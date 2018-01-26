@@ -36,6 +36,9 @@ class productos_controller {
             }
         }
     }
+    function update(){
+      $product = new productos_model();
+    }
 
     function delete() {
         if (isset($_GET['id'])) {
