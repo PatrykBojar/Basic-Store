@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Administrador | Productos</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="icon" href="../img/icon.png">
+  <link rel="stylesheet" type="text/css" href="../style/productos_style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2>Toggleable Pills</h2>
+    <br>
+    <!-- Nav pills -->
+    <ul class="nav nav-pills" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#insert">I</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#modify">M</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#delete">D</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="insert" class="container tab-pane active"><br>
+        <h3>I</h3>
+        <form action="index.php?controller=productos&action=insert" method="post">
+          <div class="row text-center">
+            <div class="container tab-pane active form-group">
+              <label for="form_nombre" class="font-weight-bold">Nombre</label>
+              <input type="text" class="form-control col-12 font-weight-bold" name="name">
+            </div>
+            <div class="container tab-pane form-group">
+              <label for="stock" class="font-weight-bold">Stock</label>
+              <input type="text" class="form-control col-12 font-weight-bold" name="stock">
+            </div>
+            <div class="container tab-pane active form-group">
+              <label for="price" class="font-weight-bold">Precio</label>
+              <input type="text" class="form-control col-12 font-weight-bold" name="price">
+            </div>
+            <div class="container tab-pane active form-group">
+              <label for="shrtDesc" class="font-weight-bold">Descripción corta</label>
+              <textarea rows="2" class="form-control txtNoResizable" name="shrtDesc"></textarea>
+            </div>
+            <div class="container tab-pane form-group">
+              <label for="$lngDesc" class="font-weight-bold">Descripción larga</label>
+              <textarea rows="5" class="form-control txtNoResizable" name="$lngDesc"></textarea>
+            </div>
+            <div class="container tab-pane active form-group">
+              <label for="brand" class="font-weight-bold">Marca</label>
+              <input type="text" class="form-control col-12 font-weight-bold" name="brand">
+            </div>
+            <div class="container tab-pane form-group">
+              <label for="category" class="font-weight-bold">Categoría</label>
+              <input type="text" class="form-control col-12 font-weight-bold" name="category">
+            </div>
+            <div class="container tab-pane form-group">
+              <label for="form_nombre" class="font-weight-bold">Patrocinado</label>
+              <select class="option" name="">
+                <option value="sN">No</option>
+                <option value="sY">Sí</option>
+              </select>
+              </option>
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="login">Entrar</button>
+          </div>
+        </form>
+      </div>
+      <div id="modify" class="container tab-pane fade"><br>
+        <h3>Añadir Producto</h3>
+      </div>
+      <div id="delete" class="container tab-pane fade"><br>
+        <h3>E</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
