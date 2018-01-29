@@ -3,14 +3,16 @@ require_once("model/usuarios_model.php");
 // ESTA CLASE NECESITA MEJORAS Y COMPROBACIONES
 // GUARDAR EL USUARIO EN LA VARIABLE $_SESSION, etc
 class usuarios_controller {
-  public function aaa(){
+
+
+/*  public function aaa(){
   session_start();
   if(!isset($_SESSION["user"])){
     header('Location: index.php?controller=usuarios&action=show_login_page');
   }else{
     $user=$_SESSION["user"];
   }
-}
+}*/
   public function login(){
     $usuarios = new usuarios_model();
     $usuarios->setUsername($_POST['username']);
@@ -18,6 +20,7 @@ class usuarios_controller {
     $encontrado = $usuarios->valida_usuario();
     if ($encontrado) {
       session_start();
+      $_SESSION['user'] = $row['USERNAME'];
       header('Location: index.php?controller=productos&action=show_main_page');
       exit();
     } else {
@@ -30,11 +33,16 @@ class usuarios_controller {
     $usuarios = new usuarios_model();
     $usuarios->setUsername($_POST['username']);
     $usuarios->setPassword($_POST['password']);
-    $encontrado = $usuarios->crea_usuario();
-    if ($encontrado) {
+    $registrado = $usuarios->crea_usuario();
+    $encontrado = $usuarios->valida_usuario();
+    if ($registrado && $encontrado) {
+      session_start();
+      $_SESSION['user'] = $row['USERNAME'];
       header('Location: index.php?controller=productos&action=show_main_page');
+      exit();
     } else {
       header('Location: index.php?controller=usuarios&action=show_login_page');
+      exit();
     }
   }
 

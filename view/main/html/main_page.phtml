@@ -7,103 +7,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <link rel="icon" href="../img/main-logo.png">
-  <link rel="stylesheet" type="text/css" href="../style/main_page_style.css">
-  <script src="../js/popover-top-button.js"></script>
+  <link rel="icon" href="view/main/img/main-logo.png">
+  <link rel="stylesheet" type="text/css" href="view/main/style/main_page_style.css">
+  <script src="view/main/js/popover-top-button.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-light bg-dark justify-content-between">
-    <a class="navbar-brand text-success display-4" href="#"><img src="../img/main-logo.png" id="main-logo" alt="Dragón verde">Green Dragon</a>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2 font-weight-bold" type="search" size="35" placeholder="Buscar" aria-label="Buscar">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
-  </nav>
-  <nav class="navbar navbar-toggleable-md navbar-light bg-success">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="nav nav-pills movie-sel-ul text-center">
-      <button type="button" id="btn-identificacion" class="btn btn-outline-dark font-weight-bold">Identificarse</button>
-      <button type="button" class="btn btn-outline-dark font-weight-bold ml-2">Cesta</button>
-    </ul>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <div class="">
-          <h3 class="font-weight-bold">Categorías</h3>
-          <div class="dropdown-divider text-dark"></div>
-        </div>
-        <a class="nav-item nav-link" href="#">Componentes</a>
-        <a class="nav-item nav-link" href="#">Ordenadores</a>
-        <a class="nav-item nav-link" href="#">Periféricos</a>
-      </div>
-    </div>
-  </nav>
-  <div id="carrusel" class="carousel slide" data-ride="carousel">
-<!-- Indicators -->
-<ul class="carousel-indicators">
-  <li data-target="#carrusel" data-slide-to="0" class="active"></li>
-  <li data-target="#carrusel" data-slide-to="1"></li>
-  <li data-target="#carrusel" data-slide-to="2"></li>
-</ul>
+<?php
+  include("view/main/php/header.php");
+  include("view/main/php/menu.php");
+  include("view/main/php/carrusel.php");
+  include("view/main/php/filtros.php");
+  include("view/main/php/mostrar_productos.php");
 
-<!-- The slideshow -->
-<div class="carousel-inner h-50">
-  <div class="carousel-item active">
-    <img src="../img/a.jpg" alt="Gráfica NVIDIA Titan XP" class="w-100" height="250">
-  </div>
-  <div class="carousel-item">
-    <img src="../img/b.jpg" alt="Placa Base Aorus X399" class="w-100" height="250">
-  </div>
-  <div class="carousel-item">
-    <img src="../img/c.jpg" alt="Razer Gaming Set" class="w-100" height="250">
-    <div class="carousel-caption">
-        <h3>Información</h3>
-        <p>XDDDD.</p>
-      </div>
-  </div>
-</div>
 
-<a class="carousel-control-prev" href="#carrusel" data-slide="prev">
-  <span class="carousel-control-prev-icon"></span>
-</a>
-<a class="carousel-control-next" href="#carrusel" data-slide="next">
-  <span class="carousel-control-next-icon"></span>
-</a>
-</div>
-<div class="card-deck">
-<div class="card">
-  <img class="card-img-top" src="../img/a.jpg" alt="Card image cap">
-  <div class="card-block">
-    <h4 class="card-title">Producto #1</h4>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-  </div>
-  <div class="card-footer">
-    <small class="text-muted">Last updated 3 mins ago</small>
-  </div>
-</div>
-<div class="card">
-  <img class="card-img-top" src="../img/b.jpg" alt="Card image cap">
-  <div class="card-block">
-    <h4 class="card-title">Producto #2</h4>
-    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-  </div>
-  <div class="card-footer">
-    <small class="text-muted">Last updated 3 mins ago</small>
-  </div>
-</div>
-<div class="card">
-  <img class="card-img-top" src="../img/c.jpg" alt="Card image cap">
-  <div class="card-block">
-    <h4 class="card-title">Producto #3</h4>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-  </div>
-  <div class="card-footer">
-    <small class="text-muted">Last updated 3 mins ago</small>
-  </div>
-</div>
-</div>
+?>
+
+
+ <p><a href="index.php?controller=productos&action=show_manage_product">Añadir/modificar/borrar producto</a></p>
+
 <form action="index.php?controller=usuarios&action=logout" method="post">
         <input type="submit" name="logout" value="CERRAR SESIÓN">
     </form>

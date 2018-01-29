@@ -4,14 +4,44 @@ require_once("model/productos_model.php");
 class productos_controller {
 
     function show_manage_product() {
-        require_once("view/admin/productos_manage.phtml");
+        require_once("view/admin/html/productos_manage.phtml");
     }
+
+    /*
+FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
+(INSERTA, MODIFICAR, ELIMIANR)
+    function show_eleccion() {
+        require_once("view/admin/html/insertar_producto.phtml");
+    }*/
+
+
     // Mostramos la página principal?????????
     // O de alguna forma mostramos solo los productos???y
     function show_main_page() {
         $product = new productos_model();
         $datos   = $product->get_products();
         require_once("view/main/html/main_page.phtml");
+    }
+
+    function show_product_list() {
+        $product = new productos_model();
+        $datos   = $product->get_products();
+        require_once("view/admin/html/productos_manage.phtml");
+    }
+    function ver_mas_alpha() {
+      // faltaría el get del ID para mostrar solo la descripcioón larga
+      // del producto clicado.
+        $product = new productos_model();
+        // ??? $product->getId();
+        $datos   = $product->get_products();
+
+        require_once("view/main/html/main_page_desc.phtml");
+    }
+
+    function show_sponsored_products(){
+      $product = new productos_model();
+      $datos   = $product->showSponsoredProducts();
+      require_once("view/main/html/main_page.phtml");
     }
 
     function insert() {
@@ -31,6 +61,7 @@ class productos_controller {
 
             if (!$error) {
                 header("Location: index.php");
+                exit();
             } else {
                 echo $error;
             }
@@ -41,14 +72,15 @@ class productos_controller {
     }
 
     function delete() {
-        if (isset($_GET['id'])) {
+        if (isset($_GET['ID'])) {
             $product = new productos_model();
-            $id      = $_GET['id'];
+            $id      = $_GET['ID'];
 
             $error = $product->delete_product($id);
 
             if (!$error) {
                 header("Location: index.php");
+                exit();
             } else {
                 echo $error;
             }

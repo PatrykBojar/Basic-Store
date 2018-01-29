@@ -95,7 +95,7 @@ class productos_model {
     }
 
     public function delete_product($id) {
-        $sql    = "DELETE FROM PRODUCT WHERE id='$id'";
+        $sql    = "DELETE FROM PRODUCT WHERE ID='$id'";
         $result = $this->db->query($sql);
 
         if ($this->db->error)
@@ -149,5 +149,22 @@ class productos_model {
         }
         return $this->product;
     }
-}
+
+    public function showSponsoredProducts() {
+        $query = $this->db->query("SELECT * FROM PRODUCT WHERE SPONSORED = 'Y' ORDER BY PRICE DESC");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
+    }
+    // Es correcta la consulta para mostrar la descripcón larga según id clicado????
+    public function ver_mas_alpha(){
+      $query =         $query = $this->db->query("SELECT LONGDESCRIPTION FROM PRODUCT;");
+      while ($rows = $query->fetch_assoc()) {
+          $this->product[] = $rows;
+      }
+      return $this->product;
+  }
+    }
+
 ?>
