@@ -1,19 +1,27 @@
 <?php
 require_once("model/categorias_model.php");
+/**
+ * [categorias_controller description]
+ * @author Patryk Bojar <patrickbojar12344@gmail.com>
+ */
 class categorias_controller{
 
-  function list_categories() {
+  /*function list_categories() {
       $category = new categorias_model();
       $datosCtg   = $category->get_categories();
-      require_once("view/admin/html/productos_manage.phtml");
-    //  require_once("view/admin/php/listar_categorias.php");
-  }
-  function list_subCategories() {
+      $subCategory = new categorias_model();
+      $datosSubCtg   = $category->get_subCategories();
+      //require_once("view/admin/html/productos_manage.phtml");
+      //require_once("view/admin/php/listar_categorias.php");
+      include("view/admin/html/productos_manage.phtml");
+
+  }*/
+  /*function list_subCategories() {
       $category = new categorias_model();
-      $datosCtg   = $category->get_subCategories();
+      $datosCtgSub   = $category->get_subCategories();
       require_once("view/admin/html/productos_manage.phtml");
       //require_once("view/admin/php/listar_categorias.php");
-  }
+  }*/
 
   function insert_category() {
       $category = new categorias_model();
@@ -32,9 +40,9 @@ class categorias_controller{
       }
   }
   function delete_category() {
-      if (isset($_GET['id'])) {
+      if (isset($_GET['ID'])) {
           $category = new categorias_model();
-          $id      = $_GET['id'];
+          $id      = $_GET['ID'];
 
           $error = $category->delete_category($id);
 

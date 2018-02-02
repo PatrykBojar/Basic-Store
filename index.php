@@ -3,15 +3,20 @@ require_once("db/conectar.php");
 require_once("controller/productos_controller.php");
 require_once("controller/usuarios_controller.php");
 require_once("controller/categorias_controller.php");
+require_once("controller/marcas_controller.php");
+
+require_once("config/config.php");
+
+session_start();
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
 
     if ($_GET['controller'] == "productos") {
 
-        if ($_GET['action'] == "show_main_page") {
+        if ($_GET['action'] == "show_start_page") {
             $controller = new productos_controller();
-            $controller->show_main_page();
-            //$controller->show_sponsored_products();
+            $controller->show_start_page();
+
         }
         if ($_GET['action'] == "show_login_page") {
             $controller = new productos_controller();
@@ -19,11 +24,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         }
 
         if ($_GET['action'] == "show_manage_product") {
-            $controllerCtg = new categorias_controller();
-            // COMENTAR ESTA LÍNEA PARA MOSTRAR LA TABLA EN LA PESTAÑA DE ELIMINAR (D)
-            $controllerCtg->list_categories();
             $controller = new productos_controller();
-            $controller->show_product_list();
             $controller->show_manage_product();
         }
 
@@ -144,8 +145,8 @@ CONTROLADORES NECESARIO EN CASO DE USAR UNA PÁGINA CON BOTONES DE ELECCIÓN
 } else {
     //$controller = new productos_controller();
     //$controller->view();
-    $controller = new usuarios_controller();
-    $controller->show_login_page();
+    $controller = new productos_controller();
+    $controller->show_start_page();
 }
 
 

@@ -34,7 +34,10 @@ class categorias_model {
     }
 
     public function get_subCategories() {
-        $query = $this->db->query("SELECT * FROM CATEGORY WHERE PARENTCATEGORY IS NULL");
+        $query = $this->db->query("SELECT DISTINCT c1.NAME AS 'CATEGORIA',
+          c2.NAME AS 'SUBCATEGORIA', c2.PARENTCATEGORY AS 'PARENTCATEGORY',
+          c2.ID AS 'ID' FROM CATEGORY c1, CATEGORY c2
+          WHERE c1.ID = c2.PARENTCATEGORY;");
         while ($rows = $query->fetch_assoc()) {
             $this->category[] = $rows;
         }

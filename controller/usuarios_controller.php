@@ -1,5 +1,6 @@
 <?php
 require_once("model/usuarios_model.php");
+
 // ESTA CLASE NECESITA MEJORAS Y COMPROBACIONES
 // GUARDAR EL USUARIO EN LA VARIABLE $_SESSION, etc
 class usuarios_controller {
@@ -19,9 +20,8 @@ class usuarios_controller {
     $usuarios->setPassword($_POST['password']);
     $encontrado = $usuarios->valida_usuario();
     if ($encontrado) {
-      session_start();
-      $_SESSION['user'] = $row['USERNAME'];
-      header('Location: index.php?controller=productos&action=show_main_page');
+      $_SESSION['user'] = $_POST['username'];
+      header('Location: index.php?controller=productos&action=show_start_page');
       exit();
     } else {
       header('Location: index.php?controller=usuarios&action=show_login_page');
@@ -38,7 +38,7 @@ class usuarios_controller {
     if ($registrado && $encontrado) {
       session_start();
       $_SESSION['user'] = $row['USERNAME'];
-      header('Location: index.php?controller=productos&action=show_main_page');
+      header('Location: index.php?controller=productos&action=show_start_page');
       exit();
     } else {
       header('Location: index.php?controller=usuarios&action=show_login_page');

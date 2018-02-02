@@ -1,5 +1,9 @@
+<?php
+
+ ?>
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>GreenDragon - Home</title>
@@ -13,21 +17,24 @@
 </head>
 
 <body>
-<?php
+  <?php
   include("view/main/php/header.php");
   include("view/main/php/menu.php");
   include("view/main/php/carrusel.php");
-  include("view/main/php/filtros.php");
+  //include("view/main/php/filtros.php");
   include("view/main/php/mostrar_productos.php");
 
 
 ?>
 
 
- <p><a href="index.php?controller=productos&action=show_manage_product">Añadir/modificar/borrar producto</a></p>
+    <p><a href="index.php?controller=productos&action=show_manage_product">Añadir/modificar/borrar producto</a></p>
 
-<form action="index.php?controller=usuarios&action=logout" method="post">
-        <input type="submit" name="logout" value="CERRAR SESIÓN">
+    <form action="index.php?controller=usuarios&action=logout" method="post">
+      <input type="submit" name="logout" value="CERRAR SESIÓN">
+    </form>
+    <form action="index.php?controller=usuarios&action=login" method="post">
+      <input type="submit" name="login" value="LOGIN IN">
     </form>
 </body>
 

@@ -1,10 +1,23 @@
 <?php
 require_once("model/productos_model.php");
+require_once("model/marcas_model.php");
+require_once("model/categorias_model.php");
+
 
 class productos_controller {
 
     function show_manage_product() {
-        require_once("view/admin/html/productos_manage.phtml");
+      $product = new productos_model();
+      $datos   = $product->get_products();
+      $brand = new marcas_model();
+      $datosBrand   = $brand->get_brands();
+      $category = new categorias_model();
+      $datosCtg   = $category->get_categories();
+      $subCategory = new categorias_model();
+      //$id = $_GET['ID'];
+      $datosSubCtg   = $category->get_subCategories();
+      require_once("view/admin/html/productos_manage.phtml");
+
     }
 
     /*
@@ -16,10 +29,15 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
 
 
     // Mostramos la página principal?????????
-    // O de alguna forma mostramos solo los productos???y
-    function show_main_page() {
+    // O de alguna forma mostramos solo los productos???
+    function show_start_page() {
         $product = new productos_model();
-        $datos   = $product->get_products();
+        $datos   = $product->showSponsoredProducts();
+        //echo '<pre>',print_r($datos,1),'</pre>';
+        $category = new categorias_model();
+        $datosCtg   = $category->get_categories();
+        $subCategory = new categorias_model();
+        $datosSubCtg   = $category->get_subCategories();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -28,6 +46,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->get_products();
         require_once("view/admin/html/productos_manage.phtml");
     }
+
     function ver_mas_alpha() {
       // faltaría el get del ID para mostrar solo la descripcioón larga
       // del producto clicado.
@@ -36,12 +55,6 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->get_products();
 
         require_once("view/main/html/main_page_desc.phtml");
-    }
-
-    function show_sponsored_products(){
-      $product = new productos_model();
-      $datos   = $product->showSponsoredProducts();
-      require_once("view/main/html/main_page.phtml");
     }
 
     function insert() {
@@ -119,6 +132,12 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortPriceDesc();
         require_once("view/main/html/main_page.phtml");
     }
+
+    /*function precioDescontado(){
+      $product = new productos_model();
+      $datos   = $product->precio();
+      $precioDescontado
+    }*/
 
 }
 ?>

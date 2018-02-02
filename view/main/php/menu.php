@@ -1,24 +1,44 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-success">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <p>Bienvenido, </p>
-  <ul class="nav nav-pills movie-sel-ul text-center">
-    <form action="index.php?controller=usuarios&action=show_login_page" method="post">
-      <button type="submit" id="btn-identificacion" class="btn btn-outline-dark font-weight-bold">Identificarse</button>
-    </form>
-    <button type="button" class="btn btn-outline-dark font-weight-bold ml-2">Cesta</button>
-  </ul>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <div class="">
-        <h3 class="font-weight-bold">Categorías</h3>
-        <div class="dropdown-divider text-dark"></div>
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  <?php
+foreach ($datosCtg as $datoC) {
+  $id = $datoC['ID'];
+  $name = $datoC['NAME'];
+   ?>
+  <div class="card">
+    <div class="card-header" role="tab" id="heading<?php echo $id; ?>">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" data-parsent="#accordion" href="#collapse<?php echo $id; ?>" aria-expanded="true" aria-controls="collapse<?php echo $id; ?>">
+          <?php
+          if ($datoC['NAME'] == 'COMPONENTES') {
+            echo $name;
+          }
+          if ($datoC['NAME'] == 'ORDENADORES') {
+            echo $name;
+          }
+          if ($datoC['NAME'] == 'PERIFÉRICOS') {
+            echo $name;
+          }
+          if ($datoC['NAME'] == 'TV') {
+            echo $name;
+          }
+          if ($datoC['NAME'] == 'SMARTPHONES') {
+            echo $name;
+          }?>
+        </a>
+      </h5>
+    </div>
+
+    <div id="collapse<?php echo $id; ?>" class="collapse" role="tabpanel" aria-labelledby="heading<?php echo $id; ?>">
+      <div class="card-block">
+<?php foreach ($datosSubCtg as $dato) {
+  if ($dato['PARENTCATEGORY'] == $datoC['ID']) {?>
+    <a href="index.php?controller=productos&action=show_manage_product&ID=<?php echo $dato['ID'];?>"><?php  echo $dato['SUBCATEGORIA']."<br>"; ?></a>
+<?php
+  }
+}
+?>
       </div>
-      <a class="nav-item nav-link" href="#">Componentes</a>
-      <a class="nav-item nav-link" href="#">Ordenadores</a>
-      <a class="nav-item nav-link" href="#">Periféricos</a>
     </div>
   </div>
-
-</nav>
+  <?php } ?>
+</div>

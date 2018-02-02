@@ -151,7 +151,15 @@ class productos_model {
     }
 
     public function showSponsoredProducts() {
-        $query = $this->db->query("SELECT * FROM PRODUCT WHERE SPONSORED = 'Y' ORDER BY PRICE DESC");
+        $query = $this->db->query("SELECT prd.SPONSORED AS 'SPONSORED',
+                              prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE',
+                              prd.NAME AS 'NAME', prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
+                              prd.STOCK AS 'STOCK',prd.PRICE AS 'PRICE'
+                              FROM PRODUCT prd LEFT JOIN PROMOTION prm
+                              ON prm.PRODUCT = prd.ID
+                              WHERE prd.SPONSORED = 'Y' OR
+                              EXISTS(select * FROM PROMOTION
+                                WHERE prd.ID = PROMOTION.PRODUCT);");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -165,6 +173,14 @@ class productos_model {
       }
       return $this->product;
   }
+
+  /*public function precio(){
+    $query =         $query = $this->db->query("SELECT PRICE FROM PRODUCT;");
+    while ($rows = $query->fetch_assoc()) {
+        $this->product[] = $rows;
     }
+    return $this->product;
+}*/
+}
 
 ?>
