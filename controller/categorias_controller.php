@@ -6,29 +6,26 @@ require_once("model/categorias_model.php");
  */
 class categorias_controller{
 
-  /*function list_categories() {
+  function list_categories() {
       $category = new categorias_model();
-      $datosCtg   = $category->get_categories();
+      $categories   = $category->get_categories();
       $subCategory = new categorias_model();
-      $datosSubCtg   = $category->get_subCategories();
+      $subCategories   = $category->get_subCategories();
       //require_once("view/admin/html/productos_manage.phtml");
       //require_once("view/admin/php/listar_categorias.php");
       include("view/admin/html/productos_manage.phtml");
 
-  }*/
+  }
   /*function list_subCategories() {
       $category = new categorias_model();
-      $datosCtgSub   = $category->get_subCategories();
+      $categoriesSub   = $category->get_subCsaategories();
       require_once("view/admin/html/productos_manage.phtml");
       //require_once("view/admin/php/listar_categorias.php");
   }*/
 
   function insert_category() {
       $category = new categorias_model();
-
-      if (isset($_POST['insert'])) {
-          $category->setName($_POST['name']);
-          $category->setStock($_POST['parentcategory']);
+          $category->setName($_POST['nmCat']);
           $error = $category->insert_category();
 
           if (!$error) {
@@ -37,7 +34,6 @@ class categorias_controller{
           } else {
               echo $error;
           }
-      }
   }
   function delete_category() {
       if (isset($_GET['ID'])) {

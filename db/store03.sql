@@ -3,11 +3,10 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-02-2018 a las 19:36:44
+-- Tiempo de generación: 07-02-2018 a las 19:45:10
 -- Versión del servidor: 5.7.21-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.22-0ubuntu0.16.04.1
-CREATE DATABASE `store03`;
-USE `store03`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -101,7 +100,8 @@ INSERT INTO `CATEGORY` (`ID`, `NAME`, `PARENTCATEGORY`) VALUES
 (23, 'TARJETAS MICRO SD', 5),
 (24, 'PROTECTORES', 5),
 (25, 'POWERBANKS', 5),
-(26, 'SMARTPHONES', 5);
+(26, 'SMARTPHONES', 5),
+(29, 'CONSOLAS', NULL);
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,8 @@ CREATE TABLE `PROMOTION` (
 INSERT INTO `PROMOTION` (`ID`, `DISCOUNTPERCENTAGE`, `STARTDATE`, `ENDDATE`, `PRODUCT`) VALUES
 (1, 50, '2018-01-31 20:26:08', '2018-04-30 00:00:00', 52),
 (2, 25, '2018-02-02 16:23:23', '2018-07-18 00:00:00', 53),
-(3, 15, '2018-02-02 17:35:47', '2018-02-28 00:00:00', 46);
+(3, 15, '2018-02-02 17:35:47', '2018-02-28 00:00:00', 46),
+(4, 10, '2018-02-07 18:53:27', '2018-02-28 00:00:00', 7);
 
 -- --------------------------------------------------------
 
@@ -218,20 +219,36 @@ INSERT INTO `PROMOTION` (`ID`, `DISCOUNTPERCENTAGE`, `STARTDATE`, `ENDDATE`, `PR
 --
 
 CREATE TABLE `USER` (
-  `USERNAME` varchar(32) NOT NULL,
+  `USERNAME` varchar(64) NOT NULL,
   `PASSWORD` varchar(32) NOT NULL,
   `CREATIONDATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `USERTYPE` enum('ADMIN','BUYER') NOT NULL DEFAULT 'BUYER'
+  `USERTYPE` enum('ADMIN','BUYER') NOT NULL DEFAULT 'BUYER',
+  `NAME` varchar(50) NOT NULL,
+  `EMAIL` varchar(50) NOT NULL,
+  `ADDRESS` varchar(100) NOT NULL,
+  `POSTALCODE` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `USER`
 --
 
-INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `CREATIONDATE`, `USERTYPE`) VALUES
-('admin', 'admin', '2018-01-25 18:37:20', 'ADMIN'),
-('patryk', 'patryk', '2018-01-25 18:38:08', 'BUYER'),
-('user', 'user', '2018-01-24 17:45:18', 'BUYER');
+INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `CREATIONDATE`, `USERTYPE`, `NAME`, `EMAIL`, `ADDRESS`, `POSTALCODE`) VALUES
+('aaa', '$1CH2LCw5hraY', '2018-02-07 15:24:02', 'BUYER', 'aaa', 'aa@gmail.com', 'Sol 43', '07054'),
+('admin', 'admin', '2018-01-25 18:37:20', 'ADMIN', '', '', '', ''),
+('antoni', 'CR7en2hlQPhwU', '2018-02-05 20:12:59', 'BUYER', 'Antonio Gonzales Cabrera', 'antoni21@gmail.com', 'Carrer Vell 29', '07009'),
+('ERGTERG', '1234', '2018-02-06 20:04:04', 'BUYER', 'GDFG', 'DFGDF@OJRGF.COM', 'JEROIUJ', '07050'),
+('ewasrvygkuhsza', '$1lktSW8AmrrQ', '2018-02-06 20:29:49', 'BUYER', 'Hoiheoih', 'oifhieo@gmail.com', 'ohrheohg', '07215'),
+('foiehoih21', '$1CH2LCw5hraY', '2018-02-06 20:20:20', 'BUYER', 'weuiheuhui', 'orpo@gmail.com', 'fivgfiuo 43', '07005'),
+('javi', 'CRP0W3oTu3Z4s', '2018-02-05 20:14:37', 'BUYER', 'Javier Loquito', 'jaguilar@gmail.com', 'Calle Luna 7', '07002'),
+('jcoca', 'CRP0W3oTu3Z4s', '2018-02-05 20:19:12', 'BUYER', 'Jose Coca Pérez', 'jcoca12@gmail.com', 'Carrer Verd', '07018'),
+('LHEWRGLTHJ', '$1lktSW8AmrrQ', '2018-02-06 20:18:02', 'BUYER', 'ORHREOIH', 'Oheo@gmail.com', 'HOIHOIRH 2', '07415'),
+('lluc', '1111', '2018-02-06 20:25:05', 'BUYER', 'Lluc Pagès', 'lluc@gmail.com', 'Barrio Bajo 32', '11111'),
+('patryk', 'patryk', '2018-01-25 18:38:08', 'BUYER', '', '', '', ''),
+('prueba1', '$1Wq3icmQHsZA', '2018-02-06 20:38:40', 'BUYER', 'Prueba Madre', 'qwe@gmail.com', 'Casxoihwsdjh', '01589'),
+('rgarcia', 'CRP0W3oTu3Z4s', '2018-02-05 20:20:58', 'BUYER', 'Rommel Hitler García', 'rgarcia@gmail.com', 'Calle Fuster 407', '07048'),
+('thkrlh', '$1lktSW8AmrrQ', '2018-02-06 20:18:22', 'BUYER', 'highh', 'ihgih@gmail.com', 'oeheo 32', '07548'),
+('user', 'user', '2018-01-24 17:45:18', 'BUYER', '', '', '', '');
 
 --
 -- Índices para tablas volcadas
@@ -306,7 +323,7 @@ ALTER TABLE `BRAND`
 -- AUTO_INCREMENT de la tabla `CATEGORY`
 --
 ALTER TABLE `CATEGORY`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT de la tabla `ORDER`
 --
@@ -316,12 +333,12 @@ ALTER TABLE `ORDER`
 -- AUTO_INCREMENT de la tabla `PRODUCT`
 --
 ALTER TABLE `PRODUCT`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT de la tabla `PROMOTION`
 --
 ALTER TABLE `PROMOTION`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --

@@ -49,8 +49,8 @@ class categorias_model {
 
 
     public function insert_category() {
-        $sql    = "INSERT INTO CATEGORY (NAME, PARENTCATEGORY) VALUES
-        ('{$this->name}','{$this->parentCategory}')";
+        $sql    = "INSERT INTO CATEGORY (NAME) VALUES
+        ('{$this->name}')";
         $result = $this->db->query($sql);
         if ($this->db->error)
             return "$sql<br>{$this->db->error}";
@@ -58,6 +58,7 @@ class categorias_model {
             return false;
         }
     }
+
     public function delete_category($id) {
         $sql    = "DELETE FROM CATEGORY WHERE id='$id'";
         $result = $this->db->query($sql);
@@ -69,7 +70,7 @@ class categorias_model {
         }
     }
 
-    public function insert_subCategory() {
+    /*public function insert_subCategory() {
         $sql    = "INSERT INTO CATEGORY (NAME, PARENTCATEGORY) VALUES
         ('{$this->name}','{$this->parentCategory}')";
         $result = $this->db->query($sql);
@@ -88,6 +89,6 @@ class categorias_model {
         else {
             return false;
         }
-    }
+    }*/
 }
 ?>

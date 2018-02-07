@@ -23,6 +23,10 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="pill" href="#delete">D</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#promotion">P</a>
+      </li>
+
     </ul>
 
     <div class="tab-content">
@@ -48,13 +52,13 @@
             </div>
             <div class="container tab-pane form-group">
               <label for="$lngDesc" class="font-weight-bold">Descripción larga</label>
-              <textarea rows="5" class="form-control txtNoResizable" name="$longDesc"></textarea>
+              <textarea rows="5" class="form-control txtNoResizable" name="longDesc"></textarea>
             </div>
             <div class="container tab-pane active form-group">
               <label for="brand" class="font-weight-bold">Marca</label>
-              <select class="form-control form-control-lg" name="marca">
+              <select class="form-control form-control-lg" name="brand">
               <?php
-              foreach ($datosBrand as $dato) { ?>
+              foreach ($brands as $dato) { ?>
                 <?php echo "<option value='{$dato['ID']}'>{$dato['NAME']}</option>" ?>
               <?php
               } ?>
@@ -62,10 +66,11 @@
 
             </div>
             <div class="container tab-pane form-group">
+
               <label for="category" class="font-weight-bold">Categoría</label>
-              <select class="form-control form-control-lg" name="categoriaPadre">
+              <select class="form-control form-control-lg" name="category">
               <?php
-              foreach ($datosCtg as $dato) { ?>
+              foreach ($categories as $dato) { ?>
                 <?php echo "<option value='{$dato['ID']}'>{$dato['NAME']}</option>" ?>
               <?php   } ?>
               </select>
@@ -73,16 +78,24 @@
             </div>
             <div class="container tab-pane form-group">
               <label for="category" class="font-weight-bold">Subcategoría</label>
-              <select class="form-control form-control-sm" name="">
-                <option value="sN">No</option>
-                <option value="sY">Sí</option>
-              </select>
+              <select class="form-control form-control-sm" name="subcateogry">
+                  <?php
+                  foreach ($subCategories as $dato) {
+                    if ($dato['PARENTCATEGORY'] != NULL) { ?>
+                      <?php echo "<option value='{$dato['ID']}'>{$dato['SUBCATEGORIA']}</option>" ?>
+                  <?php
+                  }
+                   } ?>
+                </select>
             </div>
             <div class="container tab-pane form-group">
               <label for="form_nombre" class="font-weight-bold">Patrocinado</label>
               <select class="form-control form-control-sm" name="sponsored">
-                <option value="sN">No</option>
-                <option value="sY">Sí</option>
+                <?php
+                $i = 0;
+                foreach ($datos as $dato) { if($dato['SPONSORED'] == 'Y' || $dato['SPONSORED'] == 'N'){?>
+                  <?php echo "<option value='{$dato['SPONSORED']}'>{$dato['SPONSORED']}</option>" ?>
+                <?php  } }?>
               </select>
             </div>
           </div>
@@ -90,12 +103,33 @@
             <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="insert">Insertar</button>
           </div>
         </form>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCat">+</button>
+     <div class="modal fade" id="addCat">
+       <form action="index.php?controller=categorias&action=insert_category" method="post">
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h4 class="modal-title">Añadir cateogría</h4>
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+           </div>
+           <div class="modal-body">
+             <div class="container tab-pane active form-group">
+               <label for="nmCat" class="font-weight-bold">Nombre</label>
+               <input type="text" class="form-control col-12 font-weight-bold" name="nmCat">
+             </div>
+           </div>
+           <div class="modal-footer">
+             <button type="submit" class="btn btn-outline-success">Añadir</button>
+           </div>
+         </div>
+       </div>
+     </form>
+     </div>
       </div>
       <div id="delete" class="container tab-pane fade"><br>
         <h3>Eliminar producto</h3>
         <form action="index.php?controller=productos&action=delete" method="post">
           <div class="row text-center">
-            <p>AQUÍ IRÁ EL LISTADO DE TODOS LOS PRODUCTOS.</p>
             <table class="table table-dark table-hover">
               <thead>
                 <tr>
@@ -113,7 +147,7 @@
                   <td><?php echo $dato['ID']; ?></td>
                   <td><?php echo $dato['NAME']; ?></td>
                   <td><?php echo $dato['STOCK']; ?></td>
-                  <td><?php echo money_format('%.2n', $dato['PRICE']); ?> €</td>
+                  <td><?php echo enEuro($dato['PRICE']); ?></td>
                   <td><?php echo $dato['SPONSORED']; ?></td>
                   <td><?php echo $dato['SHORTDESCRIPTION']; ?></td>
                   <td><?php echo "<a href=\"index.php?controller=productos&action=delete&ID={$dato['ID']}\">Borrar</a><br/>";?></td>
@@ -122,11 +156,34 @@
               </tbody>
             </table>
           </div>
-          <div class="form-group col-6">
-            <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="delete">Borrar</button>
-          </div>
+        </form>
       </div>
-      </form>
+      <div id="promotion" class="container tab-pane fade"><br>
+        <h3>Crear promoción</h3>
+        <form action="index.php?controller=productos&action=create_promotion" method="post">
+          <div class="row text-center">
+            <table class="table table-dark table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>NOMBRE</th>
+                  <th>PRECIO</th>
+                </tr>
+              </thead>
+              <tbody>
+<?php foreach ($notSponsoredPrd as $dato) { ?>
+                <tr>
+                  <td><?php echo $dato['ID']; ?></td>
+                  <td><?php echo $dato['NAME']; ?></td>
+                  <td><?php echo enEuro($dato['PRICE']); ?></td>
+                  <td><?php echo "<a href=\"index.php?controller=productos&action=create_promotion&ID={$dato['ID']}\">Crea promoción</a><br/>";?></td>
+                </tr>
+<?php  } ?>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
     </div>
     <form action="index.php?controller=productos&action=show_start_page" method="post">
       <input type="submit" class="btn btn-danger" value="Página Inicio" />

@@ -28,9 +28,13 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller->show_manage_product();
         }
 
-        if ($_GET['action'] == "ver_mas_alpha") {
+        if ($_GET['action'] == "buscador") {
             $controller = new productos_controller();
-            $controller->ver_mas_alpha();
+            $controller->buscador();
+        }
+        if ($_GET['action'] == "show_subCatProduct") {
+            $controller = new productos_controller();
+            $controller->show_subCatProduct();
         }
         /*
         if ($_GET['action'] == "show_product_list") {
@@ -42,11 +46,15 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller = new productos_controller();
             $controller->insert();
         }
-
         if ($_GET['action'] == "delete") {
             $controller = new productos_controller();
             $controller->delete();
         }
+        if ($_GET['action'] == "create_promotion") {
+            $controller = new productos_controller();
+            $controller->create_promotion();
+        }
+
         if ($_GET['action'] == "sortNombreAsc") {
             $controller = new productos_controller();
             $controller->sortNombreAsc();

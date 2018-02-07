@@ -1,7 +1,7 @@
 <?php
 require_once("model/usuarios_model.php");
 
-// ESTA CLASE NECESITA MEJORAS Y COMPROBACIONES
+// ESTA CLASE NECESITA MEJORAS Y COMPROBACIONESd
 // GUARDAR EL USUARIO EN LA VARIABLE $_SESSION, etc
 class usuarios_controller {
 
@@ -32,11 +32,14 @@ class usuarios_controller {
   public function register(){
     $usuarios = new usuarios_model();
     $usuarios->setUsername($_POST['username']);
+    $usuarios->setFullname($_POST['fullname']);
+    $usuarios->setEmail($_POST['email']);
+    $usuarios->setAddress($_POST['address']);
+    $usuarios->setZipcode($_POST['zipCode']);
     $usuarios->setPassword($_POST['password']);
     $registrado = $usuarios->crea_usuario();
-    $encontrado = $usuarios->valida_usuario();
-    if ($registrado && $encontrado) {
-      session_start();
+    //$encontrado = $usuarios->valida_usuario();
+  if (/*$registrado || */$encontrado) {
       $_SESSION['user'] = $row['USERNAME'];
       header('Location: index.php?controller=productos&action=show_start_page');
       exit();

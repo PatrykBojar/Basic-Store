@@ -10,12 +10,13 @@ class productos_controller {
       $product = new productos_model();
       $datos   = $product->get_products();
       $brand = new marcas_model();
-      $datosBrand   = $brand->get_brands();
+      $brands   = $brand->get_brands();
       $category = new categorias_model();
-      $datosCtg   = $category->get_categories();
+      $categories   = $category->get_categories();
       $subCategory = new categorias_model();
-      //$id = $_GET['ID'];
-      $datosSubCtg   = $category->get_subCategories();
+      $subCategories   = $category->get_subCategories();
+      $notSponsoredPrd = new productos_model();
+      $notSponsoredPrd = $notSponsoredPrd->showNotSponsoredProducts();
       require_once("view/admin/html/productos_manage.phtml");
 
     }
@@ -33,42 +34,31 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
     function show_start_page() {
         $product = new productos_model();
         $datos   = $product->showSponsoredProducts();
-        //echo '<pre>',print_r($datos,1),'</pre>';
+        //echo '<pre>',print_r($datos ,1),'</pre>';
         $category = new categorias_model();
-        $datosCtg   = $category->get_categories();
+        $categories   = $category->get_categories();
         $subCategory = new categorias_model();
-        $datosSubCtg   = $category->get_subCategories();
+        $subCategories   = $category->get_subCategories();
         require_once("view/main/html/main_page.phtml");
     }
 
-    function show_product_list() {
+    /*function show_product_list() {
         $product = new productos_model();
         $datos   = $product->get_products();
         require_once("view/admin/html/productos_manage.phtml");
-    }
-
-    function ver_mas_alpha() {
-      // faltaría el get del ID para mostrar solo la descripcioón larga
-      // del producto clicado.
-        $product = new productos_model();
-        // ??? $product->getId();
-        $datos   = $product->get_products();
-
-        require_once("view/main/html/main_page_desc.phtml");
-    }
+    }*/
 
     function insert() {
         $product = new productos_model();
 
-        if (isset($_POST['insert'])) {
             $product->setName($_POST['name']);
-            $product->setStock($_POST['stock']);
-            $product->setPrice($_POST['price']);
+            $product->setStock(aInt($_POST['stock']));
+            $product->setPrice(aInt($_POST['price']));
             $product->setSponsored($_POST['sponsored']);
             $product->setShrtDesc($_POST['shortDesc']);
             $product->setLngDesc($_POST['longDesc']);
-            $product->setBrand($_POST['brand']);
-            $product->setCategory($_POST['category']);
+            $product->setBrand(aInt($_POST['brand']));
+            $product->setCategory(aInt($_POST['category']));
 
             $error = $product->insert_product();
 
@@ -78,7 +68,6 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
             } else {
                 echo $error;
             }
-        }
     }
     function update(){
       $product = new productos_model();
@@ -130,6 +119,27 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
     function sortPriceDesc() {
         $product = new productos_model();
         $datos   = $product->sortPriceDesc();
+        require_once("view/main/html/main_page.phtml");
+    }
+    function show_subCatProduct(){
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
+      $product = new productos_model();
+      $name = $_GET['NAME'];
+      $datos   = $product->show_subCatProduct($name);
+      require_once("view/main/html/main_page.phtml");
+    }
+
+    function buscador() {
+        $category = new categorias_model();
+        $categories   = $category->get_categories();
+        $subCategory = new categorias_model();
+        $subCategories   = $category->get_subCategories();
+        $product = new productos_model();
+        $name = $_POST['name'];
+        $datos   = $product->buscador($name);
         require_once("view/main/html/main_page.phtml");
     }
 

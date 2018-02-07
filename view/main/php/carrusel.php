@@ -1,4 +1,4 @@
-<div id="carrusel" class="carousel slide" data-ride="carousel">
+<div id="carrusel" class="carousel slide col-12 col-lg-10 col-xl-8" data-ride="carousel">
 <!-- Indicators -->
 <ul class="carousel-indicators">
 <li data-target="#carrusel" data-slide-to="0" class="active"></li>
@@ -20,6 +20,9 @@
       <h3>Información</h3>
       <p>XDDDD.</p>
     </div>
+</div>
+<div class="carousel-item">
+  <img src="view/main/img/d.jpg" alt="Placa Base Aorus X399" class="w-100" height="250">
 </div>
 </div>
 

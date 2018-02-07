@@ -73,6 +73,8 @@ class productos_model {
         $this->category = $category;
     }
 
+
+
     public function get_products() {
         $query = $this->db->query("SELECT * FROM PRODUCT;");
         while ($rows = $query->fetch_assoc()) {
@@ -82,24 +84,34 @@ class productos_model {
     }
 
     public function insert_product() {
-        $sql    = "INSERT INTO PRODUCT (NAME, STOCK, PRICE, SPONSORED,
+
+        $name      = mysqli_real_escape_string($this->db, $this->name);
+        $stock     = mysqli_real_escape_string($this->db, $this->stock);
+        $price     = mysqli_real_escape_string($this->db, $this->price);
+        $sponsored = mysqli_real_escape_string($this->db, $this->sponsored);
+        $shrtDesc  = mysqli_real_escape_string($this->db, $this->shrtDesc);
+        $lngDesc   = mysqli_real_escape_string($this->db, $this->lngDesc);
+        $brand     = mysqli_real_escape_string($this->db, $this->brand);
+        $category  = mysqli_real_escape_string($this->db, $this->category);
+
+
+        $query = "INSERT INTO PRODUCT (NAME, STOCK, PRICE, SPONSORED,
         SHORTDESCRIPTION,LONGDESCRIPTION, BRAND, CATEGORY) VALUES
-         ('{$this->name}','{$this->stock}','{$this->price}','{$this->sponsored}',
-         '{$this->shrtDesc}','{$this->lngDesc}','{$this->brand}','{$this->category}')";
-        $result = $this->db->query($sql);
+         ('$name','$stock','$price','$sponsored','$shrtDesc','$lngDesc','$brand','$category')";
+        $result = $this->db->query($query);
         if ($this->db->error)
-            return "$sql<br>{$this->db->error}";
+            return "$query<br>{$this->db->error}";
         else {
             return false;
         }
     }
 
     public function delete_product($id) {
-        $sql    = "DELETE FROM PRODUCT WHERE ID='$id'";
-        $result = $this->db->query($sql);
+        $query    = "DELETE FROM PRODUCT WHERE ID='$id'";
+        $result = $this->db->query($query);
 
         if ($this->db->error)
-            return "$sql<br>{$this->db->error}";
+            return "$query<br>{$this->db->error}";
         else {
             return false;
         }
@@ -165,22 +177,52 @@ class productos_model {
         }
         return $this->product;
     }
-    // Es correcta la consulta para mostrar la descripcón larga según id clicado????
-    public function ver_mas_alpha(){
-      $query =         $query = $this->db->query("SELECT LONGDESCRIPTION FROM PRODUCT;");
-      while ($rows = $query->fetch_assoc()) {
-          $this->product[] = $rows;
-      }
-      return $this->product;
-  }
 
-  /*public function precio(){
-    $query =         $query = $this->db->query("SELECT PRICE FROM PRODUCT;");
-    while ($rows = $query->fetch_assoc()) {
-        $this->product[] = $rows;
+    public function showNotSponsoredProducts() {
+        $query = $this->db->query("SELECT prd.ID AS 'ID', prd.NAME AS 'NAME',
+                                    prd.PRICE AS 'PRICE' FROM PRODUCT prd LEFT JOIN
+                                    PROMOTION prm ON prm.PRODUCT = prd.ID
+                                    WHERE NOT EXISTS
+                                    (SELECT * FROM PROMOTION
+                                      WHERE prd.ID = PROMOTION.PRODUCT);");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
     }
-    return $this->product;
-}*/
+
+    public function buscador($name) {
+        $query = $this->db->query("SELECT *,DISCOUNTPERCENTAGE FROM PRODUCT prd LEFT JOIN PROMOTION prm
+        on prm.PRODUCT  = prd.ID WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%' OR LONGDESCRIPTION LIKE '%$name%'");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
+    }
+
+    public function show_subCatProduct($name) {
+        $query = $this->db->query("SELECT
+        prd.SPONSORED AS 'SPONSORED',
+        prd.NAME AS 'NAME',
+        prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
+        prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
+        prd.STOCK AS 'STOCK',
+        prd.PRICE AS 'PRICE',
+        cat.NAME AS 'CATEGORYNAME',
+        prm.DISCOUNTPERCENTAGE
+      FROM
+        PRODUCT prd
+      JOIN
+        CATEGORY cat ON prd.CATEGORY = cat.ID
+      LEFT JOIN
+        PROMOTION prm ON prm.PRODUCT = prd.ID
+        WHERE cat.NAME = '$name';");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
+    }
 }
+
 
 ?>

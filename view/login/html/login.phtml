@@ -47,7 +47,7 @@ if(isset($_SESSION["user"])){
                 <input type="password" class="form-control col-12 font-weight-bold" name="password">
               </div>
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-12">
               <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="login">Entrar</button>
             </div>
           </form>
@@ -58,15 +58,35 @@ if(isset($_SESSION["user"])){
           <form action="index.php?controller=usuarios&action=register" method="post">
             <div class="row text-center">
               <div class="container tab-pane active form-group col-6">
-                <label for="form_nombre" class="font-weight-bold">Nombre de usuario</label>
-                <input type="text" class="form-control col-12 font-weight-bold" id="form_nombre" name="username">
+                <label for="username" class="font-weight-bold">Nombre de usuario</label>
+                <input type="text" class="form-control col-12 font-weight-bold" id="username" name="username">
               </div>
               <div class="container tab-pane form-group col-6">
-                <label for="form_nombre" class="font-weight-bold">Contraseña</label>
-                <input type="password" class="form-control col-12 font-weight-bold" name="password">
+                <label for="fullname" class="font-weight-bold">Nombre completo</label>
+                <input type="text" class="form-control col-12 font-weight-bold" id="fullname" name="fullname">
+              </div>
+              <div class="container tab-pane form-group col-6">
+                <label for="email" class="font-weight-bold">Correo eletrónico</label>
+                <input type="email" class="form-control col-12 font-weight-bold" id="email" name="email">
+              </div>
+              <div class="container tab-pane form-group col-6">
+                <label for="address" class="font-weight-bold">Dirección</label>
+                <input type="text" class="form-control col-12 font-weight-bold" id="address" name="address">
+              </div>
+              <div class="container tab-pane form-group col-6">
+                <label for="zipCode" class="font-weight-bold">Código postal</label>
+                <input type="text" class="form-control col-12 font-weight-bold" id="zipCode" name="zipCode">
+              </div>
+              <div class="container tab-pane form-group col-6">
+                <label for="password" class="font-weight-bold">Contraseña</label>
+                <input type="password" class="form-control col-12 font-weight-bold" id="password" name="password">
+              </div>
+              <div class="container tab-pane form-group col-6">
+                <label for="password2" class="font-weight-bold">Repite contrasñea</label>
+                <input type="password" class="form-control col-12 font-weight-bold" id="password2" name="password2">
               </div>
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-12">
               <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="login">Registrarse</button>
             </div>
           </form>
