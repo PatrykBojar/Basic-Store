@@ -231,7 +231,7 @@ class productos_model {
     }
 
     public function showSponsoredProducts() {
-        $query = $this->db->query("SELECT prd.SPONSORED AS 'SPONSORED',
+        $query = $this->db->query("SELECT prd.ID as'ID',prd.SPONSORED AS 'SPONSORED',
                               prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE',
                               prd.NAME AS 'NAME', prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
                               prd.STOCK AS 'STOCK',prd.PRICE AS 'PRICE'
@@ -260,7 +260,7 @@ class productos_model {
     }
 
     public function buscador($name) {
-        $query = $this->db->query("SELECT *,DISCOUNTPERCENTAGE FROM PRODUCT prd LEFT JOIN PROMOTION prm
+        $query = $this->db->query("SELECT prd.ID AS 'ID', prd.STOCK AS 'STOCK',prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION', prd.NAME AS 'NAME', prd.PRICE AS 'PRICE', prd.SPONSORED AS 'SPONSORED', DISCOUNTPERCENTAGE FROM PRODUCT prd LEFT JOIN PROMOTION prm
         on prm.PRODUCT  = prd.ID WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%'
           OR LONGDESCRIPTION LIKE '%$name%' OR PRICE LIKE '%$name%';");
         while ($rows = $query->fetch_assoc()) {
@@ -271,21 +271,26 @@ class productos_model {
 
     public function show_subCatProduct($name) {
         $query = $this->db->query("SELECT
-        prd.SPONSORED AS 'SPONSORED',
-        prd.NAME AS 'NAME',
-        prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
-        prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
-        prd.STOCK AS 'STOCK',
-        prd.PRICE AS 'PRICE',
-        cat.NAME AS 'CATEGORYNAME',
-        prm.DISCOUNTPERCENTAGE
-      FROM
-        PRODUCT prd
-      JOIN
-        CATEGORY cat ON prd.CATEGORY = cat.ID
-      LEFT JOIN
-        PROMOTION prm ON prm.PRODUCT = prd.ID
-        WHERE cat.NAME = '$name';");
+  prd.SPONSORED AS 'SPONSORED',
+  prd.ID AS 'ID',
+  prd.NAME AS 'NAME',
+  prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
+  prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
+  prd.STOCK AS 'STOCK',
+  prd.PRICE AS 'PRICE',
+  cat.NAME AS 'CATEGORYNAME',
+  prm.DISCOUNTPERCENTAGE,
+  img.URL AS 'URL'
+FROM
+  PRODUCT prd
+JOIN
+  CATEGORY cat ON prd.CATEGORY = cat.ID
+LEFT JOIN
+  IMAGE img ON prd.ID = img.PRODUCT
+LEFT JOIN
+  PROMOTION prm ON prm.PRODUCT = prd.ID
+WHERE
+  cat.NAME = '$name' AND img.URL IS NOT NULL;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }

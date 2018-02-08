@@ -39,6 +39,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $categories   = $category->get_categories();
         $subCategory = new categorias_model();
         $subCategories   = $category->get_subCategories();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -112,6 +114,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortNombreAsc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortNombreDesc() {
@@ -121,6 +125,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortNombreDesc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -131,6 +137,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortStockAsc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortStockDesc() {
@@ -140,6 +148,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortStockDesc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -150,6 +160,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortPriceAsc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortPriceDesc() {
@@ -159,6 +171,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortPriceDesc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -169,6 +183,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortBrandAsc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortBrandDesc() {
@@ -178,6 +194,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortBrandDesc();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -187,6 +205,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $subCategory = new categorias_model();
       $subCategories   = $category->get_subCategories();
       $product = new productos_model();
+      $images = new productos_model();
+      $images   = $images->showProductImg();
       $name = $_GET['NAME'];
       $datos   = $product->show_subCatProduct($name);
       require_once("view/main/html/main_page.phtml");
@@ -198,16 +218,12 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $subCategory = new categorias_model();
         $subCategories   = $category->get_subCategories();
         $product = new productos_model();
+        $images = new productos_model();
+        $images   = $images->showProductImg();
         $name = $_POST['name'];
         $datos   = $product->buscador($name);
         require_once("view/main/html/main_page.phtml");
     }
-
-    /*function precioDescontado(){
-      $product = new productos_model();
-      $datos   = $product->precio();
-      $precioDescontado
-    }*/
 
 }
 ?>

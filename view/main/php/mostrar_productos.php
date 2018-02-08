@@ -4,10 +4,13 @@
     foreach ($datos as $dato) {
       ?>
       <div class="col-12 col-md-6 col-xl-4">
-        <div class="card">
-          <img class="card-img-top img-fluid" src="view/main/img/a.jpg" alt="Card image">
+        <div id="<?php echo $dato['ID']; ?>" class="card">
+          <?php foreach ($images as $img) {
+              if ($dato['ID'] == $img['ID']) { ?>
+          <img class="card-img-top img-fluid" src="<?php echo $img['URL']; ?>" alt="Card image">
+          <?php  } } ?>
           <div class="card-block">
-            <h4 class="card-title"><?php echo $dato['NAME']?></h4>
+            <h4 class="card-title"><?php echo $dato['NAME'];?></h4>
             <p class="card-text">
               <?php echo $dato['SHORTDESCRIPTION'] ?>
             </p>
@@ -23,7 +26,7 @@
             <span class="badge badge-warning">¡Quedan pocos!</span>
             <?php }elseif ($dato['STOCK'] >= 5) { ?>
             <button class="btn btn-primary"><a href="#"></a>Comprar</button>
-          <?php }else{ ?>
+            <?php }else{ ?>
             <button class="btn btn-primary disabled"><a href="#"></a>¡Sin stock!</button>
             <?php    } ?>
             <span><?php echo "Stock ".$dato['STOCK'];  ?></span>
