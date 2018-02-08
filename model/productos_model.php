@@ -4,7 +4,7 @@ class productos_model {
     private $db;
     private $product;
 
-    private $id, $name, $stock, $price, $sponsored, $shrtDesc, $lngDesc, $brand, $category;
+    private $id, $name, $stock, $price, $sponsored, $shrtDesc, $lngDesc, $brand, $category, $discout, $promDay, $promMonth, $promYear;
 
     public function __construct() {
         $this->db      = Conectar::conexion();
@@ -72,6 +72,33 @@ class productos_model {
     public function setCategory($category) {
         $this->category = $category;
     }
+    public function getDay() {
+        return $this->$promDay;
+    }
+    public function setDay($promDay) {
+        $this->promDay = $promDay;
+    }
+
+    public function getMonth () {
+        return $this->$promMonth;
+    }
+    public function setMonth($promMonth) {
+        $this->promMonth = $promMonth;
+    }
+
+    public function getYear() {
+        return $this->$promYear;
+    }
+    public function setYear($promYear) {
+        $this->promYear = $promYear;
+    }
+
+    public function getDiscount() {
+        return $this->$discout;
+    }
+    public function setDiscount($discout) {
+        $this->discout = $discout;
+    }
 
 
 
@@ -106,6 +133,24 @@ class productos_model {
         }
     }
 
+    public function create_promotion($id) {
+      $promDay = mysqli_real_escape_string($this->db, $this->promDay);
+      $promMonth = mysqli_real_escape_string($this->db, $this->promMonth);
+      $promYear = mysqli_real_escape_string($this->db, $this->promYear);
+      // Formato de la fecha adaptado a la base de datos (año-mes-día).
+      $endPromotionDate   = $promYear."-".$promMonth."-".$promDay;
+      $discount     = mysqli_real_escape_string($this->db, $this->discout);
+
+        $query = "INSERT INTO PROMOTION (DISCOUNTPERCENTAGE, STARTDATE, ENDDATE,PRODUCT) VALUES
+         ('$discount',CURRENT_TIMESTAMP,DATE_FORMAT('$endPromotionDate', '%Y-%m-%d %H-%i-%S'),'$id')";
+        $result = $this->db->query($query);
+        if ($this->db->error)
+            return "$query<br>{$this->db->error}";
+        else {
+            return false;
+        }
+    }
+
     public function delete_product($id) {
         $query    = "DELETE FROM PRODUCT WHERE ID='$id'";
         $result = $this->db->query($query);
@@ -117,7 +162,8 @@ class productos_model {
         }
     }
     public function sortNombreAsc() {
-        $query = $this->db->query("SELECT * FROM PRODUCT ORDER BY NAME ASC");
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY NAME ASC;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -125,7 +171,8 @@ class productos_model {
     }
 
     public function sortNombreDesc() {
-        $query = $this->db->query("SELECT * FROM PRODUCT ORDER BY NAME DESC");
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -133,14 +180,16 @@ class productos_model {
     }
 
     public function sortStockAsc() {
-        $query = $this->db->query("SELECT * FROM PRODUCT ORDER BY STOCK ASC");
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY STOCK ASC;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
         return $this->product;
     }
     public function sortStockDesc() {
-        $query = $this->db->query("SELECT * FROM PRODUCT ORDER BY STOCK DESC");
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY STOCK DESC;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -148,14 +197,33 @@ class productos_model {
     }
 
     public function sortPriceAsc() {
-        $query = $this->db->query("SELECT * FROM PRODUCT ORDER BY PRICE ASC");
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY PRICE ASC;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
         return $this->product;
     }
     public function sortPriceDesc() {
-        $query = $this->db->query("SELECT * FROM PRODUCT ORDER BY PRICE DESC");
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
+    }
+
+    public function sortBrandAsc() {
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY BRAND ASC;");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
+    }
+    public function sortBrandDesc() {
+        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+          ON prd.ID = prm.PRODUCT ORDER BY BRAND DESC;");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -193,7 +261,8 @@ class productos_model {
 
     public function buscador($name) {
         $query = $this->db->query("SELECT *,DISCOUNTPERCENTAGE FROM PRODUCT prd LEFT JOIN PROMOTION prm
-        on prm.PRODUCT  = prd.ID WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%' OR LONGDESCRIPTION LIKE '%$name%'");
+        on prm.PRODUCT  = prd.ID WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%'
+          OR LONGDESCRIPTION LIKE '%$name%' OR PRICE LIKE '%$name%';");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -221,6 +290,14 @@ class productos_model {
             $this->product[] = $rows;
         }
         return $this->product;
+    }
+
+    public function showProductImg(){
+      $query = $this->db->query("SELECT URL,NAME,ID FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID;");
+      while ($rows = $query->fetch_assoc()) {
+          $this->product[] = $rows;
+      }
+      return $this->product;
     }
 }
 

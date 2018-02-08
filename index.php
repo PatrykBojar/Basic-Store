@@ -36,12 +36,6 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller = new productos_controller();
             $controller->show_subCatProduct();
         }
-        /*
-        if ($_GET['action'] == "show_product_list") {
-            $controller = new productos_controller();
-            $controller->show_product_list();
-        }*/
-
         if ($_GET['action'] == "insert") {
             $controller = new productos_controller();
             $controller->insert();
@@ -79,9 +73,17 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller = new productos_controller();
             $controller->sortPriceDesc();
         }
+        if ($_GET['action'] == "sortBrandAsc") {
+            $controller = new productos_controller();
+            $controller->sortBrandAsc();
+        }
+        if ($_GET['action'] == "sortBrandDesc") {
+            $controller = new productos_controller();
+            $controller->sortBrandDesc();
+        }
 
 /*
-CONTROLADORES NECESARIO EN CASO DE USAR UNA PÁGINA CON BOTONES DE ELECCIÓN
+CONTROLADORES NECESARIO EN CASO DE USAR UNA PÁGINA CON BOTONES DE ELECCIÓN.
         if ($_GET['action'] == "show_insert_page") {
           $controllerCtg = new categorias_controller();
           $controllerCtg->list_categories();

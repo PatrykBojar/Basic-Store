@@ -69,10 +69,6 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
                 echo $error;
             }
     }
-    function update(){
-      $product = new productos_model();
-    }
-
     function delete() {
         if (isset($_GET['ID'])) {
             $product = new productos_model();
@@ -89,38 +85,102 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         }
     }
 
+    function create_promotion() {
+        if (isset($_GET['ID'])) {
+            $product = new productos_model();
+            $id      = $_GET['ID'];
+            $product->setDiscount($_POST['prmDis']);
+            $product->setDay($_POST['prmday']);
+            $product->setMonth($_POST['prmmth']);
+            $product->setYear($_POST['prmyr']);
+
+            $error = $product->create_promotion($id);
+
+            if (!$error) {
+                header("Location: index.php");
+                exit();
+            } else {
+                echo $error;
+            }
+        }
+    }
+
     function sortNombreAsc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortNombreAsc();
         require_once("view/main/html/main_page.phtml");
     }
     function sortNombreDesc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortNombreDesc();
         require_once("view/main/html/main_page.phtml");
     }
 
     function sortStockAsc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortStockAsc();
         require_once("view/main/html/main_page.phtml");
     }
     function sortStockDesc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortStockDesc();
         require_once("view/main/html/main_page.phtml");
     }
 
     function sortPriceAsc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortPriceAsc();
         require_once("view/main/html/main_page.phtml");
     }
     function sortPriceDesc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
         $product = new productos_model();
         $datos   = $product->sortPriceDesc();
         require_once("view/main/html/main_page.phtml");
     }
+
+    function sortBrandAsc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
+        $product = new productos_model();
+        $datos   = $product->sortBrandAsc();
+        require_once("view/main/html/main_page.phtml");
+    }
+    function sortBrandDesc() {
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
+        $product = new productos_model();
+        $datos   = $product->sortBrandDesc();
+        require_once("view/main/html/main_page.phtml");
+    }
+
     function show_subCatProduct(){
       $category = new categorias_model();
       $categories   = $category->get_categories();
