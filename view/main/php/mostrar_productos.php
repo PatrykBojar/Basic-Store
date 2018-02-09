@@ -4,11 +4,14 @@
     foreach ($datos as $dato) {
       ?>
       <div class="col-12 col-md-6 col-xl-4">
-        <div id="<?php echo $dato['ID']; ?>" class="card">
+        <div id="<?php echo $dato['ID']; ?>" class="card card-height">
           <?php foreach ($images as $img) {
-              if ($dato['ID'] == $img['ID']) { ?>
+              if ($dato['ID'] == $img['ID']) {
+                if($img['URL'] != NULl){ ?>
           <img class="card-img-top img-fluid" src="<?php echo $img['URL']; ?>" alt="Card image">
-          <?php  } } ?>
+        <?php }else{?>
+        <img class="card-img-top img-fluid" src="view/img_product/error_img/no-image.svg" alt="Card image">
+      <?php } } } ?>
           <div class="card-block">
             <h4 class="card-title"><?php echo $dato['NAME'];?></h4>
             <p class="card-text">

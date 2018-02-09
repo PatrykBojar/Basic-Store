@@ -41,6 +41,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $subCategories   = $category->get_subCategories();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -116,6 +118,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortNombreAsc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortNombreDesc() {
@@ -127,6 +131,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortNombreDesc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -139,6 +145,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortStockAsc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortStockDesc() {
@@ -150,6 +158,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortStockDesc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -162,6 +172,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortPriceAsc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortPriceDesc() {
@@ -173,6 +185,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortPriceDesc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -185,6 +199,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortBrandAsc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
     function sortBrandDesc() {
@@ -196,6 +212,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->sortBrandDesc();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -207,6 +225,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
       $product = new productos_model();
       $images = new productos_model();
       $images   = $images->showProductImg();
+      $carrouselImg = new productos_model();
+      $carrouselImg   = $carrouselImg->showCarrouselImg();
       $name = $_GET['NAME'];
       $datos   = $product->show_subCatProduct($name);
       require_once("view/main/html/main_page.phtml");
@@ -220,6 +240,8 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $product = new productos_model();
         $images = new productos_model();
         $images   = $images->showProductImg();
+        $carrouselImg = new productos_model();
+        $carrouselImg   = $carrouselImg->showCarrouselImg();
         $name = $_POST['name'];
         $datos   = $product->buscador($name);
         require_once("view/main/html/main_page.phtml");

@@ -5,5 +5,15 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
   </form>
 
-    <?php echo "Bienvenido, " . $_SESSION['user'];?>
+  <?php
+    if(isset($_SESSION['user'])){
+      echo "Bienvenido, " . $_SESSION['user'];?>
+      <form action="index.php?controller=usuarios&action=logout" method="post">
+        <input type="submit" name="logout" value="Salir">
+      </form>
+    <?php } else {?>
+      <form action="index.php?controller=usuarios&action=show_login_page" method="post">
+        <input type="submit" name="login" value="Identificarse">
+      </form>
+    <?php } ?>
 </nav>

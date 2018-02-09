@@ -37,9 +37,11 @@ class usuarios_controller {
     $usuarios->setAddress($_POST['address']);
     $usuarios->setZipcode($_POST['zipCode']);
     $usuarios->setPassword($_POST['password']);
-    $registrado = $usuarios->crea_usuario();
-    //$encontrado = $usuarios->valida_usuario();
-  if (/*$registrado || */$encontrado) {
+    $usuarios->setPasswordCheck($_POST['password_check']);
+    if($_POST['password'] == $_POST['password_check']){
+      $registrado = $usuarios->crea_usuario();
+    }
+  if ($registrado) {
       $_SESSION['user'] = $row['USERNAME'];
       header('Location: index.php?controller=productos&action=show_start_page');
       exit();
@@ -53,7 +55,7 @@ class usuarios_controller {
   public function logout(){
         session_start();
         session_destroy();
-        header('Location: index.php?controller=usuarios&action=show_login_page');
+        header('Location: index.php?controller=productos&action=show_start_page');
         exit();
       }
 

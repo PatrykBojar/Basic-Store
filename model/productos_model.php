@@ -290,7 +290,7 @@ LEFT JOIN
 LEFT JOIN
   PROMOTION prm ON prm.PRODUCT = prd.ID
 WHERE
-  cat.NAME = '$name' AND img.URL IS NOT NULL;");
+  cat.NAME = '$name' AND img.CAROUSEL = 'N';");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
@@ -298,7 +298,16 @@ WHERE
     }
 
     public function showProductImg(){
-      $query = $this->db->query("SELECT URL,NAME,ID FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID;");
+      $query = $this->db->query("SELECT img.URL AS 'URL', prd.NAME, prd.ID FROM PRODUCT prd
+LEFT JOIN IMAGE img ON img.PRODUCT = prd.ID
+WHERE img.CAROUSEL = 'N' OR img.URL IS NULL;");
+      while ($rows = $query->fetch_assoc()) {
+          $this->product[] = $rows;
+      }
+      return $this->product;
+    }
+    public function showCarrouselImg(){
+      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y';");
       while ($rows = $query->fetch_assoc()) {
           $this->product[] = $rows;
       }
