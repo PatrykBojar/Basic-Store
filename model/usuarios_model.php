@@ -56,28 +56,22 @@ class usuarios_model {
   }
 
       public function valida_usuario() {
-      if(isset($this->username) && isset($this->password)) {
-        $password = $this->password;
-        $query = ("SELECT USERNAME, PASSWORD FROM USER WHERE USERNAME = '$this->username'");
-        echo $query; exit();
-        $passwd = mysqli_query($this->db,"SELECT PASSWORD FROM USER");
-        $storedPasswd = Array();
-        while ($row = mysqli_fetch_array($passwd, MYSQLI_ASSOC)) {
-            $storedPasswd[] =  $row['PASSWORD'];
-        }
-      //  var_dump($storedPasswd); exit();
-        $correct_password = password_verify($password, $row['PASSWORD']);
-        if ($query->num_rows > 0) {
-            if($correct_password){
+        $prueba = $this->password;
+        $salt = "$1$startCrypt";
+
+        $contra = crypt($prueba, $salt);
+
+
+        $sql = "SELECT USERNAME, PASSWORD FROM USER WHERE USERNAME = '{$this->username}' AND PASSWORD = '{$contra}'";
+        $result = $this->db->query($sql) or trigger_error(mysqli_error($this->db)." ".$sql);
+        if ($result->num_rows > 0) {
+          while($row=$result->fetch_assoc()){
             return true;
-          }else{
-          return false;
+          }
+        } else {
+            return false;
+          }
         }
-      }else{
-        return false;
-      }
-      }
-    }
 
   public function crea_usuario() {
     $username = mysqli_real_escape_string($this->db, $this->username);

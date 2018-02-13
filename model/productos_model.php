@@ -1,6 +1,9 @@
 <?php
+/**
+ * Para mostrar, modificar e instrtar los productos.
+ * @author Patryk Bojar <patrickbojar12344@gmail.com>
+ */
 class productos_model {
-
     private $db;
     private $product;
 
@@ -23,7 +26,6 @@ class productos_model {
     public function setName($name) {
         $this->name = $name;
     }
-
     public function getStock() {
         return $this->stock;
     }
@@ -101,7 +103,10 @@ class productos_model {
     }
 
 
-
+/**
+ * Devuelve todos los productos solicitados.
+ * @return array todos los productos
+ */
     public function get_products() {
         $query = $this->db->query("SELECT * FROM PRODUCT;");
         while ($rows = $query->fetch_assoc()) {
@@ -109,7 +114,10 @@ class productos_model {
         }
         return $this->product;
     }
-
+/**
+ * Inserta un producto a la base de datos.
+ * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
+ */
     public function insert_product() {
 
         $name      = mysqli_real_escape_string($this->db, $this->name);
@@ -121,7 +129,6 @@ class productos_model {
         $brand     = mysqli_real_escape_string($this->db, $this->brand);
         $category  = mysqli_real_escape_string($this->db, $this->category);
 
-
         $query = "INSERT INTO PRODUCT (NAME, STOCK, PRICE, SPONSORED,
         SHORTDESCRIPTION,LONGDESCRIPTION, BRAND, CATEGORY) VALUES
          ('$name','$stock','$price','$sponsored','$shrtDesc','$lngDesc','$brand','$category')";
@@ -132,7 +139,11 @@ class productos_model {
             return false;
         }
     }
-
+/**
+ * Crea una promoción de un producto.
+ * @param  integer $id el id del producto pasado al hacer clic en un producto.
+ * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
+ */
     public function create_promotion($id) {
       $promDay = mysqli_real_escape_string($this->db, $this->promDay);
       $promMonth = mysqli_real_escape_string($this->db, $this->promMonth);
@@ -150,7 +161,11 @@ class productos_model {
             return false;
         }
     }
-
+/**
+ * Elimina un producto.
+ * @param  integer $id el id del producto pasado al hacer clic en un producto.
+ * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
+ */
     public function delete_product($id) {
         $query    = "DELETE FROM PRODUCT WHERE ID='$id'";
         $result = $this->db->query($query);
@@ -161,6 +176,10 @@ class productos_model {
             return false;
         }
     }
+    /**
+     * Ordena los producos de la A a la Z.
+     * @return array todos los productos ordenados por nombre de A a la Z.
+     */
     public function sortNombreAsc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY NAME ASC;");
@@ -169,7 +188,10 @@ class productos_model {
         }
         return $this->product;
     }
-
+    /**
+     * Ordena los productos de la Z a la A.
+     * @return array todos los productos ordenados por nombre de Z a la A.
+     */
     public function sortNombreDesc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
@@ -178,7 +200,10 @@ class productos_model {
         }
         return $this->product;
     }
-
+    /**
+     * Ordena los productos por el stock, de menor a mayor.
+     * @return array todos los productos ordenados por stock.
+     */
     public function sortStockAsc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY STOCK ASC;");
@@ -187,6 +212,10 @@ class productos_model {
         }
         return $this->product;
     }
+    /**
+     * Ordena los productos por el stock, de mayor a menor
+     * @return array todos los productos ordenados por stock.
+     */
     public function sortStockDesc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY STOCK DESC;");
@@ -195,7 +224,10 @@ class productos_model {
         }
         return $this->product;
     }
-
+    /**
+     * Ordena los productos por el precio, de menor a mayor.
+     * @return array todos los productos ordenados por stock.
+     */
     public function sortPriceAsc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY PRICE ASC;");
@@ -204,6 +236,10 @@ class productos_model {
         }
         return $this->product;
     }
+    /**
+     * Ordena los productos por el precio, de mayor a menor.
+     * @return array todos los productos ordenados por stock.
+     */
     public function sortPriceDesc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
@@ -212,7 +248,10 @@ class productos_model {
         }
         return $this->product;
     }
-
+    /**
+     * Ordena los productos por la marca, de la A a la Z.
+     * @return array todos los productos ordenados por la marca.
+     */
     public function sortBrandAsc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY BRAND ASC;");
@@ -221,6 +260,10 @@ class productos_model {
         }
         return $this->product;
     }
+    /**
+     * Ordena los productos por la marca, de la Z a la A.
+     * @return array todos los productos ordenados por la marca.
+     */
     public function sortBrandDesc() {
         $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
           ON prd.ID = prm.PRODUCT ORDER BY BRAND DESC;");
@@ -229,7 +272,10 @@ class productos_model {
         }
         return $this->product;
     }
-
+/**
+ * Muestra todos los productos que tengan un patrocinador (sponsored) y descuento.
+ * @return array productos correspondientes a la descripción.
+ */
     public function showSponsoredProducts() {
         $query = $this->db->query("SELECT prd.ID as'ID',prd.SPONSORED AS 'SPONSORED',
                               prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE',
@@ -246,6 +292,10 @@ class productos_model {
         return $this->product;
     }
 
+/**
+ * Muestra todos los productos que no tengan descuento.
+ * @return array productos correspondientes a la descripción.
+ */
     public function showNotSponsoredProducts() {
         $query = $this->db->query("SELECT prd.ID AS 'ID', prd.NAME AS 'NAME',
                                     prd.PRICE AS 'PRICE' FROM PRODUCT prd LEFT JOIN
@@ -258,15 +308,20 @@ class productos_model {
         }
         return $this->product;
     }
-
+/**
+ * Devuelve los productos dependiendo de la búsuqeda que ha realizado el usuario. Los filtros se aplican para distintos campos.
+ * @param  string  $name valor que el usuario ha pasado en el input.
+ * @return array productos correspondientes a la descripción.
+ */
     public function buscador($name) {
         $query = $this->db->query("SELECT prd.ID AS 'ID', prd.STOCK AS 'STOCK',prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION', prd.NAME AS 'NAME', prd.PRICE AS 'PRICE', prd.SPONSORED AS 'SPONSORED', DISCOUNTPERCENTAGE FROM PRODUCT prd LEFT JOIN PROMOTION prm
         on prm.PRODUCT  = prd.ID WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%'
           OR LONGDESCRIPTION LIKE '%$name%' OR PRICE LIKE '%$name%';");
+        $num_total_registros = mysqli_num_rows($query);
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
-        return $this->product;
+        return $this->product ;
     }
 
     public function show_subCatProduct($name) {
@@ -296,7 +351,10 @@ WHERE
         }
         return $this->product;
     }
-
+/**
+ * Muestra las imágenes de los productos que no pertenecen al carousel.
+ * @return array imágenes correspondientes a la descripción.
+ */
     public function showProductImg(){
       $query = $this->db->query("SELECT img.URL AS 'URL', prd.NAME, prd.ID FROM PRODUCT prd
 LEFT JOIN IMAGE img ON img.PRODUCT = prd.ID
@@ -306,6 +364,10 @@ WHERE img.CAROUSEL = 'N' OR img.URL IS NULL;");
       }
       return $this->product;
     }
+    /**
+     * Muestra las imágenes de los productos que pertenecen al carousel.
+     * @return array imágenes correspondientes a la descripción.
+     */
     public function showCarrouselImg(){
       $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y';");
       while ($rows = $query->fetch_assoc()) {
@@ -314,6 +376,5 @@ WHERE img.CAROUSEL = 'N' OR img.URL IS NULL;");
       return $this->product;
     }
 }
-
 
 ?>

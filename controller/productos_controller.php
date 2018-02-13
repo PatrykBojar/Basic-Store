@@ -243,6 +243,15 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $carrouselImg = new productos_model();
         $carrouselImg   = $carrouselImg->showCarrouselImg();
         $name = $_POST['name'];
+        /*$pagina = $_GET['pagina'];
+        if(!$pagina){
+          $inicio = 0;
+          $pagina = 1;
+        }else{
+          $inicio = ($pagina -1) * 6;
+        }
+        $total_paginas = ceil(19/6);
+*/
         $datos   = $product->buscador($name);
         require_once("view/main/html/main_page.phtml");
     }
