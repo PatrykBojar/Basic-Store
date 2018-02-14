@@ -35,15 +35,15 @@
           <div class="row text-center">
             <div class="container tab-pane active form-group">
               <label for="form_nombre" class="font-weight-bold">Nombre</label>
-              <input type="text" class="form-control col-12 font-weight-bold" name="name">
+              <input type="text" class="form-control col-12 font-weight-bold" name="name" required>
             </div>
             <div class="container tab-pane form-group">
               <label for="stock" class="font-weight-bold">Stock</label>
-              <input type="text" class="form-control col-12 font-weight-bold" name="stock">
+              <input type="text" class="form-control col-12 font-weight-bold" name="s   tock" required>
             </div>
             <div class="container tab-pane active form-group">
               <label for="price" class="font-weight-bold">Precio</label>
-              <input type="text" class="form-control col-12 font-weight-bold" name="price">
+              <input type="text" class="form-control col-12 font-weight-bold" name="price" required>
             </div>
             <div class="container tab-pane active form-group">
               <label for="shrtDesc" class="font-weight-bold">Descripción corta</label>
@@ -77,7 +77,7 @@
             </div>
             <div class="container tab-pane form-group">
               <label for="category" class="font-weight-bold">Subcategoría</label>
-              <select class="form-control form-control-sm" name="subcateogry">
+              <select class="form-control form-control-sm" name="subcategory">
                   <?php
                   foreach ($subCategories as $dato) {
                     if ($dato['PARENTCATEGORY'] != NULL) { ?>
@@ -102,7 +102,8 @@
             <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="insert">Insertar</button>
           </div>
         </form>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCat">+</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCat">+ categoría</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSubCat">+ subcategoría</button>
         <div class="modal fade" id="addCat">
           <form action="index.php?controller=categorias&action=insert_category" method="post">
             <div class="modal-dialog">

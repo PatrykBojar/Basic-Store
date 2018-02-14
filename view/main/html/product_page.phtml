@@ -20,14 +20,13 @@
     <br>
     <nav class="nav bg-dark">
       <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">INICIO ></a>
-      <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">
-        <?php
-  foreach ($datos as $subcat) {
-    if ($subcat['CATPRDID'] == $subCatId){
-      echo $subcat['CATNAME'];
-    }
-  } ?>
-      </a>
+      <!--<a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php //echo $subcat['CATNAME'];?>">-->
+        <?php $cont = 0; foreach ($datos as $subcat) {
+            if ($subcat['CATPRDID'] == $subCatId && $cont == 0){?>
+              <a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>"><?php echo $subcat['CATNAME'];?>      </a>
+              <?php $cont++;
+            }
+          }?>
     </nav>
 
     <div class="container bg-gris">
@@ -68,7 +67,7 @@ foreach ($datos as $producto) {
           <span class="font-weight-bold">Cantidad:</span>
           <div class="btn-group" role="group">
             <button class="btn btn-secondary remove-quantity" type="button" name="button">-</button>
-            <input class="quantity-box text-center" type="text" class="form-control" value="999" max="999" autocomplete="off" type="text">
+            <input class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
             <button class="btn btn-secondary add-quantity" type="button" name="button">+</button>
           </div>
           <br>
@@ -99,9 +98,9 @@ foreach ($datos as $producto) {
           <?php if ($producto['SHORTDESCRIPTION'] == NULL && $producto['LONGDESCRIPTION'] == NULL){ ?>
           <span class="font-italic">Este producto aún no dispone de una descripción. Lo sentimos.</span>
           <?php } ?>
-          <span><?php echo $producto['SHORTDESCRIPTION']?></span>
+          <p><?php echo $producto['SHORTDESCRIPTION']?></p>
           <hr>
-          <span><?php echo $producto['LONGDESCRIPTION']?></span>
+          <p><?php echo $producto['LONGDESCRIPTION']?></p>
         </div>
 
     </div>

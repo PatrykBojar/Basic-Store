@@ -42,6 +42,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $images   = $images->showProductImg();
         $carrouselImg = new productos_model();
         $carrouselImg   = $carrouselImg->showCarrouselImg();
+        $mostrarCarr = true;
         require_once("view/main/html/main_page.phtml");
     }
 
@@ -71,7 +72,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
             $product->setShrtDesc($_POST['shortDesc']);
             $product->setLngDesc($_POST['longDesc']);
             $product->setBrand(aInt($_POST['brand']));
-            $product->setCategory(aInt($_POST['subcateogry']));
+            $product->setCategory(aInt($_POST['subcategory']));
 
             $error = $product->insert_product();
 
