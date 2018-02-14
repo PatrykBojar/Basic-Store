@@ -4,10 +4,13 @@ require_once("controller/productos_controller.php");
 require_once("controller/usuarios_controller.php");
 require_once("controller/categorias_controller.php");
 require_once("controller/marcas_controller.php");
+//require_once("recaptchalib.php");
+
 
 require_once("config/config.php");
 
 session_start();
+
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
 
@@ -16,6 +19,11 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         if ($_GET['action'] == "show_start_page") {
             $controller = new productos_controller();
             $controller->show_start_page();
+
+        }
+        if ($_GET['action'] == "show_product_page") {
+            $controller = new productos_controller();
+            $controller->show_product_page();
 
         }
         if ($_GET['action'] == "show_login_page") {

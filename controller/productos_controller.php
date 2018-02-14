@@ -34,7 +34,6 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
     function show_start_page() {
         $product = new productos_model();
         $datos   = $product->showSponsoredProducts();
-        //echo '<pre>',print_r($datos ,1),'</pre>';
         $category = new categorias_model();
         $categories   = $category->get_categories();
         $subCategory = new categorias_model();
@@ -46,11 +45,21 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         require_once("view/main/html/main_page.phtml");
     }
 
-    /*function show_product_list() {
-        $product = new productos_model();
-        $datos   = $product->get_products();
-        require_once("view/admin/html/productos_manage.phtml");
-    }*/
+    function show_product_page() {
+      $product = new productos_model();
+      $datos   = $product->productRealInfo();
+      $category = new categorias_model();
+      $categories   = $category->get_categories();
+      $subCategory = new categorias_model();
+      $subCategories   = $category->get_subCategories();
+      $images = new productos_model();
+      $images = $images->productPageImg();
+      $id      = $_GET['id'];
+      $subCatId      = $_GET['sc'];
+        /*$subCatPrd = new categorias_model();
+        $subCatPrd   = $category->show_subCatUl($id);*/
+        require_once("view/main/html/product_page.phtml");
+    }
 
     function insert() {
         $product = new productos_model();
@@ -62,7 +71,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
             $product->setShrtDesc($_POST['shortDesc']);
             $product->setLngDesc($_POST['longDesc']);
             $product->setBrand(aInt($_POST['brand']));
-            $product->setCategory(aInt($_POST['category']));
+            $product->setCategory(aInt($_POST['subcateogry']));
 
             $error = $product->insert_product();
 
@@ -243,15 +252,6 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $carrouselImg = new productos_model();
         $carrouselImg   = $carrouselImg->showCarrouselImg();
         $name = $_POST['name'];
-        /*$pagina = $_GET['pagina'];
-        if(!$pagina){
-          $inicio = 0;
-          $pagina = 1;
-        }else{
-          $inicio = ($pagina -1) * 6;
-        }
-        $total_paginas = ceil(19/6);
-*/
         $datos   = $product->buscador($name);
         require_once("view/main/html/main_page.phtml");
     }

@@ -1,9 +1,6 @@
 <?php
-/**
- * Para mostrar, modificar e instrtar los productos.
- * @author Patryk Bojar <patrickbojar12344@gmail.com>
- */
 class productos_model {
+
     private $db;
     private $product;
 
@@ -26,6 +23,7 @@ class productos_model {
     public function setName($name) {
         $this->name = $name;
     }
+
     public function getStock() {
         return $this->stock;
     }
@@ -103,184 +101,182 @@ class productos_model {
     }
 
 
-/**
- * Devuelve todos los productos solicitados.
- * @return array todos los productos
- */
-    public function get_products() {
-        $query = $this->db->query("SELECT * FROM PRODUCT;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
-        }
-        return $this->product;
-    }
-/**
- * Inserta un producto a la base de datos.
- * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
- */
-    public function insert_product() {
 
-        $name      = mysqli_real_escape_string($this->db, $this->name);
-        $stock     = mysqli_real_escape_string($this->db, $this->stock);
-        $price     = mysqli_real_escape_string($this->db, $this->price);
-        $sponsored = mysqli_real_escape_string($this->db, $this->sponsored);
-        $shrtDesc  = mysqli_real_escape_string($this->db, $this->shrtDesc);
-        $lngDesc   = mysqli_real_escape_string($this->db, $this->lngDesc);
-        $brand     = mysqli_real_escape_string($this->db, $this->brand);
-        $category  = mysqli_real_escape_string($this->db, $this->category);
+    /**
+     * Devuelve todos los productos solicitados.
+     * @return array todos los productos
+     */
+        public function get_products() {
+            $query = $this->db->query("SELECT * FROM PRODUCT;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
+        }
+    /**
+     * Inserta un producto a la base de datos.
+     * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
+     */
+        public function insert_product() {
 
-        $query = "INSERT INTO PRODUCT (NAME, STOCK, PRICE, SPONSORED,
-        SHORTDESCRIPTION,LONGDESCRIPTION, BRAND, CATEGORY) VALUES
-         ('$name','$stock','$price','$sponsored','$shrtDesc','$lngDesc','$brand','$category')";
-        $result = $this->db->query($query);
-        if ($this->db->error)
-            return "$query<br>{$this->db->error}";
-        else {
-            return false;
-        }
-    }
-/**
- * Crea una promoción de un producto.
- * @param  integer $id el id del producto pasado al hacer clic en un producto.
- * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
- */
-    public function create_promotion($id) {
-      $promDay = mysqli_real_escape_string($this->db, $this->promDay);
-      $promMonth = mysqli_real_escape_string($this->db, $this->promMonth);
-      $promYear = mysqli_real_escape_string($this->db, $this->promYear);
-      // Formato de la fecha adaptado a la base de datos (año-mes-día).
-      $endPromotionDate   = $promYear."-".$promMonth."-".$promDay;
-      $discount     = mysqli_real_escape_string($this->db, $this->discout);
+            $name      = mysqli_real_escape_string($this->db, $this->name);
+            $stock     = mysqli_real_escape_string($this->db, $this->stock);
+            $price     = mysqli_real_escape_string($this->db, $this->price);
+            $sponsored = mysqli_real_escape_string($this->db, $this->sponsored);
+            $shrtDesc  = mysqli_real_escape_string($this->db, $this->shrtDesc);
+            $lngDesc   = mysqli_real_escape_string($this->db, $this->lngDesc);
+            $brand     = mysqli_real_escape_string($this->db, $this->brand);
+            $category  = mysqli_real_escape_string($this->db, $this->category);
 
-        $query = "INSERT INTO PROMOTION (DISCOUNTPERCENTAGE, STARTDATE, ENDDATE,PRODUCT) VALUES
-         ('$discount',CURRENT_TIMESTAMP,DATE_FORMAT('$endPromotionDate', '%Y-%m-%d %H-%i-%S'),'$id')";
-        $result = $this->db->query($query);
-        if ($this->db->error)
-            return "$query<br>{$this->db->error}";
-        else {
-            return false;
+            $query = "INSERT INTO PRODUCT (NAME, STOCK, PRICE, SPONSORED,
+            SHORTDESCRIPTION,LONGDESCRIPTION, BRAND, CATEGORY) VALUES
+             ('$name','$stock','$price','$sponsored','$shrtDesc','$lngDesc','$brand','$category')";
+            $result = $this->db->query($query);
+            if ($this->db->error)
+                return "$query<br>{$this->db->error}";
+            else {
+                return false;
+            }
         }
-    }
-/**
- * Elimina un producto.
- * @param  integer $id el id del producto pasado al hacer clic en un producto.
- * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
- */
-    public function delete_product($id) {
-        $query    = "DELETE FROM PRODUCT WHERE ID='$id'";
-        $result = $this->db->query($query);
+    /**
+     * Crea una promoción de un producto.
+     * @param  integer $id el id del producto pasado al hacer clic en un producto.
+     * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
+     */
+        public function create_promotion($id) {
+          $promDay = mysqli_real_escape_string($this->db, $this->promDay);
+          $promMonth = mysqli_real_escape_string($this->db, $this->promMonth);
+          $promYear = mysqli_real_escape_string($this->db, $this->promYear);
+          // Formato de la fecha adaptado a la base de datos (año-mes-día).
+          $endPromotionDate   = $promYear."-".$promMonth."-".$promDay;
+          $discount     = mysqli_real_escape_string($this->db, $this->discout);
 
-        if ($this->db->error)
-            return "$query<br>{$this->db->error}";
-        else {
-            return false;
+            $query = "INSERT INTO PROMOTION (DISCOUNTPERCENTAGE, STARTDATE, ENDDATE,PRODUCT) VALUES
+             ('$discount',CURRENT_TIMESTAMP,DATE_FORMAT('$endPromotionDate', '%Y-%m-%d %H-%i-%S'),'$id')";
+            $result = $this->db->query($query);
+            if ($this->db->error)
+                return "$query<br>{$this->db->error}";
+            else {
+                return false;
+            }
         }
-    }
     /**
-     * Ordena los producos de la A a la Z.
-     * @return array todos los productos ordenados por nombre de A a la Z.
+     * Elimina un producto.
+     * @param  integer $id el id del producto pasado al hacer clic en un producto.
+     * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
      */
-    public function sortNombreAsc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY NAME ASC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        public function delete_product($id) {
+            $query    = "DELETE FROM PRODUCT WHERE ID='$id'";
+            $result = $this->db->query($query);
+
+            if ($this->db->error)
+                return "$query<br>{$this->db->error}";
+            else {
+                return false;
+            }
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos de la Z a la A.
-     * @return array todos los productos ordenados por nombre de Z a la A.
-     */
-    public function sortNombreDesc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los producos de la A a la Z.
+         * @return array todos los productos ordenados por nombre de A a la Z.
+         */
+        public function sortNombreAsc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY NAME ASC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos por el stock, de menor a mayor.
-     * @return array todos los productos ordenados por stock.
-     */
-    public function sortStockAsc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY STOCK ASC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los productos de la Z a la A.
+         * @return array todos los productos ordenados por nombre de Z a la A.
+         */
+        public function sortNombreDesc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos por el stock, de mayor a menor
-     * @return array todos los productos ordenados por stock.
-     */
-    public function sortStockDesc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY STOCK DESC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los productos por el stock, de menor a mayor.
+         * @return array todos los productos ordenados por stock.
+         */
+        public function sortStockAsc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY STOCK ASC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos por el precio, de menor a mayor.
-     * @return array todos los productos ordenados por stock.
-     */
-    public function sortPriceAsc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY PRICE ASC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los productos por el stock, de mayor a menor
+         * @return array todos los productos ordenados por stock.
+         */
+        public function sortStockDesc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY STOCK DESC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos por el precio, de mayor a menor.
-     * @return array todos los productos ordenados por stock.
-     */
-    public function sortPriceDesc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY NAME DESC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los productos por el precio, de menor a mayor.
+         * @return array todos los productos ordenados por precio.
+         */
+        public function sortPriceAsc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY PRICE ASC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos por la marca, de la A a la Z.
-     * @return array todos los productos ordenados por la marca.
-     */
-    public function sortBrandAsc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY BRAND ASC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los productos por el precio, de mayor a menor.
+         * @return array todos los productos ordenados por precio.
+         */
+        public function sortPriceDesc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY PRICE DESC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-    /**
-     * Ordena los productos por la marca, de la Z a la A.
-     * @return array todos los productos ordenados por la marca.
-     */
-    public function sortBrandDesc() {
-        $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
-          ON prd.ID = prm.PRODUCT ORDER BY BRAND DESC;");
-        while ($rows = $query->fetch_assoc()) {
-            $this->product[] = $rows;
+        /**
+         * Ordena los productos por la marca, de la A a la Z.
+         * @return array todos los productos ordenados por la marca.
+         */
+        public function sortBrandAsc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY BRAND ASC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
         }
-        return $this->product;
-    }
-/**
- * Muestra todos los productos que tengan un patrocinador (sponsored) y descuento.
- * @return array productos correspondientes a la descripción.
- */
+        /**
+         * Ordena los productos por la marca, de la Z a la A.
+         * @return array todos los productos ordenados por la marca.
+         */
+        public function sortBrandDesc() {
+            $query = $this->db->query("SELECT prd.*, prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE' FROM PRODUCT prd LEFT JOIN PROMOTION prm
+              ON prd.ID = prm.PRODUCT ORDER BY BRAND DESC;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
+        }
+
     public function showSponsoredProducts() {
         $query = $this->db->query("SELECT prd.ID as'ID',prd.SPONSORED AS 'SPONSORED',
                               prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE',
                               prd.NAME AS 'NAME', prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
-                              prd.STOCK AS 'STOCK',prd.PRICE AS 'PRICE'
+                              prd.STOCK AS 'STOCK',prd.PRICE AS 'PRICE',prd.LONGDESCRIPTION AS 'LONGDESCRIPTION', prd.CATEGORY
                               FROM PRODUCT prd LEFT JOIN PROMOTION prm
                               ON prm.PRODUCT = prd.ID
                               WHERE prd.SPONSORED = 'Y' OR
@@ -292,12 +288,8 @@ class productos_model {
         return $this->product;
     }
 
-/**
- * Muestra todos los productos que no tengan descuento.
- * @return array productos correspondientes a la descripción.
- */
     public function showNotSponsoredProducts() {
-        $query = $this->db->query("SELECT prd.ID AS 'ID', prd.NAME AS 'NAME',
+        $query = $this->db->query("SELECT prd.ID AS 'ID', prd.NAME AS 'NAME',prd.LONGDESCRIPTION AS 'LONGDESCRIPTION', prd.CATEGORY,
                                     prd.PRICE AS 'PRICE' FROM PRODUCT prd LEFT JOIN
                                     PROMOTION prm ON prm.PRODUCT = prd.ID
                                     WHERE NOT EXISTS
@@ -308,20 +300,21 @@ class productos_model {
         }
         return $this->product;
     }
-/**
- * Devuelve los productos dependiendo de la búsuqeda que ha realizado el usuario. Los filtros se aplican para distintos campos.
- * @param  string  $name valor que el usuario ha pasado en el input.
- * @return array productos correspondientes a la descripción.
- */
+
     public function buscador($name) {
-        $query = $this->db->query("SELECT prd.ID AS 'ID', prd.STOCK AS 'STOCK',prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION', prd.NAME AS 'NAME', prd.PRICE AS 'PRICE', prd.SPONSORED AS 'SPONSORED', DISCOUNTPERCENTAGE FROM PRODUCT prd LEFT JOIN PROMOTION prm
-        on prm.PRODUCT  = prd.ID WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%'
+        $query = $this->db->query("SELECT prd.ID AS 'ID', prd.STOCK AS 'STOCK',
+          prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
+           prd.NAME AS 'NAME', prd.PRICE AS 'PRICE', prd.SPONSORED AS 'SPONSORED', DISCOUNTPERCENTAGE,prd.CATEGORY
+           FROM PRODUCT prd
+           LEFT JOIN PROMOTION prm
+        on prm.PRODUCT  = prd.ID
+
+        WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%'
           OR LONGDESCRIPTION LIKE '%$name%' OR PRICE LIKE '%$name%';");
-        $num_total_registros = mysqli_num_rows($query);
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
-        return $this->product ;
+        return $this->product;
     }
 
     public function show_subCatProduct($name) {
@@ -351,10 +344,7 @@ WHERE
         }
         return $this->product;
     }
-/**
- * Muestra las imágenes de los productos que no pertenecen al carousel.
- * @return array imágenes correspondientes a la descripción.
- */
+
     public function showProductImg(){
       $query = $this->db->query("SELECT img.URL AS 'URL', prd.NAME, prd.ID FROM PRODUCT prd
 LEFT JOIN IMAGE img ON img.PRODUCT = prd.ID
@@ -364,17 +354,60 @@ WHERE img.CAROUSEL = 'N' OR img.URL IS NULL;");
       }
       return $this->product;
     }
-    /**
-     * Muestra las imágenes de los productos que pertenecen al carousel.
-     * @return array imágenes correspondientes a la descripción.
-     */
     public function showCarrouselImg(){
-      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y';");
+      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y' AND URL LIKE '%-top%';");
       while ($rows = $query->fetch_assoc()) {
           $this->product[] = $rows;
       }
       return $this->product;
     }
+
+    public function showCarrouselProductImg($name){
+      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y' AND prd.NAME LIKE '$name';");
+      while ($rows = $query->fetch_assoc()) {
+          $this->product[] = $rows;
+      }
+      return $this->product;
+    }
+
+    public function productRealInfo(){
+      $query = $this->db->query("SELECT
+  prd.ID AS 'ID',
+  prd.NAME AS 'NAME',
+  prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
+  prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
+  prd.PRICE AS 'PRICE',
+  prd.STOCK AS 'STOCK',
+  prd.SPONSORED AS 'SPONSORED',
+  prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE',
+  bnd.NAME AS 'BRANDNAME',
+  cat.NAME AS 'CATNAME',
+  cat.ID AS 'CATID',
+  prd.CATEGORY AS 'CATPRDID'
+FROM
+  PRODUCT prd
+LEFT JOIN
+  PROMOTION prm ON prm.PRODUCT = prd.ID
+LEFT JOIN
+  BRAND bnd ON bnd.ID = prd.BRAND
+LEFT JOIN
+  CATEGORY cat ON cat.ID = prd.CATEGORY;");
+while ($rows = $query->fetch_assoc()) {
+    $this->product[] = $rows;
 }
+return $this->product;
+}
+public function productPageImg(){
+  $query = $this->db->query("SELECT img.URL AS 'URL', prd.NAME AS 'PRDNAME',prd.ID AS 'PRDID' FROM PRODUCT prd
+LEFT JOIN IMAGE img ON img.PRODUCT = prd.ID
+WHERE img.URL NOT LIKE '%-top%' OR img.URL IS NULL;");
+while ($rows = $query->fetch_assoc()) {
+    $this->product[] = $rows;
+}
+return $this->product;
+}
+}
+
+
 
 ?>

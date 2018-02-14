@@ -5,3 +5,12 @@
 .card-height{
   height: 700px;
 }
+.img-product:hover{
+  cursor: pointer;
+}
+/*  footer {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}*/

@@ -1,5 +1,6 @@
 <div id="carrusel" class="carousel slide col-12 col-lg-10 col-xl-8" data-ride="carousel">
   <ul class="carousel-indicators">
+
     <?php $cont = 0; foreach ($carrouselImg as $carrImg) { ?>
     <li data-target="#carrusel" data-slide-to="<?php echo $cont++;?>" class="<?php if($cont == 1) echo "active";?>"></li>
     <?php } ?>

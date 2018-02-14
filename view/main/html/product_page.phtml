@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GreenDragon - Home</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="icon" href="view/main/img/main-logo.png">
+  <link rel="stylesheet" type="text/css" href="view/main/style/product_page_style.css">
+</head>
+
+<body>
+
+  <?php
+  include("view/main/php/header.php");
+?>
+    <br>
+    <nav class="nav bg-dark">
+      <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">INICIO ></a>
+      <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">
+        <?php
+  foreach ($datos as $subcat) {
+    if ($subcat['CATPRDID'] == $subCatId){
+      echo $subcat['CATNAME'];
+    }
+  } ?>
+      </a>
+    </nav>
+
+    <div class="container bg-gris">
+      <?php
+foreach ($datos as $producto) {
+  if ($producto['ID'] == $id && $producto['CATID'] == $subCatId) {
+    foreach ($images as $img) {
+      if ($img['PRDID'] == $id) {
+        if($img['URL'] != NULl){ ?>
+        <img class="img-fluid img-size" src="<?php echo $img['URL']; ?>" alt="<?php echo $img['PRDNAME'];?>">
+        <?php }else{?>
+        <img class="img-fluid img-size" src="view/img_product/error_img/no-image.svg" alt="No existe una imagen para este producto.">
+        <?php }  } }?>
+        <div class="container bloque-precio mb-2 pb-1 pt-1 bg-white rounded">
+
+          <h1><?php echo $producto['NAME']; ?></h1>
+          <span class="precio font-weight-bold"><?php echo enEuro($producto['PRICE']  * (1-$producto['DISCOUNTPERCENTAGE']/100))?></span>
+          <div class="precio-sin-iva text-secondary ">
+            <span class="iva-tlt font-weight-bold">SIN IVA</span><br>
+            <span class="precio-secondary-size"><?php echo enEuro($producto['PRICE'] * (1-IVA/100))?></span>
+          </div>
+          <?php if ($producto['DISCOUNTPERCENTAGE'] != NULL){ ?>
+          <div class="precio-pvp text-secondary ">
+            <span class="font-weight-bold">PVP</span><br>
+            <del class="precio-secondary-size"><?php echo enEuro($producto['PRICE'])?></del>
+          </div>
+          <?php }
+          if($producto['DISCOUNTPERCENTAGE'] != NULL){ ?>
+          <div class="descuento">
+            <span class="font-weight-bold text-secondary">DTO.</span>
+            <h4><span class="badge badge-success"><?php echo $producto['DISCOUNTPERCENTAGE']?>%</span></h4>
+
+          </div>
+          <?php }else{ echo "";} ?>
+        </div>
+        <div class="container mt-2 pt-2 bg-white rounded">
+          <h6 class="font-weight-bold">Marca: <a href="#"><?php echo $producto['BRANDNAME']?></a></h6>
+          <span class="font-weight-bold">Cantidad:</span>
+          <div class="btn-group" role="group">
+            <button class="btn btn-secondary remove-quantity" type="button" name="button">-</button>
+            <input class="quantity-box text-center" type="text" class="form-control" value="999" max="999" autocomplete="off" type="text">
+            <button class="btn btn-secondary add-quantity" type="button" name="button">+</button>
+          </div>
+          <br>
+          <?php if ($producto['SPONSORED'] == "Y") { ?>
+          <span class="font-weight-bold">Promoción:</span>
+          <span>
+  <?php echo "Este producto está patrocinado.<br>";
+}else{
+  echo "";} ?></span>
+          <?php if($producto['STOCK'] < 5 && $producto['STOCK'] > 0){ ?>
+          <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span>
+          <span class="badge badge-danger">¡Quedan pocos!</span>
+          <form action="index.php?controller=productos&action=" class="pt-3" method="post">
+            <button class="btn btn-primary w-100" type="submit"></a>Comprar</button>
+          </form>
+          <?php }elseif ($producto['STOCK'] > 5) { ?>
+          <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span><br>
+          <form action="index.php?controller=productos&action=" class="pt-3" method="post">
+            <button class="btn btn-primary w-100" type="submit"></a>Comprar</button>
+          </form>
+          <?php }else{ ?>
+          <span class="font-weight-bold">Disponibilidad: ¡Sin stock! No hay unidades disponibles.</span><br>
+          <?php }?>
+        </div>
+        <div class="container mt-2 pt-2 bg-white rounded">
+          <span class="font-weight-bold">Descripción del producto</span><br>
+
+          <?php if ($producto['SHORTDESCRIPTION'] == NULL && $producto['LONGDESCRIPTION'] == NULL){ ?>
+          <span class="font-italic">Este producto aún no dispone de una descripción. Lo sentimos.</span>
+          <?php } ?>
+          <span><?php echo $producto['SHORTDESCRIPTION']?></span>
+          <hr>
+          <span><?php echo $producto['LONGDESCRIPTION']?></span>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <?php } }?>
+    </div>
+    <?php
+include("view/main/php/footer.php");
+?>
+</body>
+
+</html>

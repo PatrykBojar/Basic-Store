@@ -1,19 +1,7 @@
 <?php
 require_once("model/usuarios_model.php");
 
-// ESTA CLASE NECESITA MEJORAS Y COMPROBACIONESd
-// GUARDAR EL USUARIO EN LA VARIABLE $_SESSION, etc
 class usuarios_controller {
-
-
-/*  public function aaa(){
-  session_start();
-  if(!isset($_SESSION["user"])){
-    header('Location: index.php?controller=usuarios&action=show_login_page');
-  }else{
-    $user=$_SESSION["user"];
-  }
-}*/
   public function login(){
     $usuarios = new usuarios_model();
     $usuarios->setUsername($_POST['username']);
@@ -51,7 +39,6 @@ class usuarios_controller {
     }
   }
 
-// MAL, LA SESIÓN SIGUE GUARDADA. USAR $_SESSION.
   public function logout(){
         session_start();
         session_destroy();
@@ -62,6 +49,5 @@ class usuarios_controller {
   function show_login_page(){
     require_once("view/login/html/login.phtml");
   }
-
 }
 ?>
