@@ -9,6 +9,8 @@ class productos_controller {
     function show_manage_product() {
       $product = new productos_model();
       $datos   = $product->get_products();
+      $productId = new productos_model();
+      $productId   = $productId->getMaxIdProduct();
       $brand = new marcas_model();
       $brands   = $brand->get_brands();
       $category = new categorias_model();
@@ -118,6 +120,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
             }
         }
     }
+
 
     function sortNombreAsc() {
       $category = new categorias_model();
@@ -256,6 +259,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
         $datos   = $product->buscador($name);
         require_once("view/main/html/main_page.phtml");
     }
+
 
 }
 ?>

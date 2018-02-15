@@ -100,14 +100,23 @@ class productos_model {
         $this->discout = $discout;
     }
 
-
-
     /**
      * Devuelve todos los productos solicitados.
      * @return array todos los productos
      */
         public function get_products() {
             $query = $this->db->query("SELECT * FROM PRODUCT;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
+        }
+/**
+ * Busca el último id del producto (último en ser insertrado) en la base de datos.
+ * @return array el id del último producto.
+ */
+        public function getMaxIdProduct() {
+            $query = $this->db->query("SELECT MAX(ID) AS 'PRODUCTMAXID' FROM PRODUCT;");
             while ($rows = $query->fetch_assoc()) {
                 $this->product[] = $rows;
             }

@@ -3,6 +3,10 @@ define("IVA", 21);
 define("YEAR", date("Y"));
 define("MONTH", date("m"));
 define("DAY", date("d"));
+define("HOUR", date("H"));
+define("MINUTE", date("i"));
+define("SECOND", date("s"));
+
 
 setlocale(LC_MONETARY,"es_ES");
 

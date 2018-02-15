@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="icon" href="view/admin/img/icon.png">
-  <link rel="stylesheet" type="text/css" href="../style/productos_style.css">
+  <link rel="stylesheet" type="text/css" href="view/admin/style/productos_style.css">
 </head>
 
 <body>
@@ -90,11 +90,8 @@
             <div class="container tab-pane form-group">
               <label for="form_nombre" class="font-weight-bold">Patrocinado</label>
               <select class="form-control form-control-sm" name="sponsored">
-                <?php
-                $i = 0;
-                foreach ($datos as $dato) { if($dato['SPONSORED'] == 'Y' || $dato['SPONSORED'] == 'N'){?>
-                  <?php echo "<option value='{$dato['SPONSORED']}'>{$dato['SPONSORED']}</option>" ?>
-                <?php  } }?>
+                <option value="N">No</option>
+                <option value="Y">Sí</option>
               </select>
             </div>
           </div>
@@ -104,6 +101,8 @@
         </form>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCat">+ categoría</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSubCat">+ subcategoría</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPrdImg">+ imagen</button>
+
         <div class="modal fade" id="addCat">
           <form action="index.php?controller=categorias&action=insert_category" method="post">
             <div class="modal-dialog">
@@ -125,6 +124,60 @@
             </div>
           </form>
         </div>
+
+        <div class="modal fade" id="addSubCat">
+          <form action="index.php?controller=categorias&action=insert_category" method="post">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Añadir cateogría</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="container tab-pane active form-group">
+                    <label for="nmCat" class="font-weight-bold">Nombree</label>
+                    <input type="text" class="form-control col-12 font-weight-bold" name="nmCat" id="nmCat">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-success">Añadir</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal fade" id="addPrdImg">
+          <form action='index.php?controller=imagenes&action=insert_image' method="post" enctype='multipart/form-data'>
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Añadir imagen</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <input type="file" name="imgUrl"><br>
+                    <small class="form-text text-muted">Recuerda: el nombre de la imagen se establecerá automáticamente.</small>
+                    <small class="form-text text-info font-italic">Se añadirá al producto con la ID <strong><u><?php foreach ($productId as $prdId) { echo $prdId['PRODUCTMAXID'];?></u></strong>.</small>
+                    <input class="" type="text" name="id" value="<?php echo $prdId['PRODUCTMAXID'];?>" <?php } ?>>
+                  </div>
+                  <div class="form-group">
+                        <label for="isCarousel">¿Pertenece a un carrusel?</label>
+                    <select id="isCarousel" name="isCarousel" class="form-control">
+                      <option value="N">No</option>
+                      <option value="Y">Sí</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-success col-12">Añadir</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
       </div>
       <div id="delete" class="container tab-pane fade"><br>
         <h3>Eliminar producto</h3>

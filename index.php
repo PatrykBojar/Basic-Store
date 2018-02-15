@@ -4,6 +4,8 @@ require_once("controller/productos_controller.php");
 require_once("controller/usuarios_controller.php");
 require_once("controller/categorias_controller.php");
 require_once("controller/marcas_controller.php");
+require_once("controller/imagenes_controller.php");
+
 //require_once("recaptchalib.php");
 
 
@@ -159,6 +161,14 @@ CONTROLADORES NECESARIO EN CASO DE USAR UNA PÁGINA CON BOTONES DE ELECCIÓN.
         }
     }
 
+
+
+    if ($_GET['controller'] == "imagenes") {
+    if ($_GET['action'] == "insert_image") {
+        $controller = new imagenes_controller();
+        $controller->insert_image();
+    }
+}
 
 } else {
     //$controller = new productos_controller();

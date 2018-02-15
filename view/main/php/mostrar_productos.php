@@ -11,7 +11,7 @@
           <img class="card-img-top img-fluid img-product" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" src="<?php echo $img['URL']; ?>" alt="<?php echo $dato['NAME'];?>">
           <?php }else{?>
           <img class="card-img-top img-fluid img-product" src="view/img_product/error_img/no-image.svg" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" alt="No existe una imagen para este producto.">
-          <?php } } } ?>
+        <?php } } } ?>
           <div class="card-block">
             <h4 class="card-title"><?php echo $dato['NAME'];?></h4>
             <p class="card-text">
