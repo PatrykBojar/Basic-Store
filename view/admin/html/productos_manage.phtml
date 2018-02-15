@@ -160,14 +160,26 @@
                     <input type="file" name="imgUrl"><br>
                     <small class="form-text text-muted">Recuerda: el nombre de la imagen se establecerá automáticamente.</small>
                     <small class="form-text text-info font-italic">Se añadirá al producto con la ID <strong><u><?php foreach ($productId as $prdId) { echo $prdId['PRODUCTMAXID'];?></u></strong>.</small>
-                    <input class="" type="text" name="id" value="<?php echo $prdId['PRODUCTMAXID'];?>" <?php } ?>>
+                    <input class="oculto" type="text" name="id" value="<?php echo $prdId['PRODUCTMAXID'];?>" <?php } ?>>
                   </div>
                   <div class="form-group">
-                        <label for="isCarousel">¿Pertenece a un carrusel?</label>
+                    <label for="isCarousel">¿Pertenece a un carrusel?</label>
                     <select id="isCarousel" name="isCarousel" class="form-control">
                       <option value="N">No</option>
                       <option value="Y">Sí</option>
                     </select>
+                    <div class="form-group pt-4">
+                      <label for="radio">¿De qué tipo quieres que sea la foto?</label>
+                      <div class="radio" id="radio">
+                        <label for="0"><input id="0" type="radio" name="optradio" value="0">Portada del producto</label>
+                      </div>
+                      <div class="radio">
+                        <label for="1"><input id="1" type="radio" name="optradio" value="1">Imagen secundaria del producto</label>
+                      </div>
+                      <div class="radio">
+                        <label for="2"><input id="2" type="radio" name="optradio" value="2">Carrusel de promoción</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="modal-footer">

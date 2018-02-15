@@ -7,7 +7,6 @@ require_once("model/imagenes_model.php");
 
 class imagenes_controller {
 
-
   function insert_image(){
         // Array que contienen todos los datos de la imagen.
         $info = pathinfo($_FILES['imgUrl']['name']);

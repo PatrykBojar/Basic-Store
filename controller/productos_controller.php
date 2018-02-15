@@ -19,6 +19,8 @@ class productos_controller {
       $subCategories   = $category->get_subCategories();
       $notSponsoredPrd = new productos_model();
       $notSponsoredPrd = $notSponsoredPrd->showNotSponsoredProducts();
+      $allImages = new imagenes_model();
+      $allImages = $allImages->get_img();
       require_once("view/admin/html/productos_manage.phtml");
 
     }

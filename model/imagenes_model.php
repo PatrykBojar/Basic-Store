@@ -29,7 +29,13 @@ class imagenes_model {
       return $this->$isCarousel;
   }
 
-
+public function get_img(){
+  $query = $this->db->query("SELECT * FROM IMAGE;");
+  while ($rows = $query->fetch_assoc()) {
+      $this->product[] = $rows;
+  }
+  return $this->product;
+}
   public function insert_image(){
     $img_url      = $this->imgUrl;
     $id     = $this->id;
