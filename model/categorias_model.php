@@ -69,17 +69,7 @@ class categorias_model {
             return false;
         }
     }
-
-    /*public function show_subCatUl($id){
-      $query = $this->db->query("SELECT cat.NAME AS 'SUBCATEGORYNAME',prd.ID AS 'PRODUCTID'
-        FROM PRODUCT prd, CATEGORY cat WHERE prd.CATEGORY = cat.ID AND prd.ID = '$id';");
-      while ($rows = $query->fetch_assoc()) {
-          $this->category[] = $rows;
-      }
-      return $this->category;
-  }*/
-
-    /*public function insert_subCategory() {
+    public function insert_subCategory() {
         $sql    = "INSERT INTO CATEGORY (NAME, PARENTCATEGORY) VALUES
         ('{$this->name}','{$this->parentCategory}')";
         $result = $this->db->query($sql);
@@ -89,6 +79,15 @@ class categorias_model {
             return false;
         }
     }
+    /*public function show_subCatUl($id){
+      $query = $this->db->query("SELECT cat.NAME AS 'SUBCATEGORYNAME',prd.ID AS 'PRODUCTID'
+        FROM PRODUCT prd, CATEGORY cat WHERE prd.CATEGORY = cat.ID AND prd.ID = '$id';");
+      while ($rows = $query->fetch_assoc()) {
+          $this->category[] = $rows;
+      }
+      return $this->category;
+  }
+
     public function delete_subCategory($id) {
         $sql    = "DELETE FROM CATEGORY WHERE id='$id'";
         $result = $this->db->query($sql);

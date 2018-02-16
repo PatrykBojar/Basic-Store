@@ -6,7 +6,7 @@ require_once("model/categorias_model.php");
  */
 class categorias_controller{
 
-  function list_categories() {
+  /*function list_categories() {
       $category = new categorias_model();
       $categories   = $category->get_categories();
       $subCategory = new categorias_model();
@@ -15,7 +15,7 @@ class categorias_controller{
       //require_once("view/admin/php/listar_categorias.php");
       include("view/admin/html/productos_manage.phtml");
 
-  }
+  }*/
   /*function list_subCategories() {
       $category = new categorias_model();
       $categoriesSub   = $category->get_subCsaategories();

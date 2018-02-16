@@ -32,7 +32,6 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller = new productos_controller();
             $controller->show_login_page();
         }
-
         if ($_GET['action'] == "show_manage_product") {
             $controller = new productos_controller();
             $controller->show_manage_product();
@@ -146,18 +145,9 @@ CONTROLADORES NECESARIO EN CASO DE USAR UNA PÁGINA CON BOTONES DE ELECCIÓN.
             $controller = new categorias_controller();
             $controller->insert_subCategory();
         }
-
-        if ($_GET['action'] == "delete_category") {
-            $controller = new categorias_controller();
-            $controller->delete_category();
-        }
         if ($_GET['action'] == "delete_subCategory") {
             $controller = new categorias_controller();
             $controller->delete_subCategory();
-        }
-        if ($_GET['action'] == "list_categories") {
-            $controller = new categorias_controller();
-            $controller->list_categories();
         }
     }
 

@@ -71,7 +71,7 @@ FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
 
             $product->setName($_POST['name']);
             $product->setStock(aInt($_POST['stock']));
-            $product->setPrice(aInt($_POST['price']));
+            $product->setPrice(aFloat($_POST['price']));
             $product->setSponsored($_POST['sponsored']);
             $product->setShrtDesc($_POST['shortDesc']);
             $product->setLngDesc($_POST['longDesc']);

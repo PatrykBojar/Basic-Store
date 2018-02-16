@@ -130,7 +130,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Añadir cateogría</h4>
+                  <h4 class="modal-title">Añadir subcategoría</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -168,17 +168,23 @@
                       <option value="N">No</option>
                       <option value="Y">Sí</option>
                     </select>
-                    <div class="form-group pt-4">
-                      <label for="radio">¿De qué tipo quieres que sea la foto?</label>
-                      <div class="radio" id="radio">
-                        <label for="0"><input id="0" type="radio" name="optradio" value="0">Portada del producto</label>
-                      </div>
-                      <div class="radio">
-                        <label for="1"><input id="1" type="radio" name="optradio" value="1">Imagen secundaria del producto</label>
-                      </div>
-                      <div class="radio">
-                        <label for="2"><input id="2" type="radio" name="optradio" value="2">Carrusel de promoción</label>
-                      </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="0">¿De qué tipo será la imagen?</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="typeimg" id="0" value="option1" checked>
+                      <label class="form-check-label" for="0">Portada del producto (tarjetas).</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="typeimg" id="1" value="option2">
+                      <label class="form-check-label" for="1">Carrusel en la página de inicio.</label>
+                      <small id="1" class="form-text text-warning">Si seleccionas esta opción el valor del carrusel debe estar marcado como <strong>(Sí)</strong>.</small>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="typeimg" id="2" value="option3">
+                      <label class="form-check-label" for="2">Secundaria del producto.</label>
+                      <small id="2" class="form-text text-warning">Si seleccionas esta opción el valor del carrusel debe estar marcado como <strong>(Sí)</strong>.</small>
                     </div>
                   </div>
                 </div>
@@ -267,6 +273,24 @@
             </table>
           </div>
         </form>
+        <script>
+          function mostra_amb_ajax(precio, id, idProducto) {
+            //Agafo el valor de la casella d'input
+            var descuento = document.getElementById(id).value;
+
+            /* Una XML HTTP Request permet executar codi en el servidor
+             * sense recarregar la pàgina web. És el que es coneix com a "AJAX" */
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("zona_ajax" + idProducto).innerHTML = this.responseText;
+              }
+            }
+            //Paso la variable   nom   com a paràmetre del fitxer  texto2.php
+            xmlhttp.open("GET", "view/admin/ajax/respuestaAjax.php?descuento=" + descuento + "&precio=" + precio, true);
+            xmlhttp.send();
+          }
+        </script>
         <?php foreach ($notSponsoredPrd as $dato) {?>
         <div id="addProm<?php echo $dato['ID']; ?>" class="modal fade">
           <form action="index.php?controller=productos&action=create_promotion&ID=<?php echo $dato['ID'];?>" method="post">
@@ -279,7 +303,8 @@
                 <div class="modal-body">
                   <div class="container tab-pane active form-group">
                     <label for="prmDis" class="font-weight-bold col-12 text-center">Rango del descuento (1-99%)</label>
-                    <input type="text" class="form-control font-weight-bold" name="prmDis" id="prmDis">
+                    <input type="number" class="form-control font-weight-bold" name="prmDis" id="prmDis<?php echo $dato['ID']; ?>" onkeyup="mostra_amb_ajax(<?php echo $dato['PRICE']; ?>,'prmDis<?php echo $dato['ID']; ?>',<?php echo $dato['ID']; ?>)" min="1" max="99">
+                    <div id="zona_ajax<?php echo $dato['ID']; ?>"></div>
                   </div>
                   <div class="container tab-pane active form-inline">
                     <label for="prmyrStrt" class="font-weight-bold col-12">Fecha inicio (actual)</label>
@@ -287,9 +312,9 @@
                     <input type="text" class="form-control col-4" name="prmmthStrt" id="prmmthStrt" value="<?php echo MONTH ?>" disabled>
                     <input type="text" class="form-control col-4" name="prmdayStrt" id="prmdayStrt" value="<?php echo DAY ?>" disabled>
                     <label for="prmyr" class="font-weight-bold col-12">Fecha final (Año-mes-día)</label>
-                    <input type="text" class="form-control col-4" name="prmyr" id="prmyr" placeholder="<?php echo YEAR ?>">
-                    <input type="text" class="form-control col-4" name="prmmth" id="prmmth" placeholder="<?php echo MONTH ?>">
-                    <input type="text" class="form-control col-4" name="prmday" id="prmday" placeholder="<?php echo DAY+1 ?>">
+                    <input type="number" class="form-control col-4" name="prmyr" id="prmyr" placeholder="<?php echo YEAR ?>" min="<?php echo YEAR ?>" max="9999" required>
+                    <input type="number" class="form-control col-4" name="prmmth" id="prmmth" placeholder="<?php echo MONTH ?>" min="1" max="12" required>
+                    <input type="number" class="form-control col-4" name="prmday" id="prmday" placeholder="<?php echo DAY+1 ?>" min="1" max="31" required>
                   </div>
                 </div>
                 <div class="modal-footer">
