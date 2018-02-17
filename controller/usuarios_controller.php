@@ -2,6 +2,12 @@
 require_once("model/usuarios_model.php");
 
 class usuarios_controller {
+
+  /*public function get_users(){
+    $user = new categorias_model();
+    $users   = $user->get_users();
+  }*/
+
   public function login(){
     $usuarios = new usuarios_model();
     $usuarios->setUsername($_POST['username']);

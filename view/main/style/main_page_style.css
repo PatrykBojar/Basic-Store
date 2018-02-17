@@ -14,3 +14,16 @@
     bottom: 0;
     width: 100%;
 }*/
+div.modal > form{
+  width: 500px;
+  margin: 0 auto;
+}
+hr{
+  width: 50%;
+}
+.footerP{
+  margin-bottom: 0;
+}
+/*.contenedor-productos{
+  height: 800px;
+}*/

@@ -29,6 +29,14 @@ class marcas_model {
         }
         return $this->brand;
     }
+    public function BrandsWithPrd(){
+      $query = $this->db->query("SELECT DISTINCT brd.NAME AS 'BRANDNAME',brd.ID AS 'BRANDID' FROM BRAND brd, PRODUCT prd WHERE prd.BRAND = brd.ID;");
+      while ($rows = $query->fetch_assoc()) {
+          $this->brand[] = $rows;
+      }
+      return $this->brand;
+  }
+
     public function insert_brand() {
         $sql    = "INSERT INTO BRAND (NAME) VALUES ('{$this->name}')";
         $result = $this->db->query($sql);

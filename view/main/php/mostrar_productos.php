@@ -1,6 +1,7 @@
 <div class="card-group col-8">
   <div class="row">
     <?php
+    if(!empty($datos)){
     foreach ($datos as $dato) {
       ?>
       <div class="col-12 col-md-6 col-xl-4">
@@ -94,6 +95,10 @@
           </div>
         </form>
       </div>
-      <?php   } ?>
+    <?php   }}else{?>
+<div class="container">
+  <h3 class="text-info">No hemos podido encontrar ningun producto con tu criterio de búsqueda :(</h3>
+</div>
+    <?php } ?>
   </div>
 </div>

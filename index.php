@@ -13,7 +13,6 @@ require_once("config/config.php");
 
 session_start();
 
-
 if (isset($_GET['controller']) && isset($_GET['action'])) {
 
     if ($_GET['controller'] == "productos") {
@@ -41,6 +40,11 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller = new productos_controller();
             $controller->buscador();
         }
+        if ($_GET['action'] == "filterProductsBrands") {
+            $controller = new productos_controller();
+            $controller->filterProductsBrands();
+        }
+
         if ($_GET['action'] == "show_subCatProduct") {
             $controller = new productos_controller();
             $controller->show_subCatProduct();

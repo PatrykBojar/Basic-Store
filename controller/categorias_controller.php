@@ -52,10 +52,9 @@ class categorias_controller{
   }
   function insert_subCategory() {
       $category = new categorias_model();
-
-      if (isset($_POST['insert'])) {
-          $category->setName($_POST['name']);
-          $category->setStock($_POST['parentcategory']);
+      if ($_POST['subcatName'] != '') {
+          $category->setName($_POST['subcatName']);
+          $category->setParentCategory($_POST['parentCat']);
           $error = $category->insert_subCategory();
 
           if (!$error) {
@@ -64,6 +63,9 @@ class categorias_controller{
           } else {
               echo $error;
           }
+      }else{
+        require_once("error.php");
+
       }
   }
 

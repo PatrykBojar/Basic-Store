@@ -26,3 +26,7 @@
 .quantity-box{
   width: 45px;
 }
+div.modal > form{
+  width: 500px;
+  margin: 0 auto;
+}

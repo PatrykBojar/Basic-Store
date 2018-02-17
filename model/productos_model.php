@@ -122,6 +122,18 @@ class productos_model {
             }
             return $this->product;
         }
+/**
+ * Devuelve el precio más alto y bajo de todos los productos
+ * @return array precio más alto y bajo.
+ */
+        public function minMaxPrice() {
+            $query = $this->db->query("SELECT MAX(PRICE) AS 'MAXPRICE', MIN(PRICE) AS 'MINPRICE' FROM PRODUCT;");
+            while ($rows = $query->fetch_assoc()) {
+                $this->product[] = $rows;
+            }
+            return $this->product;
+        }
+
     /**
      * Inserta un producto a la base de datos.
      * @return mixed si la query no se ejcuta bien devolverá un error mostrando la dicha query y el posible error en ella, en caso contrario devolverá false.
@@ -317,14 +329,45 @@ class productos_model {
            FROM PRODUCT prd
            LEFT JOIN PROMOTION prm
         on prm.PRODUCT  = prd.ID
-
         WHERE NAME LIKE '%$name%' OR SHORTDESCRIPTION LIKE '%$name%'
-          OR LONGDESCRIPTION LIKE '%$name%' OR PRICE LIKE '%$name%';");
+          OR LONGDESCRIPTION LIKE '%$name%';");
         while ($rows = $query->fetch_assoc()) {
             $this->product[] = $rows;
         }
         return $this->product;
     }
+
+    public function filterProductsBrands($filtroQuery) {
+        $query = $this->db->query("SELECT
+    prd.ID AS 'ID',
+    prd.NAME AS 'NAME',
+    prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
+    prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
+    prd.PRICE AS 'PRICE',
+    prd.STOCK AS 'STOCK',
+    prd.SPONSORED AS 'SPONSORED',
+    prd.CATEGORY,
+    prm.DISCOUNTPERCENTAGE AS 'DISCOUNTPERCENTAGE',
+    bnd.NAME AS 'BRANDNAME',
+    bnd.ID AS 'BRANDID',
+    cat.NAME AS 'CATNAME',
+    cat.ID AS 'CATID',
+    prd.CATEGORY AS 'CATPRDID',
+    cat.PARENTCATEGORY AS 'PARENTCATEGORY'
+FROM
+    PRODUCT prd
+LEFT JOIN PROMOTION prm ON
+    prm.PRODUCT = prd.ID
+LEFT JOIN BRAND bnd ON
+    bnd.ID = prd.BRAND
+LEFT JOIN CATEGORY cat ON
+    cat.ID = prd.CATEGORY WHERE $filtroQuery;");
+        while ($rows = $query->fetch_assoc()) {
+            $this->product[] = $rows;
+        }
+        return $this->product;
+    }
+
 
     public function show_subCatProduct($name) {
         $query = $this->db->query("SELECT

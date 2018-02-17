@@ -25,19 +25,23 @@ class imagenes_controller {
                 switch ($valor) {
                     case "option1":
                         $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR . ":" . MINUTE . ":" . SECOND . "." . $ext;
+                        // Definimos la ruta del destino con nuestras consantes.
+                        move_uploaded_file($ruta_origen, $ruta_destino);
+                        //var_dump($ruta_destino); exit();
                         break;
                     case "option2":
                         $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR . ":" . MINUTE . ":" . SECOND . "-carrousel-top." . $ext;
+                        // Definimos la ruta del destino con nuestras consantes.
+                        move_uploaded_file($ruta_origen, $ruta_destino);
                         break;
                     case "option3":
                         $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR . ":" . MINUTE . ":" . SECOND . "-carrousel-product." . $ext;
+                        // Definimos la ruta del destino con nuestras consantes.
+                        move_uploaded_file($ruta_origen, $ruta_destino);
                         break;
                     default:
                         echo "Algo ha salido mal.";
                 }
-                // Definimos la ruta del destino con nuestras consantes.
-                //$ruta_destino = "view/img_product/".$id."-".YEAR."-".MONTH."-".DAY."_".HOUR.":".MINUTE.":".SECOND.".".$ext;
-                move_uploaded_file($ruta_origen, $ruta_destino);
                 $imagen = new imagenes_model();
                 $imagen->setImgUrl($ruta_destino);
                 $imagen->setId($_POST['id']);

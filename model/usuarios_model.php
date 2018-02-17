@@ -54,6 +54,13 @@ class usuarios_model {
   public function setZipcode($zipCode) {
     $this->zipCode = $zipCode;
   }
+  /*public function get_users(){
+    $query = $this->db->query("SELECT * FROM USER;");
+        while ($rows = $query->fetch_assoc()) {
+            $this->user[] = $rows;
+        }
+        return $this->user;
+      }*/
 
       public function valida_usuario() {
         $prueba = $this->password;

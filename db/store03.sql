@@ -2,10 +2,10 @@
 -- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 07-02-2018 a las 19:45:10
--- Versión del servidor: 5.7.21-0ubuntu0.16.04.1
--- Versión de PHP: 7.0.22-0ubuntu0.16.04.1
+-- Host: localhost
+-- Generation Time: Feb 16, 2018 at 08:46 PM
+-- Server version: 5.7.21-0ubuntu0.16.04.1
+-- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `store03`
+-- Database: `store03`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `BRAND`
+-- Table structure for table `BRAND`
 --
 
 CREATE TABLE `BRAND` (
@@ -32,7 +32,7 @@ CREATE TABLE `BRAND` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `BRAND`
+-- Dumping data for table `BRAND`
 --
 
 INSERT INTO `BRAND` (`ID`, `NAME`) VALUES
@@ -61,7 +61,7 @@ INSERT INTO `BRAND` (`ID`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATEGORY`
+-- Table structure for table `CATEGORY`
 --
 
 CREATE TABLE `CATEGORY` (
@@ -71,7 +71,7 @@ CREATE TABLE `CATEGORY` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `CATEGORY`
+-- Dumping data for table `CATEGORY`
 --
 
 INSERT INTO `CATEGORY` (`ID`, `NAME`, `PARENTCATEGORY`) VALUES
@@ -101,12 +101,13 @@ INSERT INTO `CATEGORY` (`ID`, `NAME`, `PARENTCATEGORY`) VALUES
 (24, 'PROTECTORES', 5),
 (25, 'POWERBANKS', 5),
 (26, 'SMARTPHONES', 5),
-(29, 'CONSOLAS', NULL);
+(29, 'CONSOLAS', NULL),
+(30, 'GENERACIÓN 4', 29);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `IMAGE`
+-- Table structure for table `IMAGE`
 --
 
 CREATE TABLE `IMAGE` (
@@ -115,10 +116,41 @@ CREATE TABLE `IMAGE` (
   `CAROUSEL` enum('Y','N') DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `IMAGE`
+--
+
+INSERT INTO `IMAGE` (`URL`, `PRODUCT`, `CAROUSEL`) VALUES
+('view/img_product/1-2018-02-08.jpg', 1, 'N'),
+('view/img_product/1-2018-02-09-carrousel-top.jpg', 1, 'Y'),
+('view/img_product/10-2018-02-08.jpg', 10, 'N'),
+('view/img_product/11-2018-02-08.jpg', 11, 'N'),
+('view/img_product/12-2018-02-08.jpg', 12, 'N'),
+('view/img_product/2-2018-02-08.jpg', 2, 'N'),
+('view/img_product/2-2018-02-09-carrousel-top.jpg', 2, 'Y'),
+('view/img_product/3-2018-02-08.jpg', 3, 'N'),
+('view/img_product/3-2018-02-09-carrousel-top.jpg', 3, 'Y'),
+('view/img_product/4-2018-02-08.jpg', 4, 'N'),
+('view/img_product/4-2018-02-09-carrousel-top.jpg', 4, 'Y'),
+('view/img_product/43-2018-02-08.jpg', 43, 'N'),
+('view/img_product/45-2018-02-08.jpg', 45, 'N'),
+('view/img_product/46-2018-02-08.jpg', 46, 'N'),
+('view/img_product/47-2018-02-08.jpg', 47, 'N'),
+('view/img_product/47-2018-02-11-carrousel-0.jpg', 47, 'Y'),
+('view/img_product/47-2018-02-11-carrousel-1.jpg', 47, 'Y'),
+('view/img_product/47-2018-02-11-carrousel-2.jpg', 47, 'Y'),
+('view/img_product/48-2018-02-08.jpg', 48, 'N'),
+('view/img_product/5-2018-02-08.jpg', 5, 'N'),
+('view/img_product/53-2018-02-08.jpg', 53, 'N'),
+('view/img_product/6-2018-02-08.jpg', 6, 'N'),
+('view/img_product/7-2018-02-08.jpg', 7, 'N'),
+('view/img_product/8-2018-02-08.jpg', 8, 'N'),
+('view/img_product/9-2018-02-08.jpg', 9, 'N');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ORDER`
+-- Table structure for table `ORDER`
 --
 
 CREATE TABLE `ORDER` (
@@ -133,7 +165,7 @@ CREATE TABLE `ORDER` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ORDERITEM`
+-- Table structure for table `ORDERITEM`
 --
 
 CREATE TABLE `ORDERITEM` (
@@ -147,7 +179,7 @@ CREATE TABLE `ORDERITEM` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `PRODUCT`
+-- Table structure for table `PRODUCT`
 --
 
 CREATE TABLE `PRODUCT` (
@@ -163,7 +195,7 @@ CREATE TABLE `PRODUCT` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `PRODUCT`
+-- Dumping data for table `PRODUCT`
 --
 
 INSERT INTO `PRODUCT` (`ID`, `NAME`, `STOCK`, `PRICE`, `SPONSORED`, `SHORTDESCRIPTION`, `LONGDESCRIPTION`, `BRAND`, `CATEGORY`) VALUES
@@ -191,7 +223,7 @@ INSERT INTO `PRODUCT` (`ID`, `NAME`, `STOCK`, `PRICE`, `SPONSORED`, `SHORTDESCRI
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `PROMOTION`
+-- Table structure for table `PROMOTION`
 --
 
 CREATE TABLE `PROMOTION` (
@@ -203,26 +235,28 @@ CREATE TABLE `PROMOTION` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `PROMOTION`
+-- Dumping data for table `PROMOTION`
 --
 
 INSERT INTO `PROMOTION` (`ID`, `DISCOUNTPERCENTAGE`, `STARTDATE`, `ENDDATE`, `PRODUCT`) VALUES
 (1, 50, '2018-01-31 20:26:08', '2018-04-30 00:00:00', 52),
 (2, 25, '2018-02-02 16:23:23', '2018-07-18 00:00:00', 53),
 (3, 15, '2018-02-02 17:35:47', '2018-02-28 00:00:00', 46),
-(4, 10, '2018-02-07 18:53:27', '2018-02-28 00:00:00', 7);
+(4, 10, '2018-02-07 18:53:27', '2018-02-28 00:00:00', 7),
+(6, 5, '2018-02-08 16:05:00', '2018-02-09 00:00:00', 1),
+(7, 12, '2018-02-08 16:16:39', '2018-03-15 00:00:00', 44);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `USER`
+-- Table structure for table `USER`
 --
 
 CREATE TABLE `USER` (
   `USERNAME` varchar(64) NOT NULL,
   `PASSWORD` varchar(32) NOT NULL,
   `CREATIONDATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `USERTYPE` enum('ADMIN','BUYER') NOT NULL DEFAULT 'BUYER',
+  `USERTYPE` enum('ADMIN','BUYER','VISITOR') NOT NULL DEFAULT 'BUYER',
   `NAME` varchar(50) NOT NULL,
   `EMAIL` varchar(50) NOT NULL,
   `ADDRESS` varchar(100) NOT NULL,
@@ -230,59 +264,49 @@ CREATE TABLE `USER` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `USER`
+-- Dumping data for table `USER`
 --
 
 INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `CREATIONDATE`, `USERTYPE`, `NAME`, `EMAIL`, `ADDRESS`, `POSTALCODE`) VALUES
-('aaa', '$1CH2LCw5hraY', '2018-02-07 15:24:02', 'BUYER', 'aaa', 'aa@gmail.com', 'Sol 43', '07054'),
-('admin', 'admin', '2018-01-25 18:37:20', 'ADMIN', '', '', '', ''),
-('antoni', 'CR7en2hlQPhwU', '2018-02-05 20:12:59', 'BUYER', 'Antonio Gonzales Cabrera', 'antoni21@gmail.com', 'Carrer Vell 29', '07009'),
-('ERGTERG', '1234', '2018-02-06 20:04:04', 'BUYER', 'GDFG', 'DFGDF@OJRGF.COM', 'JEROIUJ', '07050'),
-('ewasrvygkuhsza', '$1lktSW8AmrrQ', '2018-02-06 20:29:49', 'BUYER', 'Hoiheoih', 'oifhieo@gmail.com', 'ohrheohg', '07215'),
-('foiehoih21', '$1CH2LCw5hraY', '2018-02-06 20:20:20', 'BUYER', 'weuiheuhui', 'orpo@gmail.com', 'fivgfiuo 43', '07005'),
-('javi', 'CRP0W3oTu3Z4s', '2018-02-05 20:14:37', 'BUYER', 'Javier Loquito', 'jaguilar@gmail.com', 'Calle Luna 7', '07002'),
-('jcoca', 'CRP0W3oTu3Z4s', '2018-02-05 20:19:12', 'BUYER', 'Jose Coca Pérez', 'jcoca12@gmail.com', 'Carrer Verd', '07018'),
-('LHEWRGLTHJ', '$1lktSW8AmrrQ', '2018-02-06 20:18:02', 'BUYER', 'ORHREOIH', 'Oheo@gmail.com', 'HOIHOIRH 2', '07415'),
-('lluc', '1111', '2018-02-06 20:25:05', 'BUYER', 'Lluc Pagès', 'lluc@gmail.com', 'Barrio Bajo 32', '11111'),
-('patryk', 'patryk', '2018-01-25 18:38:08', 'BUYER', '', '', '', ''),
-('prueba1', '$1Wq3icmQHsZA', '2018-02-06 20:38:40', 'BUYER', 'Prueba Madre', 'qwe@gmail.com', 'Casxoihwsdjh', '01589'),
-('rgarcia', 'CRP0W3oTu3Z4s', '2018-02-05 20:20:58', 'BUYER', 'Rommel Hitler García', 'rgarcia@gmail.com', 'Calle Fuster 407', '07048'),
-('thkrlh', '$1lktSW8AmrrQ', '2018-02-06 20:18:22', 'BUYER', 'highh', 'ihgih@gmail.com', 'oeheo 32', '07548'),
-('user', 'user', '2018-01-24 17:45:18', 'BUYER', '', '', '', '');
+('admin', '$1AKteq..edcc', '2018-02-14 18:19:47', 'BUYER', 'Administrador', 'admin@gmail.com', 'Ninguna', '00000'),
+('jarribas', '$1/4POZ15tSBo', '2018-02-09 19:32:11', 'BUYER', 'Aguilar Javier Arribas', 'jarr@gmail.com', 'Andrach 11', '07150'),
+('lol', '$1CH2LCw5hraY', '2018-02-14 18:20:22', 'BUYER', 'OIJ4ERIOJ', 'EOHFEOI@GMAIL.COM', 'jrofji', '07008'),
+('patryk', '$1lt4uFo4sc4o', '2018-02-14 18:08:36', 'BUYER', 'Patryk Bojar', 'patrick@gmail.com', 'Carrer Cir 33', '07008'),
+('user', 'user', '2018-02-14 18:15:50', 'BUYER', '', '', '', '');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `BRAND`
+-- Indexes for table `BRAND`
 --
 ALTER TABLE `BRAND`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `CATEGORY`
+-- Indexes for table `CATEGORY`
 --
 ALTER TABLE `CATEGORY`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `PARENTCATEGORY` (`PARENTCATEGORY`);
 
 --
--- Indices de la tabla `IMAGE`
+-- Indexes for table `IMAGE`
 --
 ALTER TABLE `IMAGE`
   ADD PRIMARY KEY (`URL`,`PRODUCT`),
   ADD KEY `PRODUCT` (`PRODUCT`);
 
 --
--- Indices de la tabla `ORDER`
+-- Indexes for table `ORDER`
 --
 ALTER TABLE `ORDER`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `USER` (`USER`);
 
 --
--- Indices de la tabla `ORDERITEM`
+-- Indexes for table `ORDERITEM`
 --
 ALTER TABLE `ORDERITEM`
   ADD PRIMARY KEY (`ORDERLINE`,`ORDER`),
@@ -290,7 +314,7 @@ ALTER TABLE `ORDERITEM`
   ADD KEY `PRODUCT` (`PRODUCT`);
 
 --
--- Indices de la tabla `PRODUCT`
+-- Indexes for table `PRODUCT`
 --
 ALTER TABLE `PRODUCT`
   ADD PRIMARY KEY (`ID`),
@@ -298,85 +322,85 @@ ALTER TABLE `PRODUCT`
   ADD KEY `CATEGORY` (`CATEGORY`);
 
 --
--- Indices de la tabla `PROMOTION`
+-- Indexes for table `PROMOTION`
 --
 ALTER TABLE `PROMOTION`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `PRODUCT` (`PRODUCT`);
 
 --
--- Indices de la tabla `USER`
+-- Indexes for table `USER`
 --
 ALTER TABLE `USER`
   ADD PRIMARY KEY (`USERNAME`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `BRAND`
+-- AUTO_INCREMENT for table `BRAND`
 --
 ALTER TABLE `BRAND`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
--- AUTO_INCREMENT de la tabla `CATEGORY`
+-- AUTO_INCREMENT for table `CATEGORY`
 --
 ALTER TABLE `CATEGORY`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
--- AUTO_INCREMENT de la tabla `ORDER`
+-- AUTO_INCREMENT for table `ORDER`
 --
 ALTER TABLE `ORDER`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `PRODUCT`
+-- AUTO_INCREMENT for table `PRODUCT`
 --
 ALTER TABLE `PRODUCT`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
--- AUTO_INCREMENT de la tabla `PROMOTION`
+-- AUTO_INCREMENT for table `PROMOTION`
 --
 ALTER TABLE `PROMOTION`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `CATEGORY`
+-- Constraints for table `CATEGORY`
 --
 ALTER TABLE `CATEGORY`
   ADD CONSTRAINT `CATEGORY_ibfk_1` FOREIGN KEY (`PARENTCATEGORY`) REFERENCES `CATEGORY` (`ID`);
 
 --
--- Filtros para la tabla `IMAGE`
+-- Constraints for table `IMAGE`
 --
 ALTER TABLE `IMAGE`
   ADD CONSTRAINT `IMAGE_ibfk_1` FOREIGN KEY (`PRODUCT`) REFERENCES `PRODUCT` (`ID`);
 
 --
--- Filtros para la tabla `ORDER`
+-- Constraints for table `ORDER`
 --
 ALTER TABLE `ORDER`
   ADD CONSTRAINT `ORDER_ibfk_1` FOREIGN KEY (`USER`) REFERENCES `USER` (`USERNAME`);
 
 --
--- Filtros para la tabla `ORDERITEM`
+-- Constraints for table `ORDERITEM`
 --
 ALTER TABLE `ORDERITEM`
   ADD CONSTRAINT `ORDERITEM_ibfk_1` FOREIGN KEY (`ORDER`) REFERENCES `ORDER` (`ID`),
   ADD CONSTRAINT `ORDERITEM_ibfk_2` FOREIGN KEY (`PRODUCT`) REFERENCES `PRODUCT` (`ID`);
 
 --
--- Filtros para la tabla `PRODUCT`
+-- Constraints for table `PRODUCT`
 --
 ALTER TABLE `PRODUCT`
   ADD CONSTRAINT `PRODUCT_ibfk_1` FOREIGN KEY (`BRAND`) REFERENCES `BRAND` (`ID`),
   ADD CONSTRAINT `PRODUCT_ibfk_2` FOREIGN KEY (`CATEGORY`) REFERENCES `CATEGORY` (`ID`);
 
 --
--- Filtros para la tabla `PROMOTION`
+-- Constraints for table `PROMOTION`
 --
 ALTER TABLE `PROMOTION`
   ADD CONSTRAINT `PROMOTION_ibfk_1` FOREIGN KEY (`PRODUCT`) REFERENCES `PRODUCT` (`ID`);

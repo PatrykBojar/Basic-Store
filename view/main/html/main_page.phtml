@@ -14,23 +14,22 @@
 </head>
 
 <body>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtros">filtros xd</button>
 
   <?php
   include("view/main/php/header.php");
+  include("view/main/php/filtros.php");
   include("view/main/php/menu.php");
   if(isset($mostrarCarr)){
   include("view/main/php/carrusel.php");
 }
-  //include("view/main/php/filtros.php");
-  include("view/main/php/mostrar_productos.php");?>
-  <p><a href="index.php?controller=productos&action=show_manage_product">Añadir/modificar/borrar producto</a></p>
+  //include("view/main/php/ordenar.php");
+  include("view/main/php/mostrar_productos.php");
+  include("view/main/php/pagination.php");
+  include("view/main/php/footer.php");
 
-  <?php
-  //include("view/main/php/footer.php");
 
 ?>
-
-
 
 </body>
 

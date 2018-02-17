@@ -6,17 +6,35 @@
   </form>
   <?php
     if(isset($_SESSION['user'])){
-      if ($_SESSION['user'] == "admin") {
-        echo "BIENVENIDO, ADMINISTRADOR";
-      }else{
-        echo "Bivenido, " . $_SESSION['user'];
-      }?>
-     <form action="index.php?controller=usuarios&action=logout" method="post">
-        <input type="submit" name="logout" value="Salir">
-      </form>
+      if ($_SESSION['user'] == "admin") {?>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php echo  $_SESSION['user'];?>
+        </button>
+          <div class="dropdown-menu" aria-labelledby="userMenu">
+            <a href="index.php?controller=productos&action=show_manage_product" class="dropdown-item btn">Zona ADMIN</a>
+            <a href="index.php?controller=usuarios&action=logout" class="dropdown-item btn text-danger">Salir</a>
+          </div>
+        </div>
+      <?php }else{ ?>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <?php echo  $_SESSION['user'];?>
+    </button>
+      <div class="dropdown-menu" aria-labelledby="userMenu">
+        <button class="dropdown-item" type="button" disabled>Editar perfil</button>
+        <button class="dropdown-item" type="button">Historial de compras</button>
+        <a href="index.php?controller=usuarios&action=logout" class="dropdown-item btn text-danger">Salir</a>
+      </div>
+    </div>
+    <?php }?>
+    <form action="index.php?controller=usuarios&action=logout" method="post">
+      <input type="submit" name="logout" value="Salir">
+    </form>
     <?php } else {?>
-      <form action="index.php?controller=usuarios&action=show_login_page" method="post">
-        <input type="submit" name="login" value="Identificarse">
-      </form>
-    <?php } ?>
+    <form action="index.php?controller=usuarios&action=show_login_page" method="post">
+      <input type="submit" name="login" value="Identificarse">
+    </form>
+  <?php } ?>
+
 </nav>
