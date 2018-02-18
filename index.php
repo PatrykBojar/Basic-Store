@@ -5,6 +5,8 @@ require_once("controller/usuarios_controller.php");
 require_once("controller/categorias_controller.php");
 require_once("controller/marcas_controller.php");
 require_once("controller/imagenes_controller.php");
+require_once("controller/carrito_controller.php");
+require_once("controller/order_controller.php");
 
 //require_once("recaptchalib.php");
 
@@ -35,7 +37,11 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             $controller = new productos_controller();
             $controller->show_manage_product();
         }
+        if ($_GET['action'] == "show_cart") {
+            $controller = new productos_controller();
+            $controller->ver_carrito();
 
+        }
         if ($_GET['action'] == "buscador") {
             $controller = new productos_controller();
             $controller->buscador();
@@ -113,6 +119,28 @@ CONTROLADORES NECESARIO EN CASO DE USAR UNA PÁGINA CON BOTONES DE ELECCIÓN.
             $controller->show_product_list();
         }
 */
+    }
+    if ($_GET['controller'] == "carrito") {
+      if ($_GET['action'] == "ver_carrito") {
+          $controller = new carrito_controller();
+          $controller->ver_carrito();
+      }
+
+    }
+
+    if ($_GET['controller'] == "order") {
+      if ($_GET['action'] == "add_to_cart") {
+          $controller = new order_controller();
+          $controller->add_to_cart();
+      }
+      if ($_GET['action'] == "delete_item") {
+          $controller = new order_controller();
+          $controller->remove_cart_items();
+      }
+      if ($_GET['action'] == "empty_cart") {
+          $controller = new order_controller();
+          $controller->empty_cart();
+      }
     }
 
     if ($_GET['controller'] == "usuarios") {

@@ -38,5 +38,8 @@ hr{
   color: #fff;
   background-color: #a0160c;
   margin-left: 1rem !important;
-
+}
+.img-carrito{
+width: 40px;
+height: 40px;
 }

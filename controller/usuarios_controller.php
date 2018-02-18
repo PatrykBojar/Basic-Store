@@ -1,5 +1,8 @@
 <?php
 require_once("model/usuarios_model.php");
+require_once("model/carrito_model.php");
+require_once("model/order_model.php");
+
 
 class usuarios_controller {
 
@@ -15,6 +18,15 @@ class usuarios_controller {
     $encontrado = $usuarios->valida_usuario();
     if ($encontrado) {
       $_SESSION['user'] = $_POST['username'];
+
+      $order = new order_model();
+      $order->get_UserOrder();
+
+        if (!empty($_SESSION['cart'])) {
+          $order->appendOrder($_SESSION['cart']);
+          unset($_SESSION['cart']);
+        }
+
       header('Location: index.php?controller=productos&action=show_start_page');
       exit();
     } else {

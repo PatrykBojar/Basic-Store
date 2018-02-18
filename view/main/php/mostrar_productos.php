@@ -32,10 +32,16 @@
               <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
                 <button class="btn btn-primary col-12" type="submit"></a>Comprar</button>
               </form>
+              <form action="index.php?controller=order&action=add_to_cart&id=<?php echo $dato['ID'];?>" method="post">
+                <button class="btn btn-primary col-3" type="submit"></a>Al carro</button>
+              </form>
               <span class="badge badge-warning">¡Quedan pocos!</span>
             <?php }elseif ($dato['STOCK'] >= 5) { ?>
               <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
                 <button class="btn btn-primary col-12" type="submit"></a>Comprar</button>
+              </form>
+              <form action="index.php?controller=order&action=add_to_cart&id=<?php echo $dato['ID'];?>" method="post">
+                <button class="btn btn-primary col-3" type="submit"></a>Al carro</button>
               </form>
             <?php }else{ ?>
             <button class="btn btn-primary disabled col-12">¡Sin stock!</button>
