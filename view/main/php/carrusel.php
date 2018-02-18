@@ -1,4 +1,4 @@
-<div id="carrusel" class="carousel slide col-12 col-lg-10 col-xl-12" data-ride="carousel">
+<div id="carrusel" class="carousel slide col-12 col-lg-10 col-xl-12 mt-4" data-ride="carousel">
   <ul class="carousel-indicators">
 
     <?php $cont = 0; foreach ($carrouselImg as $carrImg) { ?>

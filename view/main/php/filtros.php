@@ -1,3 +1,5 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtros">filtros xd</button>
+
 <div class="modal fade" id="filtros">
   <form action="index.php?controller=productos&action=filterProductsBrands" method="post">
     <div class="modal-dialog">

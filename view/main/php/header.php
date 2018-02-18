@@ -1,3 +1,4 @@
+<div class="row">
 <nav class="navbar navbar-light bg-dark justify-content-between col-12">
   <a class="navbar-brand text-success display-4" href="index.php?controller=productos&action=show_start_page"><img src="view/main/img/main-logo.png" id="main-logo" alt="Dragón verde">Green Dragon</a>
   <form class="form-inline" action="index.php?controller=productos&action=buscador" method="post">
@@ -38,3 +39,4 @@
   <?php } ?>
 
 </nav>
+</div>

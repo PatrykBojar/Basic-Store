@@ -27,3 +27,16 @@ hr{
 /*.contenedor-productos{
   height: 800px;
 }*/
+.prom-badge{
+  position: absolute;
+}
+.badge-warning{
+  background-color: #ff9335;
+  color: #fff;
+}
+.badge-descuento{
+  color: #fff;
+  background-color: #a0160c;
+  margin-left: 1rem !important;
+
+}
