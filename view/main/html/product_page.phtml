@@ -20,7 +20,6 @@
     <br>
     <nav class="nav bg-dark">
       <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">INICIO ></a>
-      <!--<a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php //echo $subcat['CATNAME'];?>">-->
         <?php $cont = 0; foreach ($datos as $subcat) {
             if ($subcat['CATPRDID'] == $subCatId && $cont == 0){?>
               <a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>"><?php echo $subcat['CATNAME'];?>      </a>
@@ -65,25 +64,22 @@ foreach ($datos as $producto) {
         <div class="container mt-2 pt-2 bg-white rounded">
           <h6 class="font-weight-bold">Marca: <a href="#"><?php echo $producto['BRANDNAME']?></a></h6>
           <span class="font-weight-bold">Cantidad:</span>
-          <!--<div class="btn-group" role="group">
-            <button class="btn btn-secondary remove-quantity" type="button" name="button">-</button>
-            <input class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
-            <button class="btn btn-secondary add-quantity" type="button" name="button">+</button>
-          </div>-->
           <br>
-          <?php if ($producto['SPONSORED'] == "Y") { ?>
-          <span class="font-weight-bold">Promoción:</span>
-          <span>
-  <?php echo "Este producto está patrocinado.<br>";
-}else{
-  echo "";} ?></span>
+          <?php
+          if ($producto['SPONSORED'] == "Y") { ?>
+            <span class="font-weight-bold">Promoción:</span>
+            <span>
+              <?php echo "Este producto está patrocinado.<br>";
+          }else{
+              echo "";} ?>
+            </span>
           <?php if($producto['STOCK'] < 5 && $producto['STOCK'] > 0){ ?>
           <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span>
           <span class="badge badge-danger">¡Quedan pocos!</span>
           <form action="index.php?controller=productos&action=" class="pt-3" method="post">
             <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
           </form>
-          <?php $logedornot = (!isset($_SESSION['username'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
+          <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
          <form action="<?php echo $logedornot; ?>" class="" method="post">
            <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
            <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
@@ -93,7 +89,7 @@ foreach ($datos as $producto) {
           <form action="index.php?controller=productos&action=" class="pt-3" method="post">
             <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
           </form>
-          <?php $logedornot = (!isset($_SESSION['username'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
+          <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
          <form action="<?php echo $logedornot; ?>" class="" method="post">
            <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
            <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>

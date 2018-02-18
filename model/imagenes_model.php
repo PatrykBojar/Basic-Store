@@ -1,13 +1,19 @@
 <?php
+/**
+ * Gestiona las imágenes.
+ */
 class imagenes_model {
   private $db;
   private $id, $imgUrl, $isCarousel;
 
+  /**
+   * Hacemos la conexión.
+   */
   public function __construct() {
       $this->db      = Conectar::conexion();
       $this->product = array();
   }
-
+  // GETTERS Y SETTERES.
   public function getId() {
       return $this->id;
   }
@@ -29,6 +35,10 @@ class imagenes_model {
       return $this->$isCarousel;
   }
 
+/**
+ * Obtenemos todas las imágenes.
+ * @return array imágenes.
+ */
 public function get_img(){
   $query = $this->db->query("SELECT * FROM IMAGE;");
   while ($rows = $query->fetch_assoc()) {
@@ -36,6 +46,10 @@ public function get_img(){
   }
   return $this->product;
 }
+/**
+ * Añade una imagen, ya sea para un producto, carousel, etc.
+ * @return mixed mensaje de error o boolean false.
+ */
   public function insert_image(){
     $img_url      = $this->imgUrl;
     $id     = $this->id;

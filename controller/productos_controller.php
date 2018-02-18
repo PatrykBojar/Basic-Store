@@ -31,15 +31,7 @@ class productos_controller {
         require_once("view/admin/html/productos_manage.phtml");
 
     }
-
-    /*
-    FUNCIÓN PARA MOSTRAR LA PÁGINA DE LA ELECCIÓN CON BOTONES
-    (INSERTA, MODIFICAR, ELIMIANR)
-    function show_eleccion() {
-    require_once("view/admin/html/insertar_producto.phtml");
-    }*/
-
-
+    
     /**
      * Muestra la página principal con los productos promocionados y con descuento.
      */

@@ -16,7 +16,7 @@
 
   <?php include("view/main/php/header.php");?>
   <main>
-    <?php var_dump($_SESSION['user']);?>
+
     <div id="main-content" class="container-fluid">
       <?php $summary = 0; ?>
       <div class="container">
@@ -32,7 +32,7 @@
               <th>Producto</th>
               <th>Precio</th>
               <th>Cantidad</th>
-              <th class="text-center">Precio Total</th>
+              <th class="text-center">Total</th>
               <th></th>
             </tr>
           </thead>
@@ -71,26 +71,25 @@
           </tbody>
           <tfoot>
             <tr>
-              <td><a href="index.php" class="btn btn-warning">Continuar comprando</a></td>
+              <td><a href="index.php" class="btn btn-warning">Continuar comprando...</a></td>
               <td colspan="2" class=""></td>
-              <td class=" text-center"><strong><?php echo "Total: ".enEuro($summary); ?></strong></td>
-              <td><a href="index.php?controller=order&action=empty" class="btn btn-warning">Vaciar Carrito</a></td>
+              <td class=" text-center"><strong><?php echo "TOTAL A PAGAR: ".enEuro($summary); ?></strong></td>
+              <td><a href="index.php?controller=order&action=empty" class="btn btn-danger">Vaciar Carrito</a></td>
             </tr>
           </tfoot>
 
-          <?php } elseif (isset($_SESSION['user'])){
+        <?php } elseif (isset($_SESSION['user'])){
             if (isset($check) == "PENDING") {?>
           <thead>
             <tr>
               <th>Producto</th>
               <th>Precio</th>
               <th>Cantidad</th>
-              <th class="text-center">Precio Total</th>
+              <th class="text-center">Total</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-
             <?php
                 foreach ($datos as $dato) {
                   $summary = ($dato['PRICE']*$dato['QUANTITY']) + $summary;
@@ -126,8 +125,8 @@
             <tr>
               <td><a href="index.php" class="btn btn-warning">Continuar Comprando...</a></td>
               <td colspan="2" class=""></td>
-              <td class=" text-center"><strong><?php echo "Total: ".enEuro($summary); ?></strong></td>
-              <td><a href="index.php?controller=order&action=emptyorderwithitems" class="btn btn-warning">Vaciar Carrito</a></td>
+              <td class=" text-center"><strong><?php echo "TOTAL A PAGAR: ".enEuro($summary); ?></strong></td>
+              <td><a href="index.php?controller=order&action=emptyorderwithitems" class="btn btn-danger">Vaciar Carrito</a></td>
               <td><a href="index.php?controller=order&action=checkout" class="btn btn-success btn-block">Realizar Pedido</a></td>
             </tr>
           </tfoot>
