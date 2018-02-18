@@ -5,24 +5,6 @@ require_once("model/categorias_model.php");
  * @author Patryk Bojar <patrickbojar12344@gmail.com>
  */
 class categorias_controller{
-
-  /*function list_categories() {
-      $category = new categorias_model();
-      $categories   = $category->get_categories();
-      $subCategory = new categorias_model();
-      $subCategories   = $category->get_subCategories();
-      //require_once("view/admin/html/productos_manage.phtml");
-      //require_once("view/admin/php/listar_categorias.php");
-      include("view/admin/html/productos_manage.phtml");
-
-  }*/
-  /*function list_subCategories() {
-      $category = new categorias_model();
-      $categoriesSub   = $category->get_subCsaategories();
-      require_once("view/admin/html/productos_manage.phtml");
-      //require_once("view/admin/php/listar_categorias.php");
-  }*/
-
   function insert_category() {
       $category = new categorias_model();
           $category->setName($_POST['nmCat']);

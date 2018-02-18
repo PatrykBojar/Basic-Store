@@ -408,7 +408,10 @@ WHERE img.CAROUSEL = 'N' OR img.URL IS NULL;");
       return $this->product;
     }
     public function showCarrouselImg(){
-      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y' AND URL LIKE '%-top%';");
+      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME',PRICE,prm.DISCOUNTPERCENTAGE
+                    FROM IMAGE img JOIN PRODUCT prd  ON img.PRODUCT = prd.ID
+                    LEFT JOIN PROMOTION prm ON prm.PRODUCT = prd.ID
+                    WHERE CAROUSEL = 'Y' AND URL LIKE '%-top%';");
       while ($rows = $query->fetch_assoc()) {
           $this->product[] = $rows;
       }
@@ -416,7 +419,9 @@ WHERE img.CAROUSEL = 'N' OR img.URL IS NULL;");
     }
 
     public function showCarrouselProductImg($name){
-      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img JOIN PRODUCT prd ON img.PRODUCT = prd.ID WHERE CAROUSEL = 'Y' AND prd.NAME LIKE '$name';");
+      $query = $this->db->query("SELECT URL,NAME AS 'CARRNAME' FROM IMAGE img
+                    JOIN PRODUCT prd ON img.PRODUCT = prd.ID
+                    WHERE CAROUSEL = 'Y' AND prd.NAME LIKE '$name';");
       while ($rows = $query->fetch_assoc()) {
           $this->product[] = $rows;
       }

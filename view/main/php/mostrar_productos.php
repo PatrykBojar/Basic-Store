@@ -1,8 +1,8 @@
-<div class="card-group col-8">
-  <div class="row">
-    <?php
-    if(!empty($datos)){
-    foreach ($datos as $dato) {
+  <?php
+    if(!empty($datos)){?>
+      <div class="row">
+
+    <?php foreach ($datos as $dato) {
       ?>
       <div class="col-12 col-md-6 col-xl-4">
         <div id="<?php echo $dato['ID']; ?>" class="card card-height">
@@ -22,7 +22,6 @@
             <h5 class="text-primary">Precio antiguo: <?php echo enEuro($dato['PRICE'])?></h5>
             <?php } else{ ?>
             <h5 class="text-primary">Precio: <?php echo enEuro($dato['PRICE'])?></h5>
-
             <?php } ?>
             <h5 class="text-primary">Precio sin IVA: <?php echo enEuro($dato['PRICE'] * (1-IVA/100))?></h5>
             <?php if($dato['STOCK'] < 5 && $dato['STOCK'] > 0){ ?>
@@ -96,9 +95,10 @@
         </form>
       </div>
     <?php   }}else{?>
-<div class="container">
+<div class="container text-center">
   <h3 class="text-info">No hemos podido encontrar ningun producto con tu criterio de búsqueda :(</h3>
 </div>
     <?php } ?>
   </div>
+</div>
 </div>

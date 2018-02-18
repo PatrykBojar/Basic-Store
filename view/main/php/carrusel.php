@@ -1,4 +1,4 @@
-<div id="carrusel" class="carousel slide col-12 col-lg-10 col-xl-8" data-ride="carousel">
+<div id="carrusel" class="carousel slide col-12 col-lg-10 col-xl-12" data-ride="carousel">
   <ul class="carousel-indicators">
 
     <?php $cont = 0; foreach ($carrouselImg as $carrImg) { ?>
@@ -9,6 +9,16 @@
     <?php $imgCont = 0; foreach ($carrouselImg as $carrImg) { ?>
     <div class="carousel-item <?php if($imgCont == 0) echo "active";?>">
       <img src="<?php echo $carrImg['URL'];?>" alt="<?php echo $carrImg['CARRNAME'];?>" class="w-100" height="250">
+      <div class="carousel-caption">
+          <span class="badge badge-info"><?php echo $carrImg['CARRNAME'] ?></span>
+          <span class="badge badge-danger"><?php echo enEuro($carrImg['PRICE']  * (1-$carrImg['DISCOUNTPERCENTAGE']/100))?></span>
+          <?php if($carrImg['DISCOUNTPERCENTAGE'] != NULL){ ?>
+            <span class="badge badge-danger"><?php echo $carrImg['DISCOUNTPERCENTAGE']?>%</span>
+          <?php }else{
+                echo "";
+          } ?>
+     </div>
+
     </div>
     <?php  $imgCont++; } ?>
   </div>
