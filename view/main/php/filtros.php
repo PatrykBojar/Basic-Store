@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtros">filtros xd</button>
+<button type="button" class="btn btn-primary col-12" data-toggle="modal" data-target="#filtros">Ver filtros...</button>
 
 <div class="modal fade" id="filtros">
   <form action="index.php?controller=productos&action=filterProductsBrands" method="post">
@@ -11,7 +11,8 @@
         <div class="modal-body">
           <div class="form-row">
             <div class="form-group col-4">
-              <p class="font-weight-bold text-center">Marcas</p><hr>
+              <p class="font-weight-bold text-center">Marcas</p>
+              <hr>
               <?php foreach ($brandsWithPrd as $brand){ ?>
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="<?php echo $brand['BRANDID'];?>" value="<?php echo $brand['BRANDID'];?>" name="filtro[]">
@@ -20,7 +21,8 @@
               <?php }?>
             </div>
             <div class="form-group col-8">
-              <p class="font-weight-bold text-center">Precio</p><hr>
+              <p class="font-weight-bold text-center">Precio</p>
+              <hr>
               <?php foreach ($maxMin as $precio) {?>
               <input type="number" class="form-control col-12" name="minPrice" id="minPrice" value="<?php echo aInt($precio['MINPRICE'])?>" placeholder="Precio mínimo para el filtro..." min="<?php echo aInt($precio['MINPRICE'])?>">
               <small class="font-italic">Este filtro selecciona de forma automática el precio mínimo disponible en nuestra tienda :)</small>

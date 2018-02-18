@@ -13,69 +13,134 @@
 </head>
 
 <body>
-  <?php include("view/main/php/header.php"); ?>
 
-  <?php $Tprice = 0; ?>
-  <div class="container">
-    <table id="cart" class="table table-hover table-condensed">
-      <?php if (empty($_SESSION['cart'])) {
-          echo "<h2>No hay artículos en tu carrito<h2>";
-        } else {?>
+  <?php include("view/main/php/header.php");?>
+  <main>
+    <?php var_dump($_SESSION['user']);?>
+    <div id="main-content" class="container-fluid">
+      <?php $summary = 0; ?>
+      <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+          <?php if (empty($_SESSION['cart']) && !isset($_SESSION['user'])) {?>
+            <div class="container text-center">
+              <h3 class="text-info  mt-5">Tu carrito está vacío</h3>
+            </div>
+          <?php
+        } elseif(!empty($_SESSION['cart']) && !isset($_SESSION['user'])) {?>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th class="text-center">Precio Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <thead>
-        <tr>
-          <th style="width:50%">Producto</th>
-          <th style="width:10%">Precio</th>
-          <th style="width:8%">Cantidad</th>
-          <th style="width:22%" class="text-center">Precio Total</th>
-          <th style="width:10%"></th>
-        </tr>
-      </thead>
-      <tbody>
+            <?php
+            foreach ($_SESSION['cart'] as $datos) {
+              $summary = ($datos['PRICE']*$datos['QUANTITY']) + $summary;
+            ?>
+              <tr class="">
+                <td data-th="Product">
+                  <div class="row">
+                    <div class="col-sm-2"><img src="<?php echo $datos['URL']; ?>" class="img-fluid" /></div>
+                    <div class="col-sm-10">
+                      <h4 class="nomargin"><?php echo $datos['NAME']; ?></h4>
+                      <p>
+                        <?php echo $datos['SHORTDESCRIPTION']; ?>
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td data-th="Price">
+                  <?php echo $datos['PRICE']." €"; ?>
+                </td>
+                <td data-th="Quantity" class="text-center">
+                  <?php echo $datos['QUANTITY']; ?>
+                </td>
+                <td data-th="Subtotal" class="text-center">
+                  <?php echo enEuro($datos['PRICE']*$datos['QUANTITY']);?>
+                </td>
+                <td class="actions" data-th="">
+                  <a class="btn btn-danger btn-sm" href="index.php?controller=order&action=delete&id=<?php echo $datos['ID'] ?>">Quitar</a>
+                </td>
+              </tr>
+              <?php } ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><a href="index.php" class="btn btn-warning">Continuar comprando</a></td>
+              <td colspan="2" class=""></td>
+              <td class=" text-center"><strong><?php echo "Total: ".enEuro($summary); ?></strong></td>
+              <td><a href="index.php?controller=order&action=empty" class="btn btn-warning">Vaciar Carrito</a></td>
+            </tr>
+          </tfoot>
 
-        <?php
-                        foreach ($_SESSION['cart'] as $datos) {
-                          $Tprice = $datos['PRICE'] + $Tprice;
-                        ?>
-          <tr class="">
-            <td data-th="Product">
-              <div class="row">
-                <div class="col-sm-2"><img src="<?php echo $datos['URL']; ?>" class="img-fluid" /></div>
-                <div class="col-sm-10">
-                  <h4 class="nomargin"><?php echo $datos['NAME']; ?></h4>
-                  <p>
-                    <?php echo $datos['SHORT']; ?>
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td data-th="Price">
-              <?php echo $datos['PRICE']." €"; ?>
-            </td>
-            <td data-th="Quantity" class="text-center">
-              <?php echo $datos['QUANTITY']; ?>
-            </td>
-            <td data-th="Subtotal" class="text-center">
-              <?php echo $datos['PRICE']*$datos['QUANTITY']." €"; ?>
-            </td>
-            <td class="actions" data-th="">
-              <a class="btn btn-danger btn-sm" href="index.php?controller=order&action=delete_item&id=<?php echo $datos['ID'] ?>">ELIMINAR</a>
-            </td>
-          </tr>
-          <?php } ?>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td><a href="index.php" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-          <td colspan="2" class=""></td>
-          <td class=" text-center"><strong><?php echo "Total: ".$Tprice." €"; ?></strong></td>
-          <td><a href="index.php?controller=order&action=empty_cart" class="btn btn-warning"><i class="fa fa-angle-left">VACÍAR CARRITO</td>
-          <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-        </tr>
-      </tfoot>
-      <?php } ?>
-    </table>
-  </div>
+          <?php } elseif (isset($_SESSION['user'])){
+            if (isset($check) == "PENDING") {?>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th class="text-center">Precio Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <?php
+                foreach ($datos as $dato) {
+                  $summary = ($dato['PRICE']*$dato['QUANTITY']) + $summary;
+                ?>
+              <tr class="">
+                <td data-th="Product">
+                  <div class="row">
+                    <div class="col-sm-2"><img src="<?php echo $dato['URL']; ?>" class="img-fluid" /></div>
+                    <div class="col-sm-10">
+                      <h4 class="nomargin"><?php echo $dato['NAME']; ?></h4>
+                      <p>
+                        <?php echo $dato['SHORTDESCRIPTION']; ?>
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td data-th="Price">
+                  <?php echo $dato['PRICE']." €"; ?>
+                </td>
+                <td data-th="Quantity" class="text-center">
+                  <?php echo $dato['QUANTITY']; ?>
+                </td>
+                <td data-th="Subtotal" class="text-center">
+                  <?php echo enEuro($dato['PRICE']*$dato['QUANTITY']); ?>
+                </td>
+                <td class="actions" data-th="">
+                  <a class="btn btn-danger btn-sm" href="index.php?controller=order&action=deleteorderitem&id=<?php echo $dato['PRODUCT'] ?>">Quitar</a>
+                </td>
+              </tr>
+              <?php } ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><a href="index.php" class="btn btn-warning">Continuar Comprando...</a></td>
+              <td colspan="2" class=""></td>
+              <td class=" text-center"><strong><?php echo "Total: ".enEuro($summary); ?></strong></td>
+              <td><a href="index.php?controller=order&action=emptyorderwithitems" class="btn btn-warning">Vaciar Carrito</a></td>
+              <td><a href="index.php?controller=order&action=checkout" class="btn btn-success btn-block">Realizar Pedido</a></td>
+            </tr>
+          </tfoot>
+        <?php } else {?>
+          <div class="container text-center">
+            <h3 class="text-info  mt-5">Tu carrito está vacío</h3>
+          </div>
+        <?php  } }?>
+
+        </table>
+      </div>
+    </div>
+  </main>
 </body>
 
 </html>

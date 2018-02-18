@@ -76,6 +76,8 @@ class productos_controller {
         $subCategories = $category->get_subCategories();
         $images        = new productos_model();
         $images        = $images->productPageImg();
+
+
         $id            = $_GET['id'];
         $subCatId      = $_GET['sc'];
 

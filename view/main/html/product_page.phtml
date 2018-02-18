@@ -65,11 +65,11 @@ foreach ($datos as $producto) {
         <div class="container mt-2 pt-2 bg-white rounded">
           <h6 class="font-weight-bold">Marca: <a href="#"><?php echo $producto['BRANDNAME']?></a></h6>
           <span class="font-weight-bold">Cantidad:</span>
-          <div class="btn-group" role="group">
+          <!--<div class="btn-group" role="group">
             <button class="btn btn-secondary remove-quantity" type="button" name="button">-</button>
             <input class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
             <button class="btn btn-secondary add-quantity" type="button" name="button">+</button>
-          </div>
+          </div>-->
           <br>
           <?php if ($producto['SPONSORED'] == "Y") { ?>
           <span class="font-weight-bold">Promoción:</span>
@@ -83,18 +83,22 @@ foreach ($datos as $producto) {
           <form action="index.php?controller=productos&action=" class="pt-3" method="post">
             <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
           </form>
-          <form action="index.php?controller=order&action=add_to_cart&id=<?php echo $producto['ID'];?>" method="post" class="text-center">
-            <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
-          </form>
-          <?php }elseif ($producto['STOCK'] > 5) { ?>
+          <?php $logedornot = (!isset($_SESSION['username'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
+         <form action="<?php echo $logedornot; ?>" class="" method="post">
+           <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
+           <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
+         </form>
+        <?php }elseif ($producto['STOCK'] >= 5) { ?>
           <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span><br>
           <form action="index.php?controller=productos&action=" class="pt-3" method="post">
             <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
           </form>
-          <form action="index.php?controller=order&action=add_to_cart&id=<?php echo $producto['ID'];?>" method="post" class="text-center">
-            <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
-          </form>
-          <?php }else{ ?>
+          <?php $logedornot = (!isset($_SESSION['username'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
+         <form action="<?php echo $logedornot; ?>" class="" method="post">
+           <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
+           <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
+         </form>
+        <?php }else{ ?>
           <span class="font-weight-bold">Disponibilidad: ¡Sin stock! No hay unidades disponibles.</span><br>
           <?php }?>
         </div>

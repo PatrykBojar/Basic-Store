@@ -1,8 +1,8 @@
-  <?php
+<?php
     if(!empty($datos)){?>
-      <div class="row">
-<div class="card-deck carousel">
-    <?php foreach ($datos as $dato) { ?>
+  <div class="row">
+    <div class="card-deck carousel">
+      <?php foreach ($datos as $dato) { ?>
       <div class="col-12 col-md-6 col-xl-4 mt-5">
         <div id="<?php echo $dato['ID']; ?>" class="card">
           <?php foreach ($images as $img) {
@@ -14,42 +14,42 @@
           <span class="badge badge-warning font-weight-bold prom-badge mt-3 ml-3">PROMOCIÓN</span>
           <?php } }else{?>
           <img class="card-img-top img-fluid img-product" src="view/img_product/error_img/no-image.svg" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" alt="No existe una imagen para este producto.">
-        <?php } } } ?>
+          <?php } } } ?>
           <div class="card-block">
             <h4 class="card-title text-center p-2"><?php echo $dato['NAME'];?></h4>
             <p class="card-text text-center p-2">
               <?php echo $dato['SHORTDESCRIPTION'] ?>
             </p>
             <?php if($dato['DISCOUNTPERCENTAGE'] != NULL){ ?>
-              <hr>
+            <hr>
             <h5 class="text-dark text-center font-weight-bold"><?php echo enEuro($dato['PRICE']  * (1-$dato['DISCOUNTPERCENTAGE']/100))?></h5>
             <h6 class="text-muted text-center"><del><?php echo enEuro($dato['PRICE'])?></del><span class="badge badge-descuento font-weight-bold"><?php echo $dato['DISCOUNTPERCENTAGE'] ?>%</span></h6>
             <?php } else{ ?>
-              <hr>
+            <hr>
             <h5 class="text-dark text-center font-weight-bold"><?php echo enEuro($dato['PRICE'])?></h5>
             <?php } ?>
             <?php if($dato['STOCK'] < 5 && $dato['STOCK'] > 0){ ?>
-              <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
-                <button class="btn btn-primary col-12" type="submit"></a>Comprar</button>
-              </form>
-              <form action="index.php?controller=order&action=add_to_cart&id=<?php echo $dato['ID'];?>" method="post">
-                <button class="btn btn-primary col-3" type="submit"></a>Al carro</button>
-              </form>
-              <span class="badge badge-warning">¡Quedan pocos!</span>
+            <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
+              <button class="btn btn-primary col-12" type="submit"></a>Comprar</button>
+            </form>
+            <form action="index.php?controller=order&action=insert&id=<?php echo $dato['ID'];?>" method="post">
+              <button class="btn btn-primary col-3" type="submit"></a>Al carro</button>
+            </form>
+            <span class="badge badge-warning">¡Quedan pocos!</span>
             <?php }elseif ($dato['STOCK'] >= 5) { ?>
-              <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
-                <button class="btn btn-primary col-12" type="submit"></a>Comprar</button>
-              </form>
-              <form action="index.php?controller=order&action=add_to_cart&id=<?php echo $dato['ID'];?>" method="post">
-                <button class="btn btn-primary col-3" type="submit"></a>Al carro</button>
-              </form>
+            <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
+              <button class="btn btn-primary col-12" type="submit"></a>Comprar</button>
+            </form>
+            <form action="index.php?controller=order&action=insert&id=<?php echo $dato['ID'];?>" method="post">
+              <button class="btn btn-primary col-3" type="submit"></a>Al carro</button>
+            </form>
             <?php }else{ ?>
             <button class="btn btn-primary disabled col-12">¡Sin stock!</button>
             <?php    } ?>
 
           </div>
           <div class="card-footer">
-<span><?php echo "Stock ".$dato['STOCK'];  ?></span>
+            <span><?php echo "Stock ".$dato['STOCK'];  ?></span>
           </div>
         </div>
       </div>
@@ -90,19 +90,19 @@
               <div class="modal-footer">
                 <?php if($dato['STOCK'] > 0){ ?>
                 <button type="submit" class="btn btn-outline-success col-12">¡Lo quiero!</button>
-              <?php }else{ ?>
+                <?php }else{ ?>
                 <button class="btn btn-primary col-12">Ver producto</button>
-              <?php } ?>
+                <?php } ?>
               </div>
             </div>
           </div>
         </form>
       </div>
-    <?php   }}else{?>
-<div class="container text-center">
-  <h3 class="text-info">No hemos podido encontrar ningun producto con tu criterio de búsqueda :(</h3>
-</div>
-    <?php } ?>
+      <?php   }}else{?>
+      <div class="container text-center">
+        <h3 class="text-info">No hemos podido encontrar ningun producto con tu criterio de búsqueda :(</h3>
+      </div>
+      <?php } ?>
+    </div>
   </div>
-</div>
-</div>
+  </div>

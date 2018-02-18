@@ -398,6 +398,33 @@ WHERE
         return $this->product;
     }
 
+    /*public function show_productBrand($name){
+      $query = $this->db->quert("SELECT
+    prd.SPONSORED AS 'SPONSORED',
+    prd.ID AS 'ID',
+    prd.NAME AS 'NAME',
+    prd.SHORTDESCRIPTION AS 'SHORTDESCRIPTION',
+    prd.LONGDESCRIPTION AS 'LONGDESCRIPTION',
+    prd.STOCK AS 'STOCK',
+    prd.PRICE AS 'PRICE',
+    prd.CATEGORY,
+    cat.NAME AS 'CATEGORYNAME',
+    prm.DISCOUNTPERCENTAGE,
+    img.URL AS 'URL'
+FROM
+    PRODUCT prd
+JOIN CATEGORY cat ON
+    prd.CATEGORY = cat.ID
+LEFT JOIN IMAGE img ON
+    prd.ID = img.PRODUCT
+LEFT JOIN PROMOTION prm ON
+    prm.PRODUCT = prd.ID
+LEFT JOIN BRAND brd ON
+    brd.ID = prd.BRAND
+WHERE
+    brd.NAME = '$name';")
+  }*/
+
     public function showProductImg(){
       $query = $this->db->query("SELECT img.URL AS 'URL', prd.NAME, prd.ID FROM PRODUCT prd
 LEFT JOIN IMAGE img ON img.PRODUCT = prd.ID

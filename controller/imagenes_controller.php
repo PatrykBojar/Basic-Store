@@ -4,9 +4,13 @@ require_once("model/marcas_model.php");
 require_once("model/categorias_model.php");
 require_once("model/imagenes_model.php");
 
-
+/**
+ * Inserta las imágenes para un producto
+ */
 class imagenes_controller {
-
+/**
+ * Inserta una imagen al último producto.
+ */
     function insert_image() {
         // Array que contienen todos los datos de la imagen.
         $info = pathinfo($_FILES['imgUrl']['name']);
@@ -14,8 +18,7 @@ class imagenes_controller {
         if (isset($info['extension'])) {
             // Sacamos la extención actual de la imagen y la pasamos a minsúculas (compatibilidad en Windows y Linux).
             $ext = strtolower($info['extension']);
-            if ($info['extension'] == "gif" || $info['extension'] == "jpg" || $info['extension'] == "png" || $info['extension'] == "jpeg"
-                  || $info['extension'] == "tif" || $info['extension'] == "tiff" || $info['extension'] == "bmp") {
+            if ($info['extension'] == "gif" || $info['extension'] == "jpg" || $info['extension'] == "png" || $info['extension'] == "jpeg" || $info['extension'] == "tif" || $info['extension'] == "tiff" || $info['extension'] == "bmp") {
                 // Ruta origen del archivo.
                 $ruta_origen = $_FILES['imgUrl']['tmp_name'];
                 // Obtenemos el ID del producto.

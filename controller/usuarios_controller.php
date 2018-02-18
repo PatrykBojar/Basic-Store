@@ -1,36 +1,32 @@
 <?php
 require_once("model/usuarios_model.php");
-require_once("model/carrito_model.php");
 require_once("model/order_model.php");
 
-
 class usuarios_controller {
-
-  /*public function get_users(){
-    $user = new categorias_model();
-    $users   = $user->get_users();
-  }*/
 
   public function login(){
     $usuarios = new usuarios_model();
     $usuarios->setUsername($_POST['username']);
     $usuarios->setPassword($_POST['password']);
     $encontrado = $usuarios->valida_usuario();
+
     if ($encontrado) {
       $_SESSION['user'] = $_POST['username'];
 
-      $order = new order_model();
+     $order = new order_model();
       $order->get_UserOrder();
-
-        if (!empty($_SESSION['cart'])) {
-          $order->appendOrder($_SESSION['cart']);
-          unset($_SESSION['cart']);
-        }
-
+           if (!empty($_SESSION['cart'])) {
+             $check = $order->check_UserOrder();
+             if ($check == "PENDING") {
+               $order->reject_prevOrder();
+             }
+             $order->appendOrder($_SESSION['cart']);
+             unset($_SESSION['cart']);
+           }
       header('Location: index.php?controller=productos&action=show_start_page');
       exit();
     } else {
-      header('Location: index.php?controller=usuarios&action=show_login_page');
+    header('Location: index.php?controller=usuarios&action=show_login_page');
       exit();
     }
   }
@@ -59,6 +55,7 @@ class usuarios_controller {
 
   public function logout(){
         session_start();
+        session_unset();
         session_destroy();
         header('Location: index.php?controller=productos&action=show_start_page');
         exit();

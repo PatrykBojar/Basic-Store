@@ -10,21 +10,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="icon" href="view/main/img/main-logo.png">
   <link rel="stylesheet" type="text/css" href="view/main/style/main_page_style.css">
-  <script src="view/main/js/popover-top-button.js"></script>
 </head>
 
 <body>
   <?php
+  //var_dump($_SESSION['username']);
+
   include("view/main/php/header.php");
-  include("view/main/php/filtros.php");
   include("view/main/php/menu.php");
   if(isset($mostrarCarr)){
   include("view/main/php/carrusel.php");
 }
+include("view/main/php/filtros.php");
   //include("view/main/php/ordenar.php");
   include("view/main/php/mostrar_productos.php");
   //include("view/main/php/pagination.php");
-//  include("view/main/php/footer.php");
+  include("view/main/php/footer.php");
 
 
 ?>

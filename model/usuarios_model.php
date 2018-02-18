@@ -63,13 +63,15 @@ class usuarios_model {
       }*/
 
       public function valida_usuario() {
+        $username = mysqli_real_escape_string($this->db, $this->username);
+
         $prueba = $this->password;
         $salt = "$1$startCrypt";
 
         $contra = crypt($prueba, $salt);
 
 
-        $sql = "SELECT USERNAME, PASSWORD FROM USER WHERE USERNAME = '{$this->username}' AND PASSWORD = '{$contra}'";
+        $sql = "SELECT USERNAME, PASSWORD FROM USER WHERE USERNAME = '$username' AND PASSWORD = '{$contra}'";
         $result = $this->db->query($sql) or trigger_error(mysqli_error($this->db)." ".$sql);
         if ($result->num_rows > 0) {
           while($row=$result->fetch_assoc()){
