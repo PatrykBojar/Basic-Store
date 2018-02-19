@@ -27,18 +27,18 @@ class imagenes_controller {
                 $valor       = $_POST['typeimg'];
                 switch ($valor) {
                     case "option1":
-                        $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR . ":" . MINUTE . ":" . SECOND . "." . $ext;
+                        $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR .  MINUTE .  SECOND . "." . $ext;
                         // Definimos la ruta del destino con nuestras consantes.
                         move_uploaded_file($ruta_origen, $ruta_destino);
                         //var_dump($ruta_destino); exit();
                         break;
                     case "option2":
-                        $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR . ":" . MINUTE . ":" . SECOND . "-carrousel-top." . $ext;
+                        $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR  . MINUTE .  SECOND . "-carrousel-top." . $ext;
                         // Definimos la ruta del destino con nuestras consantes.
                         move_uploaded_file($ruta_origen, $ruta_destino);
                         break;
                     case "option3":
-                        $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR . ":" . MINUTE . ":" . SECOND . "-carrousel-product." . $ext;
+                        $ruta_destino = "view/img_product/" . $id . "-" . YEAR . "-" . MONTH . "-" . DAY . "_" . HOUR .  MINUTE .  SECOND . "-carrousel-product." . $ext;
                         // Definimos la ruta del destino con nuestras consantes.
                         move_uploaded_file($ruta_origen, $ruta_destino);
                         break;
