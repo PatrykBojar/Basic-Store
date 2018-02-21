@@ -10,17 +10,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="icon" href="view/main/img/main-logo.png">
   <link rel="stylesheet" type="text/css" href="view/main/style/cart_page_style.css">
+  <link rel="stylesheet" type="text/css" href="view/main/style/main_page_style.css">
 </head>
 
 <body>
 
   <?php include("view/main/php/header.php");?>
-  <main>
 
-    <div id="main-content" class="container-fluid">
+<div class="row">
+    <div id="main-content" class="container">
       <?php $summary = 0; ?>
-      <div class="container">
-        <table id="cart" class="table table-hover table-condensed">
+        <table id="cart" class="table table-hover table-responsive">
           <?php if (empty($_SESSION['cart']) && !isset($_SESSION['user'])) {?>
             <div class="container text-center">
               <h3 class="text-info  mt-5">Tu carrito está vacío</h3>
@@ -55,7 +55,7 @@
                   </div>
                 </td>
                 <td data-th="Price">
-                  <?php echo $datos['PRICE']." €"; ?>
+                  <?php echo enEuro($datos['PRICE']); ?>
                 </td>
                 <td data-th="Quantity" class="text-center">
                   <?php echo $datos['QUANTITY']; ?>
@@ -107,7 +107,7 @@
                   </div>
                 </td>
                 <td data-th="Price">
-                  <?php echo $dato['PRICE']." €"; ?>
+                  <?php echo enEuro($dato['PRICE']); ?>
                 </td>
                 <td data-th="Quantity" class="text-center">
                   <?php echo $dato['QUANTITY']; ?>
@@ -137,9 +137,9 @@
         <?php  } }?>
 
         </table>
-      </div>
     </div>
-  </main>
+</div>
+
 </body>
 
 </html>

@@ -2,44 +2,102 @@
   width: 100px;
 }
 
-.card-height{
+.card-height {
   height: 700px;
 }
-.img-product:hover{
+
+.img-product:hover {
   cursor: pointer;
 }
+
 /*  footer {
     position: fixed;
     height: 100px;
     bottom: 0;
     width: 100%;
 }*/
-div.modal > form{
+
+div.modal>form {
   width: 500px;
   margin: 0 auto;
 }
-hr{
+
+hr {
   width: 50%;
 }
-.footerP{
+
+.footerP {
   margin-bottom: 0;
 }
+
 /*.contenedor-productos{
   height: 800px;
 }*/
-.prom-badge{
+
+.prom-badge {
   position: absolute;
 }
-.badge-warning{
+
+.prom-badge-low {
+  position: absolute;
+  margin-left: 7rem;
+}
+
+.badge-warning {
   background-color: #ff9335;
   color: #fff;
 }
-.badge-descuento{
+
+.badge-descuento {
   color: #fff;
   background-color: #a0160c;
   margin-left: 1rem !important;
 }
-.img-carrito{
-width: 40px;
-height: 40px;
+
+.img-carrito {
+  width: 40px;
+  height: 40px;
+}
+
+.zoom-img {
+  transition: transform .2s;
+}
+
+.btn-success {
+  background-color: #1c8e36;
+  border-color: #1c8e36;
+}
+
+.btn-primary {
+  background-color: #0068d8;
+  border-color: #0068d8;
+}
+
+.bg-dark-submenu {
+  background-color: #40464c;
+}
+
+.blink {
+  animation: blink-animation 1s linear infinite;
+  -webkit-animation: blink-animation 1s linear infinite;
+}
+
+@keyframes blink-animation {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@-webkit-keyframes blink-animation {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (min-width:34em) {
+  .card-deck>.lol>.card {
+    height: 700px;
+    flex-wrap: wrap;
+    flex: initial;
+  }
 }

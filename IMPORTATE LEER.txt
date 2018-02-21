@@ -1,0 +1,8 @@
+********
+IMPORTANTE
+********
+
+Esta carpeta tiene que tener permisos recursivos 777.
+Son necesarios para que el php pueda insertar imágenes...
+
+- Patryk Bojar

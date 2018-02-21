@@ -1,32 +1,38 @@
-.bg-gris{
+.bg-gris {
   background-color: #efefef;
 }
-.img-size{
+
+.img-size {
   width: 300px;
-  height:300px;
+  height: 300px;
 }
-.precio{
+
+.precio {
   font-size: 44px;
   color: #246b23
 }
-.precio-sin-iva{
+
+.precio-sin-iva {
   width: 130px;
 }
-.precio-pvp{
+
+.precio-pvp {
   width: 130px;
 }
-.precio-secondary-size{
+
+.precio-secondary-size {
   font-size: 24px;
 }
-.descuento{
-  width: 130px;
 
+.descuento {
+  width: 130px;
 }
 
-.quantity-box{
+.quantity-box {
   width: 45px;
 }
-div.modal > form{
+
+div.modal>form {
   width: 500px;
   margin: 0 auto;
 }
