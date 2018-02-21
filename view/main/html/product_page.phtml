@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="icon" href="view/main/img/main-logo.png">
   <link rel="stylesheet" type="text/css" href="view/main/style/product_page_style.css">
+  <link rel="stylesheet" type="text/css" href="view/main/style/main_page_style.css">
 </head>
 
 <body>
@@ -17,114 +18,105 @@
   <?php
   include("view/main/php/header.php");
 ?>
-    <br>
-    <nav class="nav bg-dark">
+    <nav class="nav bg-dark mt-3">
       <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">INICIO ></a>
-        <?php $cont = 0; foreach ($datos as $subcat) {
+      <?php $cont = 0; foreach ($datos as $subcat) {
             if ($subcat['CATPRDID'] == $subCatId && $cont == 0){?>
-              <a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>"><?php echo $subcat['CATNAME'];?>      </a>
-              <?php $cont++;
+      <a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>">
+        <?php echo $subcat['CATNAME'];?> </a>
+      <?php $cont++;
             }
           }?>
     </nav>
-
-    <div class="container bg-gris">
-      <?php
+    <div class="row">
+      <div class="container bg-gris">
+        <?php
 foreach ($datos as $producto) {
   if ($producto['ID'] == $id && $producto['CATID'] == $subCatId) {
     foreach ($images as $img) {
       if ($img['PRDID'] == $id) {
         if($img['URL'] != NULl){ ?>
-        <img class="img-fluid img-size" src="<?php echo $img['URL']; ?>" alt="<?php echo $img['PRDNAME'];?>">
-        <?php }else{?>
-        <img class="img-fluid img-size" src="view/img_product/error_img/no-image.svg" alt="No existe una imagen para este producto.">
-        <?php }  } }?>
-        <div class="container bloque-precio mb-2 pb-1 pt-1 bg-white rounded">
+          <img class="img-fluid img-size" src="<?php echo $img['URL']; ?>" alt="<?php echo $img['PRDNAME'];?>">
+          <?php }else{?>
+          <img class="img-fluid img-size" src="view/img_product/error_img/no-image.svg" alt="No existe una imagen para este producto.">
+          <?php }  } }?>
+          <div class="container bloque-precio mb-2 pb-1 pt-1 bg-white rounded">
 
-          <h1><?php echo $producto['NAME']; ?></h1>
-          <span class="precio font-weight-bold"><?php echo enEuro($producto['PRICE']  * (1-$producto['DISCOUNTPERCENTAGE']/100))?></span>
-          <div class="precio-sin-iva text-secondary ">
-            <span class="iva-tlt font-weight-bold">SIN IVA</span><br>
-            <span class="precio-secondary-size"><?php echo enEuro($producto['PRICE'] * (1-IVA/100))?></span>
-          </div>
-          <?php if ($producto['DISCOUNTPERCENTAGE'] != NULL){ ?>
-          <div class="precio-pvp text-secondary ">
-            <span class="font-weight-bold">PVP</span><br>
-            <del class="precio-secondary-size"><?php echo enEuro($producto['PRICE'])?></del>
-          </div>
-          <?php }
+            <h1><?php echo $producto['NAME']; ?></h1>
+            <span class="precio font-weight-bold"><?php echo enEuro($producto['PRICE']  * (1-$producto['DISCOUNTPERCENTAGE']/100))?></span>
+            <div class="precio-sin-iva text-secondary ">
+              <span class="iva-tlt font-weight-bold">SIN IVA</span><br>
+              <span class="precio-secondary-size"><?php echo enEuro($producto['PRICE'] * (1-IVA/100))?></span>
+            </div>
+            <?php if ($producto['DISCOUNTPERCENTAGE'] != NULL){ ?>
+            <div class="precio-pvp text-secondary ">
+              <span class="font-weight-bold">PVP</span><br>
+              <del class="precio-secondary-size"><?php echo enEuro($producto['PRICE'])?></del>
+            </div>
+            <?php }
           if($producto['DISCOUNTPERCENTAGE'] != NULL){ ?>
-          <div class="descuento">
-            <span class="font-weight-bold text-secondary">DTO.</span>
-            <h4><span class="badge badge-success"><?php echo $producto['DISCOUNTPERCENTAGE']?>%</span></h4>
+            <div class="descuento">
+              <span class="font-weight-bold text-secondary">DTO.</span>
+              <h4><span class="badge badge-success"><?php echo $producto['DISCOUNTPERCENTAGE']?>%</span></h4>
 
+            </div>
+            <?php }else{ echo "";} ?>
           </div>
-          <?php }else{ echo "";} ?>
-        </div>
-        <div class="container mt-2 pt-2 bg-white rounded">
-          <h6 class="font-weight-bold">Marca: <a href="#"><?php echo $producto['BRANDNAME']?></a></h6>
-          <span class="font-weight-bold">Cantidad:</span>
-          <br>
-          <?php
+          <div class="container mt-2 pt-2 bg-white rounded">
+            <h6 class="font-weight-bold">Marca: <a href="index.php?controller=productos&action=show_start_page"><?php echo $producto['BRANDNAME']?></a></h6>
+            <span class="font-weight-bold">Cantidad:</span>
+            <br>
+            <?php
           if ($producto['SPONSORED'] == "Y") { ?>
-            <span class="font-weight-bold">Promoción:</span>
-            <span>
+              <span class="font-weight-bold">Promoción:</span>
+              <span>
               <?php echo "Este producto está patrocinado.<br>";
           }else{
               echo "";} ?>
             </span>
-          <?php if($producto['STOCK'] < 5 && $producto['STOCK'] > 0){ ?>
-          <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span>
-          <span class="badge badge-danger">¡Quedan pocos!</span>
-          <form action="index.php?controller=productos&action=" class="pt-3" method="post">
-            <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
-          </form>
-          <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
-         <form action="<?php echo $logedornot; ?>" class="" method="post">
-           <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
-           <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
-         </form>
-        <?php }elseif ($producto['STOCK'] >= 5) { ?>
-          <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span><br>
-          <form action="index.php?controller=productos&action=" class="pt-3" method="post">
-            <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
-          </form>
-          <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
-         <form action="<?php echo $logedornot; ?>" class="" method="post">
-           <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
-           <button class="btn btn-secondary w-25 mt-2" type="submit"></a>Al carro</button>
-         </form>
-        <?php }else{ ?>
-          <span class="font-weight-bold">Disponibilidad: ¡Sin stock! No hay unidades disponibles.</span><br>
-          <?php }?>
-        </div>
-        <div class="container mt-2 pt-2 bg-white rounded">
-          <span class="font-weight-bold">Descripción del producto</span><br>
+              <?php if($producto['STOCK'] < 5 && $producto['STOCK'] > 0){ ?>
+              <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span>
+              <span class="badge badge-danger">¡Quedan pocos!</span>
+              <form action="index.php?controller=productos&action=show_start_page" class="pt-3" method="post">
+                <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
+              </form>
+              <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
+              <form action="<?php echo $logedornot; ?>" class="col-12" method="post">
+                <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
+                <button class="btn btn-secondary mt-2 col-12 col-md-6" type="submit"></a>Al carro</button>
+              </form>
+              <?php }elseif ($producto['STOCK'] >= 5) { ?>
+              <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span><br>
+              <form action="index.php?controller=productos&action=show_start_page" class="pt-3" method="post">
+                <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
+              </form>
+              <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
+              <form action="<?php echo $logedornot; ?>" class="col-12 text-center pt-2" method="post">
+                <span>Und: </span><input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
+                <button class="btn btn-secondary col-12 mt-2 col-md-6 mb-md-3" type="submit"></a>Al carro</button>
+              </form>
+              <?php }else{ ?>
+              <span class="font-weight-bold">Disponibilidad: ¡Sin stock! No hay unidades disponibles.</span><br>
+              <?php }?>
+          </div>
+          <div class="container mt-2 pt-2 bg-white rounded">
+            <span class="font-weight-bold">Descripción del producto</span><br>
 
-          <?php if ($producto['SHORTDESCRIPTION'] == NULL && $producto['LONGDESCRIPTION'] == NULL){ ?>
-          <span class="font-italic">Este producto aún no dispone de una descripción. Lo sentimos.</span>
-          <?php } ?>
-          <p><?php echo $producto['SHORTDESCRIPTION']?></p>
-          <hr>
-          <p><?php echo $producto['LONGDESCRIPTION']?></p>
-        </div>
-
+            <?php if ($producto['SHORTDESCRIPTION'] == NULL && $producto['LONGDESCRIPTION'] == NULL){ ?>
+            <span class="font-italic">Este producto aún no dispone de una descripción. Lo sentimos.</span>
+            <?php } ?>
+            <p>
+              <?php echo $producto['SHORTDESCRIPTION']?>
+            </p>
+            <hr>
+            <p>
+              <?php echo $producto['LONGDESCRIPTION']?>
+            </p>
+          </div>
+      </div>
+      <?php } }?>
     </div>
-
-
-
-
-
-
-
-
-
-
-    <?php } }?>
-    </div>
-    <?php
-include("view/main/php/footer.php");
-?>
+    <?php include("view/main/php/footer.php"); ?>
 </body>
 
 </html>

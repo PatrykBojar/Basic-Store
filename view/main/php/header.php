@@ -8,17 +8,17 @@
       <?php
           if(isset($_SESSION['user'])){
             if ($_SESSION['user'] == "admin") {?>
-        <div class="dropdown">
+        <div class="dropdown pt-sm-2 pl-md-2 mb-2">
           <button class="btn btn-primary dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $_SESSION['user'];?>
               </button>
-          <div class="dropdown-menu" aria-labelledby="userMenu">
+          <div class="dropdown-menu col-12" aria-labelledby="userMenu">
             <a href="index.php?controller=productos&action=show_manage_product" class="dropdown-item btn">Zona ADMIN</a>
             <a href="index.php?controller=usuarios&action=logout" class="dropdown-item btn text-danger">Salir</a>
           </div>
         </div>
         <?php }else{ ?>
-        <div class="dropdown">
+        <div class="dropdown pt-sm-2 pl-md-2 mb-2">
           <button class="btn btn-primary dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?php echo  $_SESSION['user'];?>
           </button>

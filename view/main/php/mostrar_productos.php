@@ -3,12 +3,12 @@
   <div class="row">
     <div class="card-deck carousel">
       <?php foreach ($datos as $dato) { ?>
-      <div class="col-12 col-sm-6 col-md-4 col-xl-3 mt-5 lol">
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3 mt-5">
         <div id="<?php echo $dato['ID']; ?>" class="card">
           <?php foreach ($images as $img) {
               if ($dato['ID'] == $img['ID']) {
                 if($img['URL'] != NULl){ ?>
-          <img class="card-img-top img-fluid img-product" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" src="<?php echo $img['URL']; ?>" alt="<?php echo $dato['NAME'];?>" onmouseover="zoomImage()">
+          <img class="card-img-top img-fluid img-product" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" src="<?php echo $img['URL']; ?>" alt="<?php echo $dato['NAME'];?>">
           <?php
           if ($dato['STOCK'] < 5 && $dato['STOCK'] > 0) {
            if($dato['SPONSORED'] == 'N'){?>
