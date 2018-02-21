@@ -20,85 +20,84 @@ if(isset($_SESSION["user"])){
   <body>
     <div class="container-fluid bg-dark mb-5 pt-2">
       <a href="index.php?controller=productos&action=show_start_page"><img src="view/login/img/main-logo.png" id="top-logo" class="mx-auto d-block" alt="Dragón verde"></img></a>
-      <hr class="bg-muted">
       <h1 class="text-success text-center pb-3">Green Dragon</h1>
     </div>
-    <div class="container-fluid">
-      <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item col-6 col-sm-5 col-md-4 col-xl-5">
-          <a class="nav-link active" data-toggle="pill" href="#login_tab">Login</a>
-        </li>
-        <li class="nav-item col-6 col-sm-5 col-md-4 col-xl-5">
-          <a class="nav-link" data-toggle="pill" href="#register_tab">Registro</a>
-        </li>
-      </ul>
 
-      <div class="tab-content">
-        <div id="login_tab" class="container tab-pane active"><br>
-          <div class="container table-success col-12 col-sm-9 col-md-7 col-xl-4">
-            <form action="index.php?controller=usuarios&action=login" method="post">
-              <div class="row text-center">
-                <div class="container tab-pane active form-group col-6">
-                  <label for="form_nombre" class="font-weight-bold">Nombre de usuario</label>
-                  <input type="text" class="form-control col-12 font-weight-bold" id="form_nombre" name="username">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="form_nombre" class="font-weight-bold">Contraseña</label>
-                  <input type="password" class="form-control col-12 font-weight-bold" name="password">
-                </div>
-              </div>
-              <div class="form-group col-12">
-                <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="login">Entrar</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div id="register_tab" class="container tab-pane fade"><br>
-          <div class="container table-success col-12 col-sm-9 col-md-7 col-xl-4">
-            <form action="index.php?controller=usuarios&action=register" method="post">
-              <div class="row text-center">
-                <div class="container tab-pane active form-group col-6">
-                  <label for="username" class="font-weight-bold">Nombre de usuario</label>
-                  <input type="text" class="form-control col-12 font-weight-bold" id="username" name="username">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="fullname" class="font-weight-bold">Nombre completo</label>
-                  <input type="text" class="form-control col-12 font-weight-bold" id="fullname" name="fullname">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="email" class="font-weight-bold">Correo eletrónico</label>
-                  <input type="email" class="form-control col-12 font-weight-bold" id="email" name="email">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="address" class="font-weight-bold">Dirección</label>
-                  <input type="text" class="form-control col-12 font-weight-bold" id="address" name="address">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="zipCode" class="font-weight-bold">Código postal</label>
-                  <input type="text" class="form-control col-12 font-weight-bold" id="zipCode" name="zipCode">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="password" class="font-weight-bold">Contraseña</label>
-                  <input type="password" class="form-control col-12 font-weight-bold" id="password" name="password">
-                </div>
-                <div class="container tab-pane form-group col-6">
-                  <label for="password2" class="font-weight-bold">Repite contraseña</label>
-                  <input type="password" class="form-control col-12 font-weight-bold" id="password2" name="password_check">
-                </div>
-              </div>
-              <div class="form-group col-12">
-                <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="login">Registrarse</button>
-              </div>
-            </form>
-          </div>
-        </div>
+    <div class="row">
+    <div class="container-fluid col-12 col-lg-8" >
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+          <li class="nav-item col-6 col-sm-6 col-md-4 col-xl-5">
+            <a class="nav-link active text-center font-weight-bold" data-toggle="pill" href="#login_tab">LOGIN</a>
+          </li>
+          <li class="nav-item col-6 col-sm-6 col-md-4 col-xl-5">
+            <a class="nav-link text-center font-weight-bold" data-toggle="pill" href="#register_tab">REGISTRO</a>
+          </li>
+        </ul>
       </div>
     </div>
 
-
-
-
-
+      <div class="row">
+        <div class="tab-content pl-3 pr-3 m-auto ">
+          <div id="login_tab" class="container tab-pane active"><br>
+            <div class="container table-success rounded pt-2 pb-2 col-12">
+              <form action="index.php?controller=usuarios&action=login" method="post">
+                <div class="row text-center">
+                  <div class="tab-pane active form-group col-12">
+                    <label for="form_nombre" class="font-weight-bold">Nombre de usuario</label>
+                    <input type="text" class="form-control col-12 font-weight-bold" id="form_nombre" name="username">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="form_nombre" class="font-weight-bold">Contraseña</label>
+                    <input type="password" class="form-control col-12 font-weight-bold" name="password">
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <button type="submit" class="btn btn-success btn-sm font-weight-bold col-12 pt-2 pb-2" name="login">Entrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="register_tab" class="container tab-pane fade"><br>
+            <div class="container table-success rounded pt-2 pb-2 col-12 col-md-10 col-lg-6 col-xl-5">
+              <form action="index.php?controller=usuarios&action=register" method="post">
+                <div class="row text-center">
+                  <div class=" tab-pane active form-group col-12">
+                    <label for="username" class="font-weight-bold">Nombre de usuario</label>
+                    <input type="text" class="form-control col-12 font-weight-bold" id="username" name="username">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="fullname" class="font-weight-bold">Nombre completo</label>
+                    <input type="text" class="form-control col-12 font-weight-bold" id="fullname" name="fullname">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="email" class="font-weight-bold">Correo eletrónico</label>
+                    <input type="email" class="form-control col-12 font-weight-bold" id="email" name="email">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="address" class="font-weight-bold">Dirección</label>
+                    <input type="text" class="form-control col-12 font-weight-bold" id="address" name="address">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="zipCode" class="font-weight-bold">Código postal</label>
+                    <input type="text" class="form-control col-12 font-weight-bold" id="zipCode" name="zipCode">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="password" class="font-weight-bold">Contraseña</label>
+                    <input type="password" class="form-control col-12 font-weight-bold" id="password" name="password">
+                  </div>
+                  <div class="tab-pane form-group col-12">
+                    <label for="password2" class="font-weight-bold">Repite contraseña</label>
+                    <input type="password" class="form-control col-12 font-weight-bold" id="password2" name="password_check">
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <button type="submit" class="btn btn-success font-weight-bold col-12 pt-2 pb-2" name="login">Registrarse</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
