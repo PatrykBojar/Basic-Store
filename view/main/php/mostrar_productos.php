@@ -4,7 +4,7 @@
     <div class="card-deck carousel">
       <?php foreach ($datos as $dato) { ?>
       <div class="col-12 col-sm-6 col-md-4 col-xl-3 mt-5">
-        <div id="<?php echo $dato['ID']; ?>" class="card">
+        <div id="<?php echo $dato['ID']; ?>" class="card product-cards">
           <?php foreach ($images as $img) {
               if ($dato['ID'] == $img['ID']) {
                 if($img['URL'] != NULl){ ?>
@@ -28,11 +28,11 @@
               </p>
               <?php if($dato['DISCOUNTPERCENTAGE'] != NULL){ ?>
               <hr>
-              <h5 class="text-dark text-center font-weight-bold"><?php echo enEuro($dato['PRICE']  * (1-$dato['DISCOUNTPERCENTAGE']/100))?></h5>
+              <h5 id="precio<?php echo $dato['ID']?>" class="text-dark text-center font-weight-bold price" onclick="precioProducto(this.id)"><?php echo enEuro($dato['PRICE']  * (1-$dato['DISCOUNTPERCENTAGE']/100))?></h5>
               <h6 class="text-muted text-center"><del><?php echo enEuro($dato['PRICE'])?></del><span class="badge badge-descuento font-weight-bold"><?php echo $dato['DISCOUNTPERCENTAGE'] ?>%</span></h6>
               <?php } else{ ?>
               <hr>
-              <h5 class="text-dark text-center font-weight-bold"><?php echo enEuro($dato['PRICE'])?></h5>
+              <h5 id="precio<?php echo $dato['ID']?>" class="text-dark text-center font-weight-bold precio" onclick="precioProducto(this.id)"><?php echo enEuro($dato['PRICE'])?></h5>
               <?php } ?>
               <?php if($dato['STOCK'] < 5 && $dato['STOCK'] > 0){ ?>
               <form action="index.php?controller=productos&action=show_product_page&id=<?php echo $dato['ID'];?>&sc=<?php echo $dato['CATEGORY']; ?>" method="post">
