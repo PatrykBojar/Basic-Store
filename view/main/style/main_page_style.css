@@ -77,9 +77,17 @@ hr {
   background-color: #40464c;
 }
 
+.bg-secondary-submenu {
+  background-color: #99a1a8;
+}
+
 .blink {
   animation: blink-animation 1s linear infinite;
   -webkit-animation: blink-animation 1s linear infinite;
+}
+
+.desplegar:hover>.dropdown-menu {
+  display: block;
 }
 
 @keyframes blink-animation {

@@ -13,6 +13,7 @@ if(isset($_SESSION["user"])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <script src="view/login/js/validation-for-david.js"></script>
     <link rel="icon" href="view/login/img/login.png">
     <link rel="stylesheet" type="text/css" href="view/login/style/login_style.css">
   </head>
@@ -37,22 +38,34 @@ if(isset($_SESSION["user"])){
     </div>
 
       <div class="row">
-        <div class="tab-content pl-3 pr-3 m-auto ">
+        <div class="tab-content pl-3 pr-3 m-auto">
           <div id="login_tab" class="container tab-pane active"><br>
             <div class="container table-success rounded pt-2 pb-2 col-12">
-              <form action="index.php?controller=usuarios&action=login" method="post">
+              <form action="index.php?controller=usuarios&action=login" method="post" class="login-validation" novalidate>
                 <div class="row text-center">
                   <div class="tab-pane active form-group col-12">
-                    <label for="form_nombre" class="font-weight-bold">Nombre de usuario</label>
-                    <input type="text" class="form-control col-12 font-weight-bold" id="form_nombre" name="username">
+                    <label for="nick" class="font-weight-bold">Nombre de usuario</label>
+                    <input id="nick" type="text" class="form-control col-12 font-weight-bold" id="form_nombre" name="username" required>
+                    <div class="valid-feedback font-weight-bold">
+                      ¡Bien!
+                    </div>
+                    <div class="invalid-feedback font-weight-bold">
+                    ¡El nombre de usuario no puede estar vacío!
+                    </div>
                   </div>
                   <div class="tab-pane form-group col-12">
-                    <label for="form_nombre" class="font-weight-bold">Contraseña</label>
-                    <input type="password" class="form-control col-12 font-weight-bold" name="password">
+                    <label for="passwd" class="font-weight-bold">Contraseña</label>
+                    <input id="passwd" type="password" class="form-control col-12 font-weight-bold" name="password" required>
+                    <div class="valid-feedback font-weight-bold">
+                      ¡Bien!
+                    </div>
+                    <div class="invalid-feedback font-weight-bold">
+                      ¡La contraseña no puede estar vacía!
+                    </div>
                   </div>
                 </div>
                 <div class="form-group mt-3">
-                  <button type="submit" class="btn btn-success btn-sm font-weight-bold col-12 pt-2 pb-2" name="login">Entrar</button>
+                  <button type="submit" class="btn btn-success btn-sm font-weight-bold col-12 pt-2 pb-2" name="login" >Entrar</button>
                 </div>
               </form>
             </div>

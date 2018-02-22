@@ -18,15 +18,20 @@
   <?php
   include("view/main/php/header.php");
 ?>
-    <nav class="nav bg-dark mt-3">
-      <a class="nav-link active" href="index.php?controller=productos&action=show_start_page">INICIO ></a>
+    <nav class="breadcrumb mt-3 bg-dark">
+      <a class="breadcrumb-item" href="href=" index.php?controller=productos&action=show_start_page "">INICIO</a>
       <?php $cont = 0; foreach ($datos as $subcat) {
-            if ($subcat['CATPRDID'] == $subCatId && $cont == 0){?>
-      <a class="nav-link active" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>">
+        if ($subcat['CATPRDID'] == $subCatId && $cont == 0){?>
+      <a class="breadcrumb-item" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>">
         <?php echo $subcat['CATNAME'];?> </a>
       <?php $cont++;
-            }
-          }?>
+        }
+      }?>
+      <?php foreach ($datos as $producto) { ?>
+      <?php if ($producto['ID'] == $id){ ?>
+      <span class="breadcrumb-item active"><?php echo $producto['NAME'] ?></span>
+      <?php } ?>
+      <?php } ?>
     </nav>
     <div class="row">
       <div class="container bg-gris">
@@ -81,9 +86,9 @@ foreach ($datos as $producto) {
                 <button class="btn btn-success w-100" type="submit"></a>Comprar</button>
               </form>
               <?php $logedornot = (!isset($_SESSION['user'])) ? "index.php?controller=order&action=insert&id=".$producto['ID'] : "index.php?controller=order&action=addwithquantity&id=".$producto['ID']; ?>
-              <form action="<?php echo $logedornot; ?>" class="col-12" method="post">
-                <input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
-                <button class="btn btn-secondary mt-2 col-12 col-md-6" type="submit"></a>Al carro</button>
+              <form action="<?php echo $logedornot; ?>" class="col-12 text-center pt-2" method="post">
+                <span>Und: </span><input name="quantity" class="quantity-box text-center" type="text" class="form-control" value="1" max="999" autocomplete="off" type="text">
+                <button class="btn btn-secondary mt-2 col-12 col-md-6 mb-md-3" type="submit"></a>Al carro</button>
               </form>
               <?php }elseif ($producto['STOCK'] >= 5) { ?>
               <span class="font-weight-bold">Disponibilidad: ¡En stock! Hay <?php echo $producto['STOCK']; ?> unidades disponibles.</span><br>

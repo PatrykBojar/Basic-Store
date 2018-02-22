@@ -33,12 +33,12 @@
         <form action="index.php?controller=productos&action=insert" method="post" class="col-12">
           <div class="row text-center">
             <div class="container tab-pane active form-group">
-              <label for="form_nombre" class="font-weight-bold">Nombre</label>
-              <input type="text" class="form-control col-12 font-weight-bold" name="name" required minlength="1" maxlength="32">
+              <label for="prdname" class="font-weight-bold">Nombre</label>
+              <input id="prdname" type="text" class="form-control col-12 font-weight-bold" name="name" required minlength="1" maxlength="32">
             </div>
             <div class="container tab-pane form-group">
               <label for="stock" class="font-weight-bold">Stock</label>
-              <input type="number" class="form-control col-12 font-weight-bold" name="stock" required min="1">
+              <input id="stock" type="number" class="form-control col-12 font-weight-bold" name="stock" required min="1">
             </div>
             <div class="container tab-pane active form-group">
               <label for="price" class="font-weight-bold">Precio</label>

@@ -1,3 +1,6 @@
 .btn-danger {
   background-color: #f22439;
 }
+#progressBar{
+  width: 50%;
+}

@@ -1,5 +1,9 @@
-
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-    $('body').popover({content: "Crea una cuenta o entra en una ya existente.", selector: "#btn-identificacion", trigger: "hover"});
+$(document).ready(function() {
+  $('[data-toggle="popover"]').popover();
+  $('body').popover({
+    content: "Este botón te permite filtros los productos dependiendo de dónde estés.",
+    selector: "#btn-filtro",
+    trigger: "hover",
+    placement: "bottom"
+  });
 });

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-dark col-12 mt-3 text-success" data-toggle="modal" data-target="#filtros">Ver filtros</button>
+<button id="btn-filtro" type="button" class="btn btn-dark col-12 mt-3 text-success" data-toggle="modal" data-target="#filtros">Ver filtros</button>
 <div class="modal fade" id="filtros">
   <form action="index.php?controller=productos&action=filterProductsBrands" method="post">
     <div class="modal-dialog">
@@ -28,6 +28,17 @@
               <input type="number" class="form-control col-12 mt-3" name="maxPrice" id="maxPrice" placeholder="Precio máximo para el filtro..." min="0">
               <small class="font-italic">Producto más caro disponible: <?php echo enEuro($precio['MAXPRICE'])?></small>
               <?php }  ?>
+            </div>
+            <div class="dropdown mt-3 desplegar">
+              <button class="btn btn-secondary" type="button" data-toggle="dropdown">Ordenar</button>
+              <div class="dropdown-menu bg-secondary-submenu mt-0">
+                <a class="dropdown-item" href="index.php?controller=productos&action=sortPriceDesc">Precio: más caros primero</a>
+                <a class="dropdown-item" href="index.php?controller=productos&action=sortPriceAsc">Precio: más baratos primero</a>
+                <a class="dropdown-item" href="index.php?controller=productos&action=sortStockDesc">Stock: de más a menos</a>
+                <a class="dropdown-item" href="index.php?controller=productos&action=sortStockAsc">Stock: de menos a más</a>
+                <a class="dropdown-item" href="index.php?controller=productos&action=sortNombreAsc">Nombre: A-Z</a>
+                <a class="dropdown-item" href="index.php?controller=productos&action=sortNombreDesc">Nombre: Z-A</a>
+              </div>
             </div>
           </div>
         </div>
