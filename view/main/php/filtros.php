@@ -1,5 +1,5 @@
-<div class="col-12 mt-3">
-  <button id="btn-filtro" type="button" class="btn btn-dark col-12" data-toggle="modal" data-target="#filtros">Ver filtros</button>
+<div class="col-12 mt-3 text-center">
+  <button id="btn-filtro" type="button" class="btn btn-dark col-12 col-lg-6" data-toggle="modal" data-target="#filtros">Ver filtros</button>
 </div>
 <div class="modal fade" id="filtros">
   <form action="index.php?controller=productos&action=filterProductsBrands" method="post">

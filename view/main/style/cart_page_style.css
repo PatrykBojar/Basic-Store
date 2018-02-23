@@ -1,6 +1,23 @@
 .btn-danger {
   background-color: #f22439;
 }
-#progressBar{
+
+#progressBar-10 {
+  width: 10%;
+}
+
+#progressBar-50 {
   width: 50%;
+}
+
+.btn-cant {
+  width: 25px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }

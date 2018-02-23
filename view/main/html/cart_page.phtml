@@ -9,6 +9,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="icon" href="view/main/img/main-logo.png">
+  <script src="view/main/js/main_script.js">
+
+  </script>
   <link rel="stylesheet" type="text/css" href="view/main/style/cart_page_style.css">
   <link rel="stylesheet" type="text/css" href="view/main/style/main_page_style.css">
 </head>
@@ -25,8 +28,12 @@
         <div class="container text-center">
           <h3 class="text-info  mt-5">Tu carrito está vacío</h3>
         </div>
+
         <?php
         } elseif(!empty($_SESSION['cart']) && !isset($_SESSION['user'])) {?>
+          <div class="progress mt-2">
+            <div id="progressBar-10" class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
           <thead>
             <tr>
               <th>Producto</th>
@@ -37,7 +44,6 @@
             </tr>
           </thead>
           <tbody>
-
             <?php
             foreach ($_SESSION['cart'] as $datos) {
               $summary = ($datos['PRICE']*$datos['QUANTITY']) + $summary;
@@ -58,7 +64,10 @@
                   <?php echo enEuro($datos['PRICE']); ?>
                 </td>
                 <td data-th="Quantity" class="text-center">
-                  <?php echo $datos['QUANTITY']; ?>
+                  <button id="<?php echo $datos['ID'] ?>" class="btn btn-sm px-0 btn-cant" onclick="sumCantidad(this.id)">+</button>
+                  <input id="cantidad<?php echo $datos['ID'] ?>" type="number" value="<?php echo $datos['QUANTITY']; ?>" class="form-control col-5 text-center">
+                  <button id="<?php echo $datos['ID'] ?>" class="btn btn-sm px-0 btn-cant" onclick="resCantidad(this.id)">-</button>
+
                 </td>
                 <td data-th="Subtotal" class="text-center">
                   <?php echo enEuro($datos['PRICE']*$datos['QUANTITY']);?>
@@ -80,6 +89,9 @@
 
           <?php } elseif (isset($_SESSION['user'])){
             if (isset($check) == "PENDING") {?>
+              <div class="progress mt-2">
+                <div id="progressBar-50" class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
           <thead>
             <tr>
               <th>Producto</th>
@@ -128,12 +140,8 @@
               <td class=" text-center"><strong><?php echo "TOTAL A PAGAR: ".enEuro($summary); ?></strong></td>
               <td><a href="index.php?controller=order&action=emptyorderwithitems" class="btn btn-danger">Vaciar Carrito</a></td>
               <td><a href="index.php?controller=order&action=checkout" class="btn btn-success btn-block">Realizar Pedido</a></td>
-              <td><a id="addWidth" href="#" class="btn btn-success btn-block">Realizar Pedido (David)</a></td>
             </tr>
           </tfoot>
-          <div class="progress mt-2">
-            <div id="progressBar" class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
           <?php } else {?>
           <div class="container text-center">
             <h3 class="text-info  mt-5">Tu carrito está vacío</h3>

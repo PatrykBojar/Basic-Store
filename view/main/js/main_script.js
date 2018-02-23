@@ -13,8 +13,8 @@
 
 function precioProducto(id) {
   var price = document.getElementById(id).innerHTML;
-      alert(price);
-  }
+  alert(price);
+}
 
 function slider() {
   var sliderMin = document.getElementById("minRange");
@@ -33,26 +33,21 @@ function slider() {
     outputMax.innerHTML = this.value;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+function sumCantidad(id) {
+  document.getElementById("cantidad" + id).stepUp(1);
+}
+
+function resCantidad(id) {
+  document.getElementById("cantidad" + id).stepDown(1);
+}
+
+
 
 
 

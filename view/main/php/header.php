@@ -33,7 +33,7 @@
           <a href="index.php?controller=usuarios&action=show_login_page" class="btn btn-success font-weight-bold col-12 col-sm-12 mt-sm-2 mt-md-2 col-lg-3 ml-lg-5 mb-lg-2" name="login">Identificarse</a>
         <?php } ?>
     </form>
-    <div class="col-12 justify-content-end ml-4 ml-lg-0 input-group pt-3 pb-auto bg-inverse">
+    <div class="col-12 justify-content-end ml-4 ml-lg-0 input-group pt-3 pb-auto bg-inverse dropdown">
       <div class="text-right pr-5">
         <a class="d-inline-flex" href="index.php?controller=order&action=show_cart">
           <div class=" bg-dark">
@@ -52,6 +52,6 @@
         </a>
       </div>
     </div>
-
+</div>
   </nav>
 </div>

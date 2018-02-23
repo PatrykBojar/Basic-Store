@@ -1,5 +1,5 @@
 <div class="row">
-<div id="accordion" role="tablist" aria-multiselectable="true" class="col-12 col-lg-3 col-xl-2">
+<div id="accordion" role="tablist" aria-multiselectable="true" class="col-12 col-lg-3 col-xl-2 pr-0 pr-md-1">
   <?php
 foreach ($categories as $datoC) {
   $id = $datoC['ID'];

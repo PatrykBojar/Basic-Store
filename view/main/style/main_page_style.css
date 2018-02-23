@@ -15,6 +15,10 @@
   margin: 0 auto;
 }*/
 
+.table-secondary-submenu {
+  background-color: #40464c;
+}
+
 hr {
   width: 50%;
 }
@@ -98,9 +102,8 @@ hr {
     flex: initial;
   }
 }
-@media only screen and (max-width: 600px)  {
-  
-}
+
+@media only screen and (max-width: 600px) {}
 
 .slider-container {
   width: 100%;
