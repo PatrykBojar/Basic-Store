@@ -67,7 +67,6 @@
                   <button id="<?php echo $datos['ID'] ?>" class="btn btn-sm px-0 btn-cant" onclick="sumCantidad(this.id)">+</button>
                   <input id="cantidad<?php echo $datos['ID'] ?>" type="number" value="<?php echo $datos['QUANTITY']; ?>" class="form-control col-5 text-center">
                   <button id="<?php echo $datos['ID'] ?>" class="btn btn-sm px-0 btn-cant" onclick="resCantidad(this.id)">-</button>
-
                 </td>
                 <td data-th="Subtotal" class="text-center">
                   <?php echo enEuro($datos['PRICE']*$datos['QUANTITY']);?>

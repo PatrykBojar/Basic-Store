@@ -19,7 +19,7 @@
   include("view/main/php/header.php");
 ?>
     <nav class="breadcrumb mt-3 bg-dark">
-      <a class="breadcrumb-item" href="href=" index.php?controller=productos&action=show_start_page "">INICIO</a>
+      <a class="breadcrumb-item" href="index.php?controller=productos&action=show_start_page">INICIO</a>
       <?php $cont = 0; foreach ($datos as $subcat) {
         if ($subcat['CATPRDID'] == $subCatId && $cont == 0){?>
       <a class="breadcrumb-item" href="index.php?controller=productos&action=show_subCatProduct&NAME=<?php echo $subcat['CATNAME'];?>">
