@@ -30,13 +30,17 @@
         </div>
         <?php }?>
         <?php } else {?>
-          <a href="index.php?controller=usuarios&action=show_login_page" class="btn btn-success font-weight-bold col-12 col-sm-12 mt-sm-2 mt-md-2 col-lg-3 ml-lg-5 mb-lg-2" name="login">Identificarse</a>
+        <a href="index.php?controller=usuarios&action=show_login_page" class="btn btn-success font-weight-bold col-12 col-sm-12 mt-sm-2 mt-md-2 col-lg-3 ml-lg-5 mb-lg-2" name="login">Identificarse</a>
         <?php } ?>
     </form>
-    <div class="col-12 justify-content-end ml-4 ml-lg-0 input-group pt-3 pb-auto bg-inverse dropdown">
+    <div class="col-12 text-sm-center text-md-right">
+      <button type="button" name="button" class="btn font-weight-bold col-12 col-sm-6 mt-sm-2 mt-md-2 col-lg-2 ml-lg-5 mb-lg-2" onclick="contador()">Añadir al carrito JS</button>
+      <span id="contador" class="badge badge-light">0</span>
+    </div>
+    <div class="col-12 justify-content-end ml-4 ml-lg-0 input-group pt-3 pb-auto bg-inverse dropdown ">
       <div class="text-right pr-5">
         <a class="d-inline-flex" href="index.php?controller=order&action=show_cart">
-          <div class=" bg-dark">
+          <div class="bg-dark" onmouseover="showMenu()" onmouseout="hideMenu()">
             <img src="view/main/img/shopping_cart.png" class="img-fluid img-carrito" alt="Carrito de compra">
             <span class="badge badge-light"><?php if (empty(isset($_SESSION['cart']))) {
             echo "0";
@@ -49,9 +53,16 @@
           echo $counter;
         }?></span>
           </div>
+          <div id="jsDropdown" class="dropdown-menu text-center carousel">
+            <a class="dropdown-item"><small>Samsung QE65Q7C 65"</small></a>
+            <a class="dropdown-item"><small>MSI GeForce GTX 1080 Ti</small></a>
+            <a class="dropdown-item" ><small>Razer DeathAdder Elite Ratón</small></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">Total: 3.361,84€</a>
+          </div>
         </a>
       </div>
     </div>
 </div>
-  </nav>
+</nav>
 </div>

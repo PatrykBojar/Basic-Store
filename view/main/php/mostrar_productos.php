@@ -8,7 +8,7 @@
           <?php foreach ($images as $img) {
               if ($dato['ID'] == $img['ID']) {
                 if($img['URL'] != NULl){ ?>
-          <img class="card-img-top img-fluid img-product" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" src="<?php echo $img['URL']; ?>" alt="<?php echo $dato['NAME'];?>">
+          <img onmouseover="zoomImg(this)" onmouseout="zoomOut()" class="card-img-top img-fluid img-product" data-toggle="modal" data-target="#showMore<?php echo $dato['ID']; ?>" src="<?php echo $img['URL']; ?>" alt="<?php echo $dato['NAME'];?>">
           <?php
           if ($dato['STOCK'] < 5 && $dato['STOCK'] > 0) {
            if($dato['SPONSORED'] == 'N'){?>

@@ -6,6 +6,11 @@
   height: 700px;
 }
 
+.img-product {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .img-product:hover {
   cursor: pointer;
 }
@@ -81,6 +86,15 @@ hr {
 
 .desplegar:hover>.dropdown-menu {
   display: block;
+}
+
+.img-js {
+  transition: width 1s;
+  -webkit-transition: width 1s;
+}
+
+.img-js:hover {
+  width: 100%;
 }
 
 @keyframes blink-animation {
